@@ -2,10 +2,16 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import CurrentUser from "interfaces/CurrentUser";
 import CurrentFilters from "interfaces/CurrentFilters";
 
-interface CurrentMisc extends CurrentUser, CurrentFilters {}
+interface CurrentMisc extends CurrentFilters {
+  user: CurrentUser
+}
 
 let initialState: CurrentMisc = {
-  user: null,
+  user: {
+    fullName: null,
+    displayImageUrl: null,
+    lastRetrieved: null,
+  },
   filters: []
 };
 
@@ -14,13 +20,17 @@ const misc = createSlice({
   initialState,
   reducers: {
     setUser: (state, action: PayloadAction<CurrentUser>) => {
-      state.user = action.payload.user;
+      state.user = { ...action.payload };
     },
     updateFilter: (state, action: PayloadAction<CurrentFilters>) => {
       state.filters = action.payload.filters;
     },
     clearUser: state => {
-      state.user = null;
+      state.user = {
+        fullName: null,
+        displayImageUrl: null,
+        lastRetrieved: null,
+      };
     },
     clearFilters: state => {
       state.filters = [];

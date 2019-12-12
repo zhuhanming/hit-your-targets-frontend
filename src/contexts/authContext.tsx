@@ -1,15 +1,10 @@
 import React from 'react';
 import { useAsync } from 'react-async';
 
+import AuthContextInterface from 'interfaces/AuthContext';
 import AuthService from 'services/AuthService';
 import Loading from 'components/loading';
-import UserContextInterface from 'interfaces/UserContext';
 
-interface AuthContextInterface {
-  data: UserContextInterface;
-  login(): Promise<any>;
-  logout(): Promise<void>;
-}
 
 const AuthContext = React.createContext<AuthContextInterface | undefined>(undefined);
 

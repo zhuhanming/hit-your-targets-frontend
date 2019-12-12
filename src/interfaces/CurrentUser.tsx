@@ -1,5 +1,7 @@
 interface CurrentUser {
-  user: string | null,
+  fullName: string | null,
+  displayImageUrl: string | null,
+  lastRetrieved: Date | null
 }
 
 export default CurrentUser;
