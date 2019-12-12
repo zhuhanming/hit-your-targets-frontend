@@ -2,13 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import whyDidYouRender from '@welldone-software/why-did-you-render';
 import { PersistGate } from 'redux-persist/integration/react';
+import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import App from 'app';
 // import AppProviders from 'contexts';
 
 
 import * as serviceWorker from './serviceWorker';
-import './index.css';
+import './index.scss';
 
 import store, { persistor } from 'app/store';
 
@@ -17,7 +18,9 @@ const render = () => {
     <Provider store={store}>
       <PersistGate persistor={persistor}>
         {/* <AppProviders> */}
-        <App />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
         {/* </AppProviders> */}
       </PersistGate>
     </Provider>,
