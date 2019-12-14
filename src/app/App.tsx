@@ -1,25 +1,30 @@
 import React from 'react';
 import logo from '../logo.svg';
+
+import { retryPromise } from 'utils';
+import { useUser } from 'contexts/userContext';
+import Loading from 'components/loading';
 import './App.scss';
 
+const loadAuthenticatedApp = () => import('./AuthenticatedApp');
+const AuthenticatedApp = React.lazy(loadAuthenticatedApp);
+const UnauthenticatedApp = React.lazy(()=> import('./UnauthenticatedApp'));
+
 const App: React.FC = () => {
+  const user = useUser();
+
+  React.useEffect(() => {
+    loadAuthenticatedApp();
+  }, []);
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Suspense fallback={<Loading />}>
+      {user ? (
+        <AuthenticatedApp />
+      ) : (
+        <UnauthenticatedApp />
+      )}
+    </React.Suspense>
   );
 }
 

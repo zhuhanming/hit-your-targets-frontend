@@ -2,7 +2,7 @@ import React from 'react';
 import { useAsync } from 'react-async';
 
 import AuthContextInterface from 'interfaces/AuthContext';
-import AuthService from 'services/AuthService';
+import AuthService from 'services/authService';
 import Loading from 'components/loading';
 
 

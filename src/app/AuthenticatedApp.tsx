@@ -39,3 +39,5 @@ const AuthenticatedApp = () => {
     </Router>
   )
 }
+
+export default AuthenticatedApp;
