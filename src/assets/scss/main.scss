@@ -1,0 +1,11 @@
+@charset "utf-8";
+
+@import './variables.scss';
+@import '../../../node_modules/bulma/bulma.sass';
+
+body {
+  position: relative;
+  z-index: -2;
+  color: $dark;
+  background: $body-bg;
+}

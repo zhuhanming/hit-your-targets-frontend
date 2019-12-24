@@ -1,22 +1,24 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import CurrentUser from "interfaces/CurrentUser";
-import CurrentFilters from "interfaces/CurrentFilters";
+/* eslint-disable no-param-reassign */
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import CurrentUser from 'interfaces/CurrentUser';
+import CurrentFilters from 'interfaces/CurrentFilters';
 
 interface CurrentMisc extends CurrentFilters {
-  user: CurrentUser
+  user: CurrentUser;
 }
 
-let initialState: CurrentMisc = {
+const initialState: CurrentMisc = {
   user: {
-    fullName: null,
+    name: null,
+    email: null,
     displayImageUrl: null,
-    lastRetrieved: null,
+    lastRetrieved: null
   },
   filters: []
 };
 
 const misc = createSlice({
-  name: "misc",
+  name: 'misc',
   initialState,
   reducers: {
     setUser: (state, action: PayloadAction<CurrentUser>) => {
@@ -27,9 +29,10 @@ const misc = createSlice({
     },
     clearUser: state => {
       state.user = {
-        fullName: null,
+        name: null,
+        email: null,
         displayImageUrl: null,
-        lastRetrieved: null,
+        lastRetrieved: null
       };
     },
     clearFilters: state => {

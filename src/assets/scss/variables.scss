@@ -1,0 +1,107 @@
+@import '../../../node_modules/bulma/sass/utilities/_all.sass';
+
+// Start variables here
+$mobile: 576px !default;
+// $desktop: 1279px;
+// $navbar-height: 4rem;
+// $navbar-dropdown-arrow: $grey-dark;
+// $navbar-breakpoint: $mobile;
+
+$fontawesome: 'Font Awesome 5 Free';
+
+// Brand colors
+$orange-light: #ffe293;
+$orange-dark: #ff9467;
+$orange: #ffa26f;
+$yellow-dark: #ffe293;
+$yellow-light: #fdffd3;
+$yellow: #ffed8d;
+$dark: #767676;
+
+$light-mode-gradient: linear-gradient(
+  to left top,
+  rgba(255, 133, 96, 1) 0%,
+  rgba(255, 190, 126, 1) 50%,
+  rgba(255, 227, 149, 1) 100%
+);
+
+// $link: $blue;
+// $success: $green;
+// $danger: $red;
+
+$radius-extra-large: 30px;
+
+// $action-button-bg: linear-gradient(
+//   45deg,
+//   rgba(38, 126, 208, 1) 0%,
+//   rgba(85, 96, 232, 1) 100%
+// );
+// $action-button-bg-reversed: linear-gradient(
+//   45deg,
+//   rgba(85, 96, 232, 1) 0%,
+//   rgba(38, 126, 208, 1) 100%
+// );
+
+// $danger-button-bg: linear-gradient(
+//   45deg,
+//   rgba(185, 47, 76, 1) 0%,
+//   rgba(224, 42, 69, 1) 100%
+// );
+
+// $danger-button-bg-reversed: linear-gradient(
+//   45deg,
+//   rgba(224, 42, 69, 1) 0%,
+//   rgba(185, 47, 76, 1) 100%
+// );
+
+// $success-button-bg: linear-gradient(
+//   45deg,
+//   rgba(41, 152, 87, 1) 0%,
+//   rgba(44, 196, 108, 1) 100%
+// );
+
+// $success-button-bg-reversed: linear-gradient(
+//   45deg,
+//   rgba(44, 196, 108, 1) 0%,
+//   rgba(41, 152, 87, 1) 100%
+// );
+
+$body-bg: $light-mode-gradient;
+
+// Set your brand colors
+// $purple: #8a4d76;
+// $pink: #fa7c91;
+// $brown: #757763;
+// $beige-light: #d0d1cd;
+// $beige-lighter: #eff0eb;
+
+// Update Bulma's global variables
+$body-color: $dark;
+$text: $dark;
+$label-color: $white;
+$box-radius: $radius-extra-large;
+
+// $section-padding: 2rem 0;
+// $button-background-color: none;
+// $input-radius: 10px;
+// $button-border-color: rgba(85, 96, 232, 0.25);
+// $button-focus-box-shadow-color: rgba(85, 96, 232, 0.25);
+// $button-active-border-color: rgba(85, 96, 232, 0.25);
+// $button-color: white;
+// $button-focus-color: white;
+// $button-active-color: white;
+// $button-hover-color: white;
+// $control-radius: 10px;
+
+// $family-sans-serif: "Nunito", sans-serif;
+// $grey-dark: $brown;
+// $grey-light: $beige-light;
+// $primary: $purple;
+// $link: $pink;
+
+// Update some of Bulma's component variables
+// $body-background-color: $orange-light;
+$dropdown-item-color: $text;
+// $control-border-width: 2px;
+// $input-border-color: transparent;
+// $input-shadow: none;

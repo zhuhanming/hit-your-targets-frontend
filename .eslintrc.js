@@ -5,6 +5,7 @@ module.exports = {
   },
   extends: [
     'airbnb',
+    'plugin:@typescript-eslint/recommended',
     'prettier',
     'prettier/react',
     'plugin:import/errors',
@@ -32,8 +33,17 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module'
   },
-  plugins: ['@typescript-eslint', 'react', 'prettier'],
+  plugins: ['@typescript-eslint', 'react', 'import', 'prettier'],
   rules: {
+    'import/no-unresolved': 'off',
+    'react/jsx-filename-extension': [
+      1,
+      { extensions: ['.js', '.jsx', '.tsx'] }
+    ],
+    'react/jsx-props-no-spreading': 'off',
+    'react/prop-types': 0,
+    'no-underscore-dangle': 0,
+    'import/prefer-default-export': 'off',
     'prettier/prettier': 'error',
     'import/extensions': [
       'error',
@@ -45,10 +55,18 @@ module.exports = {
         tsx: 'never'
       }
     ]
+    // 'import/extensions': ['.js', '.jsx', '.json', '.ts', '.tsx']
   },
   settings: {
-    // 'import/no-unresolved': 'off',
-    'import/resolver': 'webpack',
+    'import/resolver': {
+      webpack: {
+        config: 'webpack.config.js'
+      },
+      node: {
+        paths: ['src'],
+        extensions: ['.js', '.jsx', '.json', '.ts', '.tsx']
+      }
+    },
     // {
     //   typescript: {
     //     directory: './tsconfig.json'
