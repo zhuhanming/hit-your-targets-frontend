@@ -48,16 +48,17 @@ module.exports = {
   },
   settings: {
     // 'import/no-unresolved': 'off',
-    'import/resolver': {
-      typescript: {
-        directory: './tsconfig.json'
-      },
-      node: {
-        paths: ['src'],
-        moduleDirectory: ['node_modules', 'src/'],
-        extensions: ['.js', '.jsx', '.ts', '.tsx']
-      }
-    },
+    'import/resolver': 'webpack',
+    // {
+    //   typescript: {
+    //     directory: './tsconfig.json'
+    //   },
+    //   node: {
+    //     paths: ['src'],
+    //     moduleDirectory: ['node_modules', 'src/'],
+    //     extensions: ['.js', '.jsx', '.ts', '.tsx']
+    //   }
+    // },
     'import/extensions': ['.js', '.jsx', '.ts', '.tsx'],
     'import/parsers': {
       '@typescript-eslint/parser': ['.ts', '.tsx']
