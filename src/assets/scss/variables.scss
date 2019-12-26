@@ -18,6 +18,8 @@ $yellow-light: #fdffd3;
 $yellow: #ffed8d;
 $dark: #767676;
 
+$red: #e36464; // for danger
+
 $light-mode-gradient: linear-gradient(
   to left top,
   rgba(255, 133, 96, 1) 0%,
@@ -25,11 +27,19 @@ $light-mode-gradient: linear-gradient(
   rgba(255, 227, 149, 1) 100%
 );
 
+$dark-mode-gradient: linear-gradient(
+  to left top,
+  rgba(90, 29, 139, 1) 0%,
+  rgba(70, 79, 180, 1) 50%,
+  rgba(129, 129, 239, 1) 100%
+);
+
 // $link: $blue;
 // $success: $green;
-// $danger: $red;
+$danger: $red;
 
 $radius-extra-large: 30px;
+$change-theme-duration: 5s;
 
 // $action-button-bg: linear-gradient(
 //   45deg,
@@ -66,7 +76,8 @@ $radius-extra-large: 30px;
 //   rgba(41, 152, 87, 1) 100%
 // );
 
-$body-bg: $light-mode-gradient;
+$body-bg-light: $light-mode-gradient;
+$body-bg-dark: $dark-mode-gradient;
 
 // Set your brand colors
 // $purple: #8a4d76;
@@ -76,8 +87,8 @@ $body-bg: $light-mode-gradient;
 // $beige-lighter: #eff0eb;
 
 // Update Bulma's global variables
-$body-color: $dark;
-$text: $dark;
+// $body-color: $dark;
+// $text: $dark;
 $label-color: $white;
 $box-radius: $radius-extra-large;
 
@@ -101,7 +112,7 @@ $box-radius: $radius-extra-large;
 
 // Update some of Bulma's component variables
 // $body-background-color: $orange-light;
-$dropdown-item-color: $text;
+// $dropdown-item-color: $text;
 // $control-border-width: 2px;
 // $input-border-color: transparent;
 // $input-shadow: none;

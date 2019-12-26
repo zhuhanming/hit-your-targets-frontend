@@ -15,13 +15,15 @@ import {
   ROOT
 } from 'constants/routes';
 // import FacebookCallback from 'routes/auth/facebookCallback';
+import { useTheme } from 'contexts/themeContext';
 
 const redirectToLogin = () => <Redirect to={LOGIN} />;
 
 const UnauthenticatedApp = () => {
+  const { theme } = useTheme();
   return (
     <Router>
-      <div className="unauth app">
+      <div className={`app unauth ${theme}`}>
         {/* <Navbar isAuthenticated={false} /> */}
         <Switch>
           <Route path={LOGIN}>

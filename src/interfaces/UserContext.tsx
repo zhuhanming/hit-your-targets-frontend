@@ -1,6 +1,5 @@
-interface UserContextInterface {
-  fullName: string,
-  email: string,
+export default interface UserContextInterface {
+  name: string;
+  email: string;
+  displayImageUrl: string;
 }
-
-export default UserContextInterface;

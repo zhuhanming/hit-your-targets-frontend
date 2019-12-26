@@ -3,8 +3,9 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import CurrentUser from 'interfaces/CurrentUser';
 import CurrentFilters from 'interfaces/CurrentFilters';
 
-interface CurrentMisc extends CurrentFilters {
+export interface CurrentMisc extends CurrentFilters {
   user: CurrentUser;
+  theme: string;
 }
 
 const initialState: CurrentMisc = {
@@ -14,7 +15,8 @@ const initialState: CurrentMisc = {
     displayImageUrl: null,
     lastRetrieved: null
   },
-  filters: []
+  filters: [],
+  theme: ''
 };
 
 const misc = createSlice({
@@ -26,6 +28,9 @@ const misc = createSlice({
     },
     updateFilter: (state, action: PayloadAction<CurrentFilters>) => {
       state.filters = action.payload.filters;
+    },
+    updateTheme: (state, action: PayloadAction<string>) => {
+      state.theme = action.payload;
     },
     clearUser: state => {
       state.user = {
@@ -41,6 +46,12 @@ const misc = createSlice({
   }
 });
 
-export const { setUser, updateFilter, clearUser, clearFilters } = misc.actions;
+export const {
+  setUser,
+  updateFilter,
+  updateTheme,
+  clearUser,
+  clearFilters
+} = misc.actions;
 
 export default misc.reducer;

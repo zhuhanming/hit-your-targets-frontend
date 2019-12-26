@@ -1,13 +1,11 @@
 import SubToDo from 'interfaces/SubToDo';
 
-interface ToDo{
-  title: string,
-  description: string,
-  startTime: Date,
-  endTime: Date,
-  tags: string[],
-  completed: boolean,
-  subToDos: SubToDo,
+export default interface ToDo {
+  title: string;
+  description: string;
+  startTime: Date;
+  endTime: Date;
+  tags: string[];
+  completed: boolean;
+  subToDos: SubToDo;
 }
-
-export default ToDo;
