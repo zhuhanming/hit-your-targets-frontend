@@ -4,6 +4,7 @@
   height: 100%;
   width: 100%;
   color: $dark;
+  transition: color $change-theme-duration;
   @include light-gradient();
 
   &::before {
@@ -12,7 +13,7 @@
 
   &.dark {
     color: $black;
-
+    transition: color $change-theme-duration;
     &::before {
       opacity: 1;
     }

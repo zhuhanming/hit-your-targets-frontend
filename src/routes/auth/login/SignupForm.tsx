@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useAuth } from 'contexts/authContext';
+import { useTheme } from 'contexts/themeContext';
+import { emailRegex } from 'constants/regex';
 
-import './SignupForm.scss';
+import '../styles.scss';
 
 type SignupFormProps = {
   email: string | null;
@@ -17,6 +19,7 @@ const SignupForm = ({
   handleChangeForm
 }: SignupFormProps) => {
   const { signup } = useAuth();
+  const { theme } = useTheme();
   const [isLoading, setIsLoading] = useState(false);
 
   const getDefaultValues = () => {
@@ -26,9 +29,10 @@ const SignupForm = ({
 
   const {
     register,
-    handleSubmit,
-    getValues
-    // errors
+    handleSubmit: validateInputs,
+    getValues,
+    errors,
+    watch
   } = useForm({
     defaultValues: getDefaultValues()
   });
@@ -37,6 +41,7 @@ const SignupForm = ({
     setIsLoading(true);
     await signup(data).catch(() => {
       handleError();
+      setIsLoading(false);
     });
   };
 
@@ -47,40 +52,135 @@ const SignupForm = ({
 
   return (
     <>
-      <form onSubmit={handleSubmit(handleSignup)}>
-        <input
-          type="text"
-          placeholder="Name"
-          name="name"
-          ref={register({ required: 'This field is required', maxLength: 80 })}
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          name="email"
-          ref={register({
-            required: 'This field is required',
-            pattern: /^\S+@\S+$/i
-          })}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          name="password"
-          ref={register({ required: 'This field is required' })}
-        />
-        <input
-          type="password"
-          placeholder="Confirm Password"
-          name="passwordConfirmation"
-          ref={register({ required: 'This field is required' })}
-        />
+      <h1 className="title auth__title is-4">Sign Up</h1>
+      <form className="form" onSubmit={validateInputs(handleSignup)}>
+        <div className="field">
+          <label className="form__label label" htmlFor="name">
+            Name
+          </label>
+          <div className="control">
+            <input
+              id="name"
+              className={`input ${errors.name ? 'is-danger' : ''}`}
+              type="text"
+              placeholder="Name"
+              name="name"
+              ref={register({
+                required: 'This field is required',
+                validate: (value: string) => {
+                  if (value.length > 50) {
+                    return 'Your name cannot be longer than 50 characters';
+                  }
 
-        <button type="submit" className={`${isLoading ? 'is-loading' : ''}`}>
+                  return true;
+                }
+              })}
+            />
+            {errors.name && (
+              <p className="help is-danger">{(errors.name as any).message}</p>
+            )}
+          </div>
+        </div>
+        <div className="field">
+          <label className="form__label label" htmlFor="email">
+            Email
+          </label>
+          <div className="control">
+            <input
+              id="email"
+              type="text"
+              placeholder="Email"
+              className={`input ${errors.email ? 'is-danger' : ''}`}
+              name="email"
+              ref={register({
+                required: 'This field is required',
+                validate: value => {
+                  if (!value.match(emailRegex)) {
+                    return 'Your email address is not of the correct format';
+                  }
+
+                  return true;
+                }
+              })}
+            />
+            {errors.email && (
+              <p className="help is-danger">{(errors.email as any).message}</p>
+            )}
+          </div>
+        </div>
+        <div className="field">
+          <label className="form__label label" htmlFor="password">
+            Password
+          </label>
+          <div className="control">
+            <input
+              id="password"
+              className={`input ${errors.password ? 'is-danger' : ''}`}
+              type="password"
+              placeholder="Password"
+              name="password"
+              ref={register({
+                required: 'This field is required',
+                validate: (value: string) => {
+                  if (value.length < 8) {
+                    return 'Your password should have more than 8 characters';
+                  }
+                  return true;
+                }
+              })}
+            />
+            {errors.password && (
+              <p className="help is-danger">
+                {(errors.password as any).message}
+              </p>
+            )}
+          </div>
+        </div>
+        <div className="field">
+          <label className="form__label label" htmlFor="passwordConfirmation">
+            Password Confirmation
+          </label>
+          <div className="control">
+            <input
+              id="passwordConfirmation"
+              className={`input ${
+                errors.passwordConfirmation ? 'is-danger' : ''
+              }`}
+              type="password"
+              placeholder="Confirm Password"
+              name="passwordConfirmation"
+              ref={register({
+                required: 'This field is required',
+                validate: (value: string) => {
+                  if (value !== watch('password')) {
+                    return 'Your password confirmation does not match your password';
+                  }
+                  return true;
+                }
+              })}
+            />
+            {errors.passwordConfirmation && (
+              <p className="help is-danger">
+                {(errors.passwordConfirmation as any).message}
+              </p>
+            )}
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          className={`form__button button ${theme} ${
+            isLoading ? 'is-loading' : ''
+          }`}
+        >
           Sign Up
         </button>
       </form>
-      <button onClick={onChangeForm} type="button" className="as-non-button">
+      <button
+        onClick={onChangeForm}
+        type="button"
+        className="as-non-button auth__toggle is-size-7"
+      >
         <span>I already have an account</span>
       </button>
     </>

@@ -1,0 +1,38 @@
+@import '../../assets/scss/variables.scss';
+
+.auth {
+  height: 100%;
+  display: flex;
+
+  &__title {
+    text-align: center;
+    margin-bottom: 0 !important;
+  }
+
+  &__brand-logo {
+    display: flex;
+  }
+
+  &__toggle {
+    width: 100%;
+    margin-top: 0.5rem;
+    text-align: center;
+  }
+
+  .form {
+    &__label {
+      color: inherit;
+    }
+    &__button {
+      width: 100%;
+      background-color: $orange-dark;
+      color: $white;
+      transition: background-color $change-theme-duration;
+
+      &.dark {
+        background: $purple-light;
+        transition: background-color $change-theme-duration;
+      }
+    }
+  }
+}

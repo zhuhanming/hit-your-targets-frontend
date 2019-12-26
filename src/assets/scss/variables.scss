@@ -1,7 +1,7 @@
 @import '../../../node_modules/bulma/sass/utilities/_all.sass';
 
 // Start variables here
-$mobile: 576px !default;
+// $mobile: 576px !default;
 // $desktop: 1279px;
 // $navbar-height: 4rem;
 // $navbar-dropdown-arrow: $grey-dark;
@@ -17,6 +17,9 @@ $yellow-dark: #ffe293;
 $yellow-light: #fdffd3;
 $yellow: #ffed8d;
 $dark: #767676;
+
+$purple-light: #798fe6;
+$purple-dark: #562293;
 
 $red: #e36464; // for danger
 
@@ -39,42 +42,7 @@ $dark-mode-gradient: linear-gradient(
 $danger: $red;
 
 $radius-extra-large: 30px;
-$change-theme-duration: 5s;
-
-// $action-button-bg: linear-gradient(
-//   45deg,
-//   rgba(38, 126, 208, 1) 0%,
-//   rgba(85, 96, 232, 1) 100%
-// );
-// $action-button-bg-reversed: linear-gradient(
-//   45deg,
-//   rgba(85, 96, 232, 1) 0%,
-//   rgba(38, 126, 208, 1) 100%
-// );
-
-// $danger-button-bg: linear-gradient(
-//   45deg,
-//   rgba(185, 47, 76, 1) 0%,
-//   rgba(224, 42, 69, 1) 100%
-// );
-
-// $danger-button-bg-reversed: linear-gradient(
-//   45deg,
-//   rgba(224, 42, 69, 1) 0%,
-//   rgba(185, 47, 76, 1) 100%
-// );
-
-// $success-button-bg: linear-gradient(
-//   45deg,
-//   rgba(41, 152, 87, 1) 0%,
-//   rgba(44, 196, 108, 1) 100%
-// );
-
-// $success-button-bg-reversed: linear-gradient(
-//   45deg,
-//   rgba(44, 196, 108, 1) 0%,
-//   rgba(41, 152, 87, 1) 100%
-// );
+$change-theme-duration: 0.5s;
 
 $body-bg-light: $light-mode-gradient;
 $body-bg-dark: $dark-mode-gradient;
@@ -91,6 +59,7 @@ $body-bg-dark: $dark-mode-gradient;
 // $text: $dark;
 $label-color: $white;
 $box-radius: $radius-extra-large;
+$box-shadow: none;
 
 // $section-padding: 2rem 0;
 // $button-background-color: none;

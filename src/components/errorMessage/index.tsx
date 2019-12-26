@@ -5,7 +5,7 @@ const ErrorMessage = ({
   className = ''
 }) => {
   return (
-    <article className={`${className} errorMessage message is-danger`}>
+    <article className={`${className} errorMessage message is-small is-danger`}>
       <div className="errorMessage__message message-body">{message}</div>
     </article>
   );

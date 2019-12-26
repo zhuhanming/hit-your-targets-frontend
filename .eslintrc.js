@@ -43,6 +43,8 @@ module.exports = {
     'react/jsx-props-no-spreading': 'off',
     'react/prop-types': 0,
     'no-underscore-dangle': 0,
+    'import/imports-first': ['error', 'absolute-first'],
+    'import/newline-after-import': 'error',
     'import/prefer-default-export': 'off',
     'prettier/prettier': 'error',
     'import/extensions': [
@@ -53,6 +55,22 @@ module.exports = {
         jsx: 'never',
         ts: 'never',
         tsx: 'never'
+      }
+    ],
+    'jsx-a11y/label-has-associated-control': [
+      'error',
+      {
+        required: {
+          some: ['nesting', 'id']
+        }
+      }
+    ],
+    'jsx-a11y/label-has-for': [
+      'error',
+      {
+        required: {
+          some: ['nesting', 'id']
+        }
       }
     ]
     // 'import/extensions': ['.js', '.jsx', '.json', '.ts', '.tsx']

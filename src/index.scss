@@ -8,6 +8,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 code {
@@ -30,10 +33,43 @@ html {
   font-size: 16px;
 }
 
-body {
-  min-height: 100vh;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.field label {
+  pointer-events: none;
+}
+
+.box {
+  color: inherit;
+}
+
+button,
+input {
+  font-family: inherit !important;
+}
+
+button {
+  border: none;
+  background: none;
+  font-size: 1rem;
+
+  &.as-non-button {
+    cursor: pointer;
+    padding: 0;
+    border: none;
+    white-space: normal;
+  }
+
+  &.no-outline {
+    outline: none;
+  }
+
+  &.no-shadow {
+    box-shadow: none;
+  }
+
+  &.button[disabled] {
+    background-image: none;
+    background-color: $grey-lighter;
+  }
 }
 
 .is-text-wrap {
