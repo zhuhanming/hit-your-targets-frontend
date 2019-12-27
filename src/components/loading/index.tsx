@@ -9,7 +9,7 @@ import './Loading.scss';
 const defaultOptions = {
   loop: true,
   autoplay: true,
-  animationData: animationData,
+  animationData,
   rendererSettings: {
     preserveAspectRatio: 'xMidYMid slice'
   }
@@ -17,11 +17,11 @@ const defaultOptions = {
 
 const Loading = ({ className = '' }) => {
   return (
-    <FadeIn>
-      <div className={`loading ${className}`}>
-        <Lottie options={defaultOptions} width="auto" />
-      </div>
-    </FadeIn>
+    <div className={`loading ${className}`}>
+      <FadeIn>
+        <Lottie options={defaultOptions} width="auto" height="auto" />
+      </FadeIn>
+    </div>
   );
 };
 
