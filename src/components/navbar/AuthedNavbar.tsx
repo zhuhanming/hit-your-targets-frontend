@@ -18,17 +18,19 @@ const AuthTabs = ({ pathname }) => {
     <>
       <li className={`${pathname.match(`${HOME}`) ? 'is-active' : ''}`}>
         <Link to={HOME}>
-          <i
-            className="fas fa-home has-tooltip-right has-tooltip-bottom-mobile"
-            data-tooltip="Home"
-          />
+          <div data-tooltip="Home">
+            <i
+              className="fas fa-home has-tooltip-right has-tooltip-bottom-mobile"
+              title="Home"
+            />
+          </div>
         </Link>
       </li>
       <li className={`${pathname.match(`${LIST}`) ? 'is-active' : ''}`}>
         <Link to={LIST}>
           <i
             className="fas fa-list has-tooltip-right has-tooltip-bottom-mobile"
-            data-tooltip="List View"
+            title="List View"
           />
         </Link>
       </li>
@@ -36,7 +38,7 @@ const AuthTabs = ({ pathname }) => {
         <Link to={KANBAN}>
           <i
             className="fas fa-clipboard-list has-tooltip-right has-tooltip-bottom-mobile"
-            data-tooltip="Kanban View"
+            title="Kanban View"
           />
         </Link>
       </li>
@@ -44,7 +46,7 @@ const AuthTabs = ({ pathname }) => {
         <Link to={CALENDAR}>
           <i
             className="fas fa-calendar-alt has-tooltip-right has-tooltip-bottom-mobile"
-            data-tooltip="Calendar View"
+            title="Calendar View"
           />
         </Link>
       </li>

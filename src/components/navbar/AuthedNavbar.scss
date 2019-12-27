@@ -36,6 +36,12 @@
         transition: background-color 0.5s;
         border-radius: 1rem;
 
+        &:hover {
+          a {
+            color: $black;
+          }
+        }
+
         @media only screen and (max-width: $mobile) {
           font-size: 1.2rem;
           height: 3rem;
@@ -52,6 +58,11 @@
       }
 
       .is-active {
+        &:hover {
+          a {
+            color: $orange-dark;
+          }
+        }
         a {
           color: $orange-dark;
           transition: color 0.5s;
@@ -63,6 +74,8 @@
           margin: 1rem 0;
           height: 2rem;
           border-left: 4px solid $orange-dark;
+          transition: border-color 0.5s;
+
           @media only screen and (max-width: $mobile) {
             width: 1rem;
             height: 3rem;
@@ -85,9 +98,21 @@
     .tabs {
       ul {
         .is-active {
+          &:hover {
+            a {
+              color: $purple-dark;
+            }
+          }
           background-color: $purple-light;
           a {
             color: $purple-dark;
+          }
+          &::before {
+            transition: border-color 0.5s;
+            border-left: 4px solid $purple-dark;
+            @media only screen and (max-width: $mobile) {
+              border-bottom: 3px solid $purple-dark;
+            }
           }
         }
       }

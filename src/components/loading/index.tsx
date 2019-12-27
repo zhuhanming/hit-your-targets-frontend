@@ -3,6 +3,7 @@ import Lottie from 'react-lottie';
 import FadeIn from 'react-fade-in';
 
 import animationData from 'assets/animations/loading.json';
+import { useTheme } from 'contexts/themeContext';
 
 import './Loading.scss';
 
@@ -16,8 +17,9 @@ const defaultOptions = {
 };
 
 const Loading = ({ className = '' }) => {
+  const { theme } = useTheme();
   return (
-    <div className={`loading ${className}`}>
+    <div className={`loading ${className} ${theme}`}>
       <FadeIn>
         <Lottie options={defaultOptions} width="auto" height="auto" />
       </FadeIn>
