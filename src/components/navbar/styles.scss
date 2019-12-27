@@ -1,0 +1,29 @@
+@import '../../assets/scss/variables';
+
+@mixin navbar-fixed-top() {
+  top: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  z-index: $navbar-fixed-z;
+  width: 100vw;
+  height: $navbar-height;
+}
+
+@mixin navbar-fixed-left() {
+  left: 0;
+  top: 0;
+  position: fixed;
+  bottom: 0;
+  z-index: $navbar-fixed-z;
+  height: 100vh;
+  width: $navbar-width;
+}
+
+.navbar {
+  @media only screen and (max-width: $mobile) {
+    padding: 0;
+    @include navbar-fixed-top();
+  }
+  @include navbar-fixed-left();
+}

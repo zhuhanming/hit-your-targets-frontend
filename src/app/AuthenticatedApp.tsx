@@ -6,7 +6,7 @@ import {
   Redirect
 } from 'react-router-dom';
 
-// import Navbar from 'components/navbar';
+import Navbar from 'components/navbar';
 import Main from 'routes/main';
 import {
   UNAUTHED_ROUTES,
@@ -28,7 +28,7 @@ const AuthenticatedApp = () => {
   return (
     <Router>
       <div className={`app ${theme}`}>
-        {/* <Navbar /> */}
+        <Navbar isAuthenticated />
         <Switch>
           <Route exact path={UNAUTHED_ROUTES} render={redirectToRoot} />
           <Route exact path={HOME} component={Main} />

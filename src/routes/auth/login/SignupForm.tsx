@@ -173,7 +173,7 @@ const SignupForm = ({
             isLoading ? 'is-loading' : ''
           }`}
         >
-          Sign Up
+          <strong>Get Started</strong>
         </button>
       </form>
       <button

@@ -3,9 +3,23 @@
 .app {
   height: 100%;
   width: 100%;
+  position: absolute;
+  right: 0;
   color: $dark;
   transition: color $change-theme-duration;
   @include light-gradient();
+
+  padding-left: $navbar-width;
+  padding-top: 0;
+
+  @media only screen and (max-width: $mobile) {
+    padding-left: 0;
+    padding-top: $navbar-height;
+  }
+
+  &.unauth {
+    padding-left: 0;
+  }
 
   &::before {
     @include dark-gradient();

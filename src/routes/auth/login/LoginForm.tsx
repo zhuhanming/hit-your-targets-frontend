@@ -104,7 +104,7 @@ const LoginForm = ({
                 isLoading ? 'is-loading' : ''
               }`}
             >
-              Login
+              <strong>Login Now</strong>
             </button>
           </div>
         </div>

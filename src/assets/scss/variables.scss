@@ -1,11 +1,13 @@
 @import '../../../node_modules/bulma/sass/utilities/_all.sass';
 
 // Start variables here
-// $mobile: 576px !default;
+$mobile: 576px !default;
 // $desktop: 1279px;
-// $navbar-height: 4rem;
-// $navbar-dropdown-arrow: $grey-dark;
-// $navbar-breakpoint: $mobile;
+$navbar-height: 4rem;
+$navbar-width: 6rem;
+$navbar-dropdown-arrow: $grey-dark;
+$navbar-breakpoint: $mobile;
+$navbar-fixed-z: 30 !default;
 
 $fontawesome: 'Font Awesome 5 Free';
 

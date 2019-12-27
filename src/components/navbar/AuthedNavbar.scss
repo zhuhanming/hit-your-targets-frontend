@@ -1,0 +1,80 @@
+@import '../../assets/scss/variables.scss';
+
+.main-route-tabs {
+  font-weight: bold;
+  margin: auto;
+  height: $navbar-height;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @include from($mobile) {
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 3rem 0;
+  }
+
+  .tabs {
+    margin-bottom: 0;
+    ul {
+      border: none;
+
+      @include from($mobile) {
+        display: flex;
+        flex-direction: column;
+      }
+
+      li {
+        height: 4rem;
+        width: 4rem;
+        margin: 0.5rem 0;
+        display: flex;
+        justify-content: center;
+        font-size: 1.6rem;
+        transition: background-color 0.5s;
+        border-radius: 1rem;
+
+        @media only screen and (max-width: $mobile) {
+          font-size: 1.2rem;
+          height: 3rem;
+          width: 3rem;
+          margin: 0.5rem;
+        }
+
+        a {
+          color: $dark;
+          transition: color 0.5s;
+          padding: 0;
+          border: none;
+        }
+      }
+
+      .is-active {
+        a {
+          color: $orange-dark;
+          transition: color 0.5s;
+        }
+        background-color: $orange-light;
+        border-radius: 1rem;
+        transition: background-color 0.5s;
+      }
+    }
+  }
+}
+
+.dark {
+  .main-route-tabs {
+    .tabs {
+      ul {
+        .is-active {
+          background-color: $purple-light;
+          a {
+            color: $purple-dark;
+          }
+        }
+      }
+    }
+  }
+}
