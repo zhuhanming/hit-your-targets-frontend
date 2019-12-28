@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import AuthedNavbar from './AuthedNavbar';
 
-import './styles.scss';
+import './Navbar.scss';
 
 const Navbar = ({ isAuthenticated }) => {
   const [isNavbarExpanded, setIsNavbarExpanded] = useState(false);

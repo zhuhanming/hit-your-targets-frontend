@@ -5,7 +5,7 @@ import { useAuth } from 'contexts/authContext';
 import { useTheme } from 'contexts/themeContext';
 import { emailRegex } from 'constants/regex';
 
-import '../styles.scss';
+import '../Auth.scss';
 
 type LoginFormProps = {
   email: string | null;

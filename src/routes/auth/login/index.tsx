@@ -5,7 +5,7 @@ import BrandLogo from 'components/svgr/BrandLogo';
 import LoginForm from './LoginForm';
 import SignupForm from './SignupForm';
 
-import '../styles.scss';
+import '../Auth.scss';
 
 const Login = () => {
   const [state, setState] = useReducer((s, a) => ({ ...s, ...a }), {
