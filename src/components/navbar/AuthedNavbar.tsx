@@ -17,38 +17,44 @@ const AuthTabs = ({ pathname }) => {
   return (
     <>
       <li className={`${pathname.match(`${HOME}`) ? 'is-active' : ''}`}>
-        <Link to={HOME}>
-          <div data-tooltip="Home">
-            <i
-              className="fas fa-home has-tooltip-right has-tooltip-bottom-mobile"
-              title="Home"
-            />
-          </div>
-        </Link>
+        <div
+          className="tooltip tooltip__container is-tooltip-right is-tooltip-bottom-mobile"
+          data-tooltip="Home"
+        >
+          <Link to={HOME}>
+            <i className="fas fa-home" />
+          </Link>
+        </div>
       </li>
       <li className={`${pathname.match(`${LIST}`) ? 'is-active' : ''}`}>
-        <Link to={LIST}>
-          <i
-            className="fas fa-list has-tooltip-right has-tooltip-bottom-mobile"
-            title="List View"
-          />
-        </Link>
+        <div
+          className="tooltip tooltip__container is-tooltip-right is-tooltip-bottom-mobile"
+          data-tooltip="List View"
+        >
+          <Link to={LIST}>
+            <i className="fas fa-list" />
+          </Link>
+        </div>
       </li>
       <li className={`${pathname.match(`${KANBAN}`) ? 'is-active' : ''}`}>
-        <Link to={KANBAN}>
-          <i
-            className="fas fa-clipboard-list has-tooltip-right has-tooltip-bottom-mobile"
-            title="Kanban View"
-          />
-        </Link>
+        <div
+          className="tooltip tooltip__container is-tooltip-right is-tooltip-bottom-mobile"
+          data-tooltip="Kanban View"
+        >
+          <Link to={KANBAN}>
+            <i className="fas fa-clipboard-list" />
+          </Link>
+        </div>
       </li>
       <li className={`${pathname.match(`${CALENDAR}`) ? 'is-active' : ''}`}>
-        <Link to={CALENDAR}>
-          <i
-            className="fas fa-calendar-alt has-tooltip-right has-tooltip-bottom-mobile"
-            title="Calendar View"
-          />
-        </Link>
+        <div
+          className="tooltip tooltip__container is-tooltip-right is-tooltip-bottom-mobile"
+          data-tooltip="Calendar View"
+        >
+          <Link to={CALENDAR}>
+            <i className="fas fa-calendar-alt " />
+          </Link>
+        </div>
       </li>
       {/* <li className={`${pathname.startsWith(`${CHAT}`) ? 'is-active' : ''}`}>
         <Link to={CHAT}>
@@ -89,12 +95,14 @@ const AuthedNavbar = ({ isNavbarExpanded }) => {
             <li
               className={`${pathname.match(`${SETTINGS}`) ? 'is-active' : ''}`}
             >
-              <Link to={SETTINGS}>
-                <i
-                  className="fas fa-user has-tooltip-right has-tooltip-bottom-mobile"
-                  data-tooltip="Profile"
-                />
-              </Link>
+              <div
+                className="tooltip tooltip__container is-tooltip-right is-tooltip-bottom-mobile"
+                data-tooltip="Profile"
+              >
+                <Link to={SETTINGS}>
+                  <i className="fas fa-user" />
+                </Link>
+              </div>
             </li>
           </ul>
         </div>

@@ -1,7 +1,6 @@
 @import '../../assets/scss/variables.scss';
 
 .main-route-tabs {
-  font-weight: bold;
   margin: auto;
   height: $navbar-height;
   padding: 0;
@@ -18,8 +17,10 @@
 
   .tabs {
     margin-bottom: 0;
+    overflow: visible;
     ul {
       border: none;
+      overflow: visible;
 
       @include from($mobile) {
         display: flex;
@@ -39,6 +40,18 @@
         &:hover {
           a {
             color: $black;
+          }
+        }
+
+        .tooltip {
+          height: 100%;
+          width: 100%;
+          font: inherit;
+
+          &__container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
           }
         }
 
@@ -70,11 +83,11 @@
         &::before {
           content: '';
           position: absolute;
+          transition: border-color 0.5s;
           width: 4rem;
           margin: 1rem 0;
           height: 2rem;
           border-left: 4px solid $orange-dark;
-          transition: border-color 0.5s;
 
           @media only screen and (max-width: $mobile) {
             width: 1rem;
@@ -112,6 +125,7 @@
             border-left: 4px solid $purple-dark;
             @media only screen and (max-width: $mobile) {
               border-bottom: 3px solid $purple-dark;
+              border-left: none;
             }
           }
         }
