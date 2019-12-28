@@ -18,4 +18,10 @@ const retryPromise = (promise, retriesLeft = 5, interval = 1000) => {
   });
 };
 
-export { retryPromise };
+const capitalize = (word: string) => {
+  return word.replace(/(?:^|\s)\S/g, a => {
+    return a.toUpperCase();
+  });
+};
+
+export { retryPromise, capitalize };

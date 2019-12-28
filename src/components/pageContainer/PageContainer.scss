@@ -1,0 +1,10 @@
+@import '../../assets/scss/variables.scss';
+
+.page-container {
+  height: 100%;
+  width: 100%;
+  padding-top: 1rem;
+  @include from($mobile) {
+    padding: 1.5rem 2rem;
+  }
+}

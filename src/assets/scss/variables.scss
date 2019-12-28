@@ -8,6 +8,7 @@ $navbar-width: 6rem;
 $navbar-dropdown-arrow: $grey-dark;
 $navbar-breakpoint: $mobile;
 $navbar-fixed-z: 30 !default;
+$checkradio-focus: none;
 
 $fontawesome: 'Font Awesome 5 Free';
 
@@ -62,6 +63,9 @@ $body-bg-dark: $dark-mode-gradient;
 $label-color: $white;
 $box-radius: $radius-extra-large;
 $box-shadow: none;
+
+$switch-background: $orange-light;
+$switch-background-active: $purple-light;
 
 // $section-padding: 2rem 0;
 // $button-background-color: none;
