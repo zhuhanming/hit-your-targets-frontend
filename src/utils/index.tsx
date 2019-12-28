@@ -24,4 +24,17 @@ const capitalize = (word: string) => {
   });
 };
 
-export { retryPromise, capitalize };
+const randomGreeting = (name: string) => {
+  const greetings = [
+    `Welcome back, ${name}`,
+    `How are you today, ${name}?`,
+    'Winners never quit, and quitters never win',
+    'Rome was not built in a day',
+    "Take baby steps - you'll get there!",
+    "There's no time to waste!"
+  ];
+
+  return greetings[Math.floor(Math.random() * greetings.length)];
+};
+
+export { retryPromise, capitalize, randomGreeting };

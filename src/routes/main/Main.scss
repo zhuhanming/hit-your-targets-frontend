@@ -1,1 +1,18 @@
 @import '../../assets/scss/variables.scss';
+
+.main-content {
+  &__title {
+  }
+
+  &__body {
+    flex-grow: 1;
+  }
+  &__row {
+    height: 50%;
+    // padding: 1rem 0;
+
+    .columns {
+      height: 100%;
+    }
+  }
+}

@@ -10,7 +10,7 @@ const Settings = () => {
 
   return (
     <>
-      <PageContainer>
+      <PageContainer titleText="Settings">
         <button type="button" className="button" onClick={logout}>
           Logout
         </button>

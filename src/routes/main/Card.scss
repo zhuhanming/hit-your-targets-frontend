@@ -1,0 +1,14 @@
+.main-card {
+  display: flex;
+  flex-direction: column;
+
+  &__title {
+    font-weight: bold;
+    color: white;
+    margin-bottom: 1.1rem !important;
+  }
+
+  &__body {
+    height: 100%;
+  }
+}

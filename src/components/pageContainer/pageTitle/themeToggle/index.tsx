@@ -14,7 +14,7 @@ const ThemeToggle = () => {
         name="switch"
         className="switch is-rounded is-large"
         onClick={toggle}
-        checked={theme !== ''}
+        defaultChecked={theme !== ''}
       />
       {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
       <label htmlFor="switch" />

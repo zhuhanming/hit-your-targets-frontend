@@ -1,19 +1,74 @@
-import React from 'react';
+import React, { useReducer, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+// import { toast } from 'react-toastify';
 
 import { useUser } from 'contexts/userContext';
-import { capitalize } from 'utils';
+import { useTodo } from 'contexts/todoContext';
+import { capitalize, randomGreeting } from 'utils';
+import RootStateInterface from 'interfaces/RootState';
 import PageContainer from 'components/pageContainer';
 import PageSection from 'components/pageSection';
-import PageTitle from 'components/pageTitle';
+import MainCard from './MainCard';
+import CalendarCard from './CalendarCard';
+import TasksForToday from './TasksForToday';
+
+import './Main.scss';
 
 const Main = () => {
   const { name } = useUser();
+  const { loadTodos } = useTodo();
+  const selectTodos = (state: RootStateInterface) => state.todos;
+  const { todos } = useSelector(selectTodos);
+  const { isTodoError } = useSelector(selectTodos);
+  const [state, setState] = useReducer((s, a) => ({ ...s, ...a }), {
+    isLoading: true,
+    isError: false,
+    title: ''
+  });
 
+  useEffect(() => {
+    let didCancel = false;
+
+    if (!didCancel) {
+      loadTodos();
+      setState({
+        title: randomGreeting(capitalize(name)),
+        isLoading: false,
+        isError: isTodoError
+      });
+    }
+
+    return () => {
+      didCancel = true;
+    };
+  }, [isTodoError, loadTodos, name]);
   return (
     <>
-      <PageContainer>
-        <PageSection>
-          <PageTitle titleText={`Welcome back, ${capitalize(name)}`} />
+      <PageContainer titleText={state.title} className="main-content">
+        <PageSection className="main-content__body is-paddingless">
+          <div className="main-content__row">
+            <div className="columns is-marginless">
+              <MainCard title="Tasks for Today">
+                <TasksForToday
+                  todos={todos.filter(todo => !todo.completed)}
+                  isLoading={state.isLoading}
+                />
+              </MainCard>
+              <MainCard title="Your Progress">
+                <span>Test</span>
+              </MainCard>
+              <MainCard title="Fun Fact of the Day">
+                <span>Test</span>
+              </MainCard>
+            </div>
+          </div>
+          <div className="main-content__row">
+            <div className="columns is-marginless">
+              <CalendarCard title="Upcoming Week">
+                <span>Work In Progress</span>
+              </CalendarCard>
+            </div>
+          </div>
         </PageSection>
       </PageContainer>
     </>

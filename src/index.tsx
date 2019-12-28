@@ -4,14 +4,24 @@ import whyDidYouRender from '@welldone-software/why-did-you-render';
 import { PersistGate } from 'redux-persist/integration/react';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import App from 'app';
 import AppProviders from 'contexts';
-
+import store, { persistor } from 'app/store';
 
 import * as serviceWorker from './serviceWorker';
 import './index.scss';
 
-import store, { persistor } from 'app/store';
+toast.configure({
+  position: 'bottom-center',
+  autoClose: 5000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true
+});
 
 const render = () => {
   ReactDOM.render(

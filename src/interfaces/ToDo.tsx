@@ -1,11 +1,14 @@
 import SubToDo from 'interfaces/SubToDo';
 
 export default interface ToDo {
+  id: number;
   title: string;
   description: string;
-  startTime: Date;
-  endTime: Date;
-  tags: string[];
+  startTime: string;
+  endTime: string;
+  // tags: string[];
   completed: boolean;
-  subToDos: SubToDo;
+  createdAt: string;
+  updatedAt: string;
+  subtodos: SubToDo[];
 }

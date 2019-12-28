@@ -1,6 +1,6 @@
 export default interface SubToDo {
   title: string;
-  startTime: Date;
-  endTime: Date;
+  startTime: string;
+  endTime: string;
   completed: boolean;
 }

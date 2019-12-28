@@ -4,10 +4,12 @@ import ToDo from 'interfaces/ToDo';
 
 export interface CurrentToDos {
   todos: ToDo[];
+  isTodoError: boolean;
 }
 
 const initialState: CurrentToDos = {
-  todos: []
+  todos: [],
+  isTodoError: false
 };
 
 const todos = createSlice({
@@ -16,10 +18,17 @@ const todos = createSlice({
   reducers: {
     setToDos: (state, action: PayloadAction<ToDo[]>) => {
       state.todos = action.payload;
+    },
+    updateToDo: (state, action: PayloadAction<ToDo>) => {
+      const foundIndex = state.todos.findIndex(x => x.id === action.payload.id);
+      state.todos[foundIndex] = action.payload;
+    },
+    setToDoError: (state, action: PayloadAction<boolean>) => {
+      state.isTodoError = action.payload;
     }
   }
 });
 
-export const { setToDos } = todos.actions;
+export const { setToDos, updateToDo, setToDoError } = todos.actions;
 
 export default todos.reducer;

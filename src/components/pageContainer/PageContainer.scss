@@ -4,7 +4,14 @@
   height: 100%;
   width: 100%;
   padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+
   @include from($mobile) {
     padding: 1.5rem 2rem;
+  }
+
+  &__columns {
+    height: 100%;
   }
 }

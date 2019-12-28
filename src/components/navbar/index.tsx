@@ -9,7 +9,6 @@ const Navbar = ({ isAuthenticated }) => {
 
   const handleNavbarBurgerClick = () => {
     setIsNavbarExpanded(!isNavbarExpanded);
-    console.log(isNavbarExpanded);
   };
 
   return (
