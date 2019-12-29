@@ -24,6 +24,7 @@
 
   &__empty-text {
     text-align: center;
+    display: block;
   }
 
   ul {
@@ -31,21 +32,17 @@
   }
 }
 
-.example-enter {
+.slide-enter {
   opacity: 0;
-  transform: translate(-250px, 0);
-  transform: translate3d(-250px, 0, 0);
 }
-.example-enter.example-enter-active {
+.slide-enter.slide-enter-active {
   opacity: 1;
   transition: opacity 1s ease;
-  transform: translate(0, 0);
-  transform: translate3d(0, 0, 0);
-  transition-property: transform, opacity;
+  transition-property: opacity;
   transition-duration: 300ms;
   transition-timing-function: cubic-bezier(0.175, 0.665, 0.32, 1), linear;
 }
-.example-leave {
+.slide-leave {
   opacity: 1;
   transform: translate(0, 0, 0);
   transform: translate3d(0, 0, 0);
@@ -53,8 +50,28 @@
   transition-duration: 300ms;
   transition-timing-function: cubic-bezier(0.175, 0.665, 0.32, 1), linear;
 }
-.example-leave.example-leave-active {
+.slide-leave.slide-leave-active {
   opacity: 0;
   transform: translate(250px, 0);
   transform: translate3d(250px, 0, 0);
+}
+
+.fade-enter {
+  opacity: 0;
+}
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 1s ease;
+  transition-property: opacity;
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(0.175, 0.665, 0.32, 1), linear;
+}
+.fade-leave {
+  opacity: 1;
+  transition-property: opacity;
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(0.175, 0.665, 0.32, 1), linear;
+}
+.fade-leave.fade-leave-active {
+  opacity: 0;
 }

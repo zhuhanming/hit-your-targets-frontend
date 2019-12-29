@@ -11,31 +11,25 @@ import './TasksForToday.scss';
 const TasksForToday = ({ todos, isLoading }) => {
   if (isLoading)
     return (
-      <ul>
-        <TodoListItemGhost />
-        <TodoListItemGhost />
-        <TodoListItemGhost />
-      </ul>
-    );
-  if (todos.length === 0)
-    return (
       <div className="tasks">
-        <span className="tasks__empty-text">
-          Great job, you&apos;re done for the day!
-        </span>
-        <button type="button" className="is-size-7 tasks__cta as-non-button">
-          <Link to={LIST}>View More</Link>
-        </button>
+        <ul>
+          <TodoListItemGhost />
+          <TodoListItemGhost />
+          <TodoListItemGhost />
+        </ul>
       </div>
     );
   // eslint-disable-next-line no-param-reassign
   if (todos.length > 5) todos = todos.slice(0, 5);
   const { length } = todos;
-  if (isLoading) return <></>;
   return (
     <div className="tasks">
       <ul>
-        <ReactCSSTransitionGroup transitionName="example">
+        <ReactCSSTransitionGroup
+          transitionName="slide"
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={500}
+        >
           {todos.map((ele, key) => {
             return (
               <TodoListItem
@@ -46,6 +40,19 @@ const TasksForToday = ({ todos, isLoading }) => {
               />
             );
           })}
+        </ReactCSSTransitionGroup>
+        <ReactCSSTransitionGroup
+          transitionName="fade"
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={500}
+        >
+          {todos.length === 0 && (
+            <article className="message is-success">
+              <span className="message-body tasks__empty-text">
+                Great job, you&apos;re done for the day!
+              </span>
+            </article>
+          )}
         </ReactCSSTransitionGroup>
       </ul>
       <button type="button" className="is-size-7 tasks__cta as-non-button">
