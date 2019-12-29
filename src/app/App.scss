@@ -17,10 +17,14 @@
   padding-left: $navbar-width;
   padding-top: 0;
 
+  @media only screen and (max-width: $tablet) {
+    height: auto;
+  }
+
   @media only screen and (max-width: $mobile) {
     padding-left: 0;
     padding-top: $navbar-height;
-    height: auto;
+    padding-bottom: 2rem;
   }
 
   &.unauth {
