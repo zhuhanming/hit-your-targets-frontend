@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 
-import { getDisplayDate } from 'utils/timeUtils';
+import { getDisplayDate, isWarning } from 'utils/timeUtils';
 import { useTodo } from 'contexts/todoContext';
 
 import './TodoListItem.scss';
@@ -10,7 +10,8 @@ const TodoListItem = ({ todo, isExpanded = false, currentKey, keyLimit }) => {
   const { title, completed, endTime, id } = todo;
   const [isChecked, setIsChecked] = useState(completed);
   const { updateTodo } = useTodo();
-  const { displayDate, warning } = getDisplayDate(endTime);
+  const displayDate = getDisplayDate(endTime);
+  const warning = isWarning(endTime);
   const handleCheck = async () => {
     try {
       setIsChecked(true);
@@ -29,8 +30,7 @@ const TodoListItem = ({ todo, isExpanded = false, currentKey, keyLimit }) => {
         id={id}
         name={id}
         checked={isChecked}
-        defaultChecked={completed}
-        onClick={handleCheck}
+        onChange={handleCheck}
       />
       <label
         className={`list-item__content ${
