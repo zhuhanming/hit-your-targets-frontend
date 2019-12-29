@@ -28,7 +28,7 @@ const isThisWeek = (date: Date) => {
     today.getMonth(),
     today.getDate() + 6
   );
-  return date < nextWeek;
+  return today < date && date < nextWeek;
 };
 
 const getDisplayDate = (endTime: string) => {
