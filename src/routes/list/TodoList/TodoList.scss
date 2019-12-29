@@ -1,3 +1,5 @@
+@import '../../../assets/scss/variables.scss';
+
 .todo-list {
   height: 100%;
   display: flex;
@@ -5,7 +7,9 @@
 
   &__box {
     flex: 1;
-    flex-basis: 0;
+    @include from($tablet) {
+      flex-basis: 0;
+    }
     // overflow-x: hidden;
     overflow: scroll;
     min-height: 0;

@@ -4,7 +4,17 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
   font-size: 0.85rem;
+
+  @media only screen and (min-width: $tablet) and (max-width: 880px) {
+    font-size: 0.75rem;
+    button {
+      padding-left: 0.1rem !important;
+      padding-right: 0.1rem !important;
+      font-size: 0.75rem !important;
+    }
+  }
 
   button {
     font-size: 0.85rem;
