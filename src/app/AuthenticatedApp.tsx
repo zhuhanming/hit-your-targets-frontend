@@ -9,6 +9,7 @@ import {
 import Navbar from 'components/navbar';
 import Main from 'routes/main';
 import Settings from 'routes/settings';
+import List from 'routes/list';
 import {
   UNAUTHED_ROUTES,
   ROOT,
@@ -34,8 +35,8 @@ const AuthenticatedApp = () => {
           <Route exact path={UNAUTHED_ROUTES} render={redirectToRoot} />
           <Route exact path={HOME} component={Main} />
           <Route exact path={SETTINGS} component={Settings} />
-          {/* <Route exact path={LIST} component={List} />
-          <Route exact path={KANBAN} component={Kanban} />
+          <Route exact path={LIST} component={List} />
+          {/* <Route exact path={KANBAN} component={Kanban} />
           <Route exact path={CALENDAR} component={Calendar} /> */}
           <Route exact path="/" render={redirectToHome} />
         </Switch>
