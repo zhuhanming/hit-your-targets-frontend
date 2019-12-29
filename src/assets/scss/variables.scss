@@ -36,8 +36,22 @@ $light-mode-gradient: linear-gradient(
   rgba(255, 227, 149, 1) 100%
 );
 
+$light-mode-horizontal-gradient: linear-gradient(
+  to left,
+  rgba(255, 133, 96, 1) 0%,
+  rgba(255, 190, 126, 1) 50%,
+  rgba(255, 227, 149, 1) 100%
+);
+
 $dark-mode-gradient: linear-gradient(
   to left top,
+  rgba(90, 29, 139, 1) 0%,
+  rgba(70, 79, 180, 1) 50%,
+  rgba(129, 129, 239, 1) 100%
+);
+
+$dark-mode-horizontal-gradient: linear-gradient(
+  to left,
   rgba(90, 29, 139, 1) 0%,
   rgba(70, 79, 180, 1) 50%,
   rgba(129, 129, 239, 1) 100%
