@@ -1,0 +1,40 @@
+@import '../../assets/scss/variables.scss';
+
+.selector {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+
+  button {
+    font-size: 0.85rem;
+    color: $dark;
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
+    transition: color 0.5s;
+
+    &.dark {
+      color: $black;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+  &__view {
+    p {
+      span {
+        font-weight: bold;
+      }
+
+      button.is-active {
+        font-weight: bold;
+        color: $black;
+      }
+    }
+  }
+
+  &__tag {
+    font-weight: bold;
+  }
+}
