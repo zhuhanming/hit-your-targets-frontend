@@ -34,14 +34,14 @@ const isThisWeek = (date: Date) => {
 const getDisplayDate = (endTime: string) => {
   const endTimeDate = new Date(Date.parse(endTime));
   if (isToday(endTimeDate)) {
-    return { displayDate: 'Today', warning: true };
+    return 'Today';
   }
   if (isTomorrow(endTimeDate)) {
-    return { displayDate: 'Tomorrow', warning: false };
+    return 'Tomorrow';
   }
   if (isThisWeek(endTimeDate)) {
-    const week = endTimeDate.toLocaleString('default', { weekday: 'long' });
-    return { displayDate: `${week}`, warning: false };
+    const weekday = endTimeDate.toLocaleString('default', { weekday: 'long' });
+    return `${weekday}`;
   }
   const now = new Date();
   const day = endTimeDate.getDate();
@@ -49,13 +49,40 @@ const getDisplayDate = (endTime: string) => {
 
   if (endTimeDate < now) {
     if (now.getFullYear() === endTimeDate.getFullYear())
-      return { displayDate: `${day} ${month}`, warning: true };
-    return {
-      displayDate: `${day} ${month} ${endTimeDate.getFullYear()}`,
-      warning: true
-    };
+      return `${day} ${month}`;
+    return `${day} ${month} ${endTimeDate.getFullYear()}`;
   }
-  return { displayDate: `${day} ${month}`, warning: false };
+  return `${day} ${month}`;
 };
 
-export { getDisplayDate };
+const isWarning = (endTime: string) => {
+  const endTimeDate = new Date(Date.parse(endTime));
+  if (isToday(endTimeDate)) {
+    return true;
+  }
+  return endTimeDate < new Date();
+};
+
+const getDaysRemaining = (endTime: string, completed: boolean) => {
+  const endTimeDate = new Date(Date.parse(endTime));
+  if (isToday(endTimeDate)) {
+    return 'DUE TODAY';
+  }
+  if (isTomorrow(endTimeDate)) {
+    return 'DUE TOMORROW';
+  }
+  const now = new Date();
+  if (endTimeDate < now) {
+    const numberOfDays = Math.ceil(
+      (now.getTime() - endTimeDate.getTime()) / (1000 * 3600 * 24)
+    );
+    if (completed) return `${numberOfDays} DAYS AGO`;
+    return `${numberOfDays} DAYS OVERDUE`;
+  }
+  const numberOfDays = Math.ceil(
+    (endTimeDate.getTime() - now.getTime()) / (1000 * 3600 * 24)
+  );
+  return `${numberOfDays} DAYS REMAINING`;
+};
+
+export { getDisplayDate, isWarning, getDaysRemaining };
