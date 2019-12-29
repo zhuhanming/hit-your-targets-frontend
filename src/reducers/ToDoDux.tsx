@@ -25,12 +25,17 @@ const todos = createSlice({
       state.todos[foundIndex] = action.payload;
       state.isTodoError = false;
     },
+    addToDo: (state, action: PayloadAction<ToDo>) => {
+      state.todos.push(action.payload);
+      state.todos.sort((a, b) => Date.parse(a.endTime) - Date.parse(b.endTime));
+      state.isTodoError = false;
+    },
     setToDoError: state => {
       state.isTodoError = true;
     }
   }
 });
 
-export const { setToDos, updateToDo, setToDoError } = todos.actions;
+export const { setToDos, updateToDo, addToDo, setToDoError } = todos.actions;
 
 export default todos.reducer;

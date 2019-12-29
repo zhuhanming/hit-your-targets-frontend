@@ -2,10 +2,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import CurrentUser from 'interfaces/CurrentUser';
 import CurrentFilters from 'interfaces/CurrentFilters';
+import { View } from 'interfaces/ViewContext';
 
 export interface CurrentMisc extends CurrentFilters {
   user: CurrentUser;
   theme: string;
+  view: View;
 }
 
 const initialState: CurrentMisc = {
@@ -16,7 +18,8 @@ const initialState: CurrentMisc = {
     lastRetrieved: null
   },
   filters: [],
-  theme: ''
+  theme: '',
+  view: View.TODAY
 };
 
 const misc = createSlice({
@@ -25,6 +28,9 @@ const misc = createSlice({
   reducers: {
     setUser: (state, action: PayloadAction<CurrentUser>) => {
       state.user = { ...action.payload };
+    },
+    setView: (state, action: PayloadAction<View>) => {
+      state.view = action.payload;
     },
     updateFilter: (state, action: PayloadAction<CurrentFilters>) => {
       state.filters = action.payload.filters;
@@ -50,6 +56,7 @@ export const {
   setUser,
   updateFilter,
   updateTheme,
+  setView,
   clearUser,
   clearFilters
 } = misc.actions;
