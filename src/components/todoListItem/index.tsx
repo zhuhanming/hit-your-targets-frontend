@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable no-return-assign */
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
@@ -7,31 +8,56 @@ import { useTodo } from 'contexts/todoContext';
 
 import './TodoListItem.scss';
 
-const TodoListItem = ({ todo, isExpanded = false, currentKey, keyLimit }) => {
+const TodoListItem = ({
+  todo,
+  isExpanded = false,
+  currentKey,
+  keyLimit,
+  focus = null,
+  setFocus = id => null
+}) => {
   const { title, completed, endTime, id, subtodos } = todo;
   const [isChecked, setIsChecked] = useState(completed);
+  const isInFocus = focus === id;
   const { updateTodo } = useTodo();
   const displayDate = getDisplayDate(endTime);
   const hasSubtodos = subtodos.length > 0;
   const warning = isWarning(endTime);
   const handleCheck = async () => {
-    if (!hasSubtodos) {
-      try {
-        setIsChecked(true);
-        await updateTodo(id, { completed: !completed });
-        toast.success(`👍 Great job! ${title} completed!`);
-      } catch (error) {
-        setIsChecked(false);
+    if (!isExpanded || isInFocus) {
+      if (!hasSubtodos) {
+        try {
+          setIsChecked(true);
+          await updateTodo(id, { completed: !completed });
+          if (!completed) {
+            setFocus(null);
+            toast.success(`👍 Great job! ${title} completed!`);
+          } else {
+            toast.warn('😮 Oh dear, what happened?');
+          }
+        } catch (error) {
+          setIsChecked(false);
+        }
       }
+    } else {
+      setFocus(id);
     }
   };
 
   return (
     <li
       className={`list-item ${
-        hasSubtodos && !isExpanded ? 'tooltip is-tooltip-bottom' : ''
+        isInFocus
+          ? 'tooltip is-tooltip-bottom'
+          : hasSubtodos && !isExpanded
+          ? 'tooltip is-tooltip-bottom'
+          : ''
       }`}
-      data-tooltip="There are incomplete subtasks for this task."
+      data-tooltip={`${
+        hasSubtodos
+          ? 'There are incomplete subtasks for this task.'
+          : 'Click again to mark as done.'
+      }`}
     >
       <input
         type="checkbox"
@@ -46,8 +72,14 @@ const TodoListItem = ({ todo, isExpanded = false, currentKey, keyLimit }) => {
       />
       <label
         className={`list-item__content tooltip-container ${
-          currentKey < keyLimit ? 'has-bottom-border' : ''
-        }`}
+          isInFocus ? 'is-in-focus' : ''
+        } ${
+          currentKey < keyLimit
+            ? 'has-bottom-border'
+            : isExpanded
+            ? ''
+            : 'not-expanded'
+        } `}
         htmlFor={id}
       >
         <div

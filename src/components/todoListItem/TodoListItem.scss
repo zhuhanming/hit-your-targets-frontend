@@ -4,21 +4,39 @@
   padding: 0 !important;
   display: flex;
   align-items: center;
+  border-bottom: none !important;
 
   &__content {
     width: 100%;
     margin: 0.5rem 0 0 0 !important;
     padding-right: 0 !important;
     padding-top: 0 !important;
-    padding-bottom: 0.5rem !important;
+    padding-bottom: calc(0.5rem + 1px) !important;
     display: flex !important;
     justify-content: space-between;
     align-items: center;
     opacity: 1 !important;
+    margin-bottom: 1.25rem !important;
+
+    &.is-in-focus {
+      .list-item__title {
+        font-weight: bold;
+        color: $primary;
+      }
+
+      &.has-bottom-border {
+        border-bottom: 1px solid $primary;
+      }
+    }
+
+    &.not-expanded {
+      margin-bottom: 0 !important;
+    }
 
     &.has-bottom-border {
-      border-bottom: 1px solid $grey-light;
+      border-bottom: 1px solid $grey-border;
       border-radius: 0 !important;
+      margin-bottom: 0 !important;
     }
   }
   &__title {
