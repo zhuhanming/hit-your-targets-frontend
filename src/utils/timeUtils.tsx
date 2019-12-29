@@ -1,38 +1,22 @@
-const isToday = (date: Date) => {
-  const today = new Date();
+import moment from 'moment';
+
+const isToday = (date: moment.Moment): boolean => {
+  return date.isSame(moment(), 'day');
+};
+
+const isTomorrow = (date: moment.Moment): boolean => {
+  return date.isSame(moment().add(1, 'days'), 'day');
+};
+
+const isThisWeek = (date: moment.Moment): boolean => {
   return (
-    date.getDate() === today.getDate() &&
-    date.getMonth() === today.getMonth() &&
-    date.getFullYear() === today.getFullYear()
+    date.isAfter(moment()) &&
+    date.isSameOrBefore(moment().add(7, 'days'), 'day')
   );
 };
 
-const isTomorrow = (date: Date) => {
-  const today = new Date();
-  const tomorrow = new Date(
-    today.getFullYear(),
-    today.getMonth(),
-    today.getDate() + 1
-  );
-  return (
-    date.getDate() === tomorrow.getDate() &&
-    date.getMonth() === tomorrow.getMonth() &&
-    date.getFullYear() === tomorrow.getFullYear()
-  );
-};
-
-const isThisWeek = (date: Date) => {
-  const today = new Date();
-  const nextWeek = new Date(
-    today.getFullYear(),
-    today.getMonth(),
-    today.getDate() + 6
-  );
-  return today < date && date < nextWeek;
-};
-
-const getDisplayDate = (endTime: string) => {
-  const endTimeDate = new Date(Date.parse(endTime));
+const getDisplayDate = (endTime: string): string => {
+  const endTimeDate = moment(endTime);
   if (isToday(endTimeDate)) {
     return 'Today';
   }
@@ -40,48 +24,36 @@ const getDisplayDate = (endTime: string) => {
     return 'Tomorrow';
   }
   if (isThisWeek(endTimeDate)) {
-    const weekday = endTimeDate.toLocaleString('default', { weekday: 'long' });
-    return `${weekday}`;
+    return endTimeDate.format('dddd');
   }
-  const now = new Date();
-  const day = endTimeDate.getDate();
-  const month = endTimeDate.toLocaleString('default', { month: 'short' });
 
-  if (endTimeDate < now) {
-    if (now.getFullYear() === endTimeDate.getFullYear())
-      return `${day} ${month}`;
-    return `${day} ${month} ${endTimeDate.getFullYear()}`;
+  if (endTimeDate.isBefore(moment())) {
+    if (endTimeDate.isSame(moment(), 'year'))
+      return endTimeDate.format('D MMM');
+    return endTimeDate.format('D MMM YYYY');
   }
-  return `${day} ${month}`;
+  return endTimeDate.format('D MMM');
 };
 
 const isWarning = (endTime: string) => {
-  const endTimeDate = new Date(Date.parse(endTime));
-  if (isToday(endTimeDate)) {
-    return true;
-  }
-  return endTimeDate < new Date();
+  const endTimeDate = moment(endTime);
+  return endTimeDate.isSameOrBefore(moment(), 'day');
 };
 
 const getDaysRemaining = (endTime: string, completed: boolean) => {
-  const endTimeDate = new Date(Date.parse(endTime));
+  const endTimeDate = moment(endTime);
   if (isToday(endTimeDate)) {
     return 'DUE TODAY';
   }
   if (isTomorrow(endTimeDate)) {
     return 'DUE TOMORROW';
   }
-  const now = new Date();
-  if (endTimeDate < now) {
-    const numberOfDays = Math.ceil(
-      (now.getTime() - endTimeDate.getTime()) / (1000 * 3600 * 24)
-    );
+  if (endTimeDate.isBefore(moment())) {
+    const numberOfDays = moment().diff(endTimeDate, 'days');
     if (completed) return `${numberOfDays} DAYS AGO`;
     return `${numberOfDays} DAYS OVERDUE`;
   }
-  const numberOfDays = Math.ceil(
-    (endTimeDate.getTime() - now.getTime()) / (1000 * 3600 * 24)
-  );
+  const numberOfDays = endTimeDate.diff(moment(), 'days');
   return `${numberOfDays} DAYS REMAINING`;
 };
 
