@@ -4,11 +4,24 @@ import { Link } from 'react-router-dom';
 
 import { LIST } from 'constants/routes';
 import ProgressOverviewItem from './ProgressOverviewItem';
+import ProgressOverviewItemGhost from './ProgressOverviewItem/ProgressOverviewItemGhost';
 
 import './ProgressOverview.scss';
 
 const ProgressOverview = ({ todos, isLoading }) => {
-  if (isLoading) return <></>;
+  if (isLoading)
+    return (
+      <div className="tasks">
+        <ul>
+          <ProgressOverviewItemGhost />
+          <ProgressOverviewItemGhost />
+          <ProgressOverviewItemGhost />
+        </ul>
+        <button type="button" className="is-size-7 tasks__cta as-non-button">
+          <Link to={LIST}>View More</Link>
+        </button>
+      </div>
+    );
   if (todos.length > 3) {
     const completedTodos = todos.filter(todo => !todo.completed);
     if (completedTodos.length >= 3) {
