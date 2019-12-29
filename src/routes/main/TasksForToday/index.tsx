@@ -24,7 +24,7 @@ const TasksForToday = ({ todos, isLoading }) => {
   const { length } = todos;
   return (
     <div className="tasks">
-      <ul>
+      <ul className="todo-list">
         <ReactCSSTransitionGroup
           transitionName="slide"
           transitionEnterTimeout={500}
