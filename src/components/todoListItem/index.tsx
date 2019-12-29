@@ -13,14 +13,11 @@ const TodoListItem = ({ todo, isExpanded = false, currentKey, keyLimit }) => {
   const { displayDate, warning } = getDisplayDate(endTime);
   const handleCheck = async () => {
     try {
+      setIsChecked(true);
       await updateTodo(id, { completed: !completed });
-      if (!isChecked) {
-        toast.success(`👍 Great job! ${title} completed!`);
-      } else {
-        toast.error(`😮 Oh no, what happened?`);
-      }
+      toast.success(`👍 Great job! ${title} completed!`);
     } catch (error) {
-      console.log(error);
+      setIsChecked(false);
     }
   };
 
@@ -31,6 +28,7 @@ const TodoListItem = ({ todo, isExpanded = false, currentKey, keyLimit }) => {
         className="is-checkradio is-success list-item__content__checkbox"
         id={id}
         name={id}
+        checked={isChecked}
         defaultChecked={completed}
         onClick={handleCheck}
       />
@@ -41,15 +39,11 @@ const TodoListItem = ({ todo, isExpanded = false, currentKey, keyLimit }) => {
         htmlFor={id}
       >
         <div
-          className={`list-item__title ${completed ? 'has-text-success' : ''} `}
+          className={`list-item__title ${isChecked ? 'has-text-success' : ''} `}
         >
           {title}
         </div>
-        <div
-          className={`list-item__date is-size-7 ${
-            warning ? 'has-text-danger' : ''
-          }`}
-        >
+        <div className={`list-item__date ${warning ? 'has-text-danger' : ''}`}>
           {displayDate}
         </div>
       </label>

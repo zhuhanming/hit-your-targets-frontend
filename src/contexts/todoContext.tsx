@@ -51,6 +51,7 @@ const TodoProvider = props => {
       toast.error(
         'Failed to update tasks. Please refresh the page to try again.'
       );
+      throw new Error(error.message);
     }
   };
 
