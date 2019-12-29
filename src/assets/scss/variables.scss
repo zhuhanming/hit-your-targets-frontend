@@ -22,6 +22,7 @@ $yellow: #ffed8d;
 $dark: #767676;
 $grey: #c3c3c3;
 $grey-light: #efefef;
+$green: #008e37;
 
 $purple-light: #798fe6;
 $purple-dark: #562293;
@@ -43,7 +44,7 @@ $dark-mode-gradient: linear-gradient(
 );
 
 // $link: $blue;
-// $success: $green;
+$success: $green;
 $danger: $red;
 
 $radius-extra-large: 30px;
@@ -68,6 +69,8 @@ $box-shadow: none;
 
 $switch-background: $orange-light;
 $switch-background-active: $purple-light;
+
+$progress-bar-background-color: $white;
 
 // $section-padding: 2rem 0;
 // $button-background-color: none;
