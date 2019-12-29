@@ -58,7 +58,7 @@ const TodoCreationField = () => {
     <form onSubmit={handleSubmit(onSubmit)} className="todo-field">
       <div className="control">
         <input
-          className="input is-slightly-transparent todo-field__input"
+          className="input todo-field__input"
           name="title"
           type="text"
           autoComplete="off"
