@@ -5,10 +5,11 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import TodoListItem from 'components/todoListItem';
 import TodoListItemGhost from 'components/todoListItem/TodoListItemGhost';
 import { LIST } from 'constants/routes';
+import ErrorMessage from 'components/errorMessage';
 
 import './TasksForToday.scss';
 
-const TasksForToday = ({ todos, isLoading }) => {
+const TasksForToday = ({ todos, isLoading, isError }) => {
   if (isLoading)
     return (
       <div className="tasks">
@@ -17,6 +18,15 @@ const TasksForToday = ({ todos, isLoading }) => {
           <TodoListItemGhost />
           <TodoListItemGhost />
         </ul>
+      </div>
+    );
+  if (isError)
+    return (
+      <div className="tasks">
+        <ErrorMessage message="An error has occurred. Please refresh the page." />
+        <button type="button" className="is-size-7 tasks__cta as-non-button">
+          <Link to={LIST}>View More</Link>
+        </button>
       </div>
     );
   // eslint-disable-next-line no-param-reassign
@@ -48,7 +58,7 @@ const TasksForToday = ({ todos, isLoading }) => {
         >
           {todos.length === 0 && (
             <article className="message is-success">
-              <span className="message-body tasks__empty-text">
+              <span className="message-body">
                 Great job, you&apos;re done for the day!
               </span>
             </article>

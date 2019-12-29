@@ -21,7 +21,6 @@ const Main = () => {
   const { loadTodos } = useTodo();
   const selectTodos = (state: RootStateInterface) => state.todos;
   const { todos } = useSelector(selectTodos);
-  const { isTodoError } = useSelector(selectTodos);
   const [state, setState] = useReducer((s, a) => ({ ...s, ...a }), {
     isLoading: true,
     isError: false,
@@ -32,16 +31,23 @@ const Main = () => {
     let didCancel = false;
 
     if (!didCancel) {
-      loadTodos();
-      setState({
-        isLoading: false
-      });
+      try {
+        loadTodos();
+        setState({
+          isLoading: false
+        });
+      } catch (error) {
+        setState({
+          isError: true,
+          isLoading: false
+        });
+      }
     }
 
     return () => {
       didCancel = true;
     };
-  }, [isTodoError, loadTodos, name]);
+  }, [loadTodos]);
 
   return (
     <>
@@ -53,10 +59,15 @@ const Main = () => {
                 <TasksForToday
                   todos={todos.filter(todo => !todo.completed)}
                   isLoading={state.isLoading}
+                  isError={state.isError}
                 />
               </MainCard>
               <MainCard title="Your Progress">
-                <ProgressOverview todos={todos} isLoading={state.isLoading} />
+                <ProgressOverview
+                  todos={todos}
+                  isLoading={state.isLoading}
+                  isError={state.isError}
+                />
               </MainCard>
               <MainCard title="Fun Fact of the Day">
                 <FunFact />

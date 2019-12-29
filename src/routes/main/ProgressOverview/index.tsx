@@ -3,12 +3,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { LIST } from 'constants/routes';
+import ErrorMessage from 'components/errorMessage';
 import ProgressOverviewItem from './ProgressOverviewItem';
 import ProgressOverviewItemGhost from './ProgressOverviewItem/ProgressOverviewItemGhost';
 
 import './ProgressOverview.scss';
 
-const ProgressOverview = ({ todos, isLoading }) => {
+const ProgressOverview = ({ todos, isLoading, isError }) => {
   if (isLoading)
     return (
       <div className="tasks">
@@ -17,6 +18,15 @@ const ProgressOverview = ({ todos, isLoading }) => {
           <ProgressOverviewItemGhost />
           <ProgressOverviewItemGhost />
         </ul>
+        <button type="button" className="is-size-7 tasks__cta as-non-button">
+          <Link to={LIST}>View More</Link>
+        </button>
+      </div>
+    );
+  if (isError)
+    return (
+      <div className="tasks">
+        <ErrorMessage message="An error has occurred. Please refresh the page." />
         <button type="button" className="is-size-7 tasks__cta as-non-button">
           <Link to={LIST}>View More</Link>
         </button>
