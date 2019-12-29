@@ -64,7 +64,11 @@ const Main = () => {
           <div className="main-content__row">
             <div className="columns is-marginless">
               <CalendarCard title="Upcoming Week">
-                <span>Work In Progress</span>
+                <article className="message is-info is-flex">
+                  <span className="message-body">
+                    Work In Progress - Coming Soon!
+                  </span>
+                </article>
               </CalendarCard>
             </div>
           </div>
