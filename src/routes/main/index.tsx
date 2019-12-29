@@ -13,6 +13,7 @@ import CalendarCard from './CalendarCard';
 import TasksForToday from './TasksForToday';
 
 import './Main.scss';
+import ProgressOverview from './ProgressOverview';
 
 const Main = () => {
   const { name } = useUser();
@@ -54,7 +55,7 @@ const Main = () => {
                 />
               </MainCard>
               <MainCard title="Your Progress">
-                <span>Test</span>
+                <ProgressOverview todos={todos} isLoading={state.isLoading} />
               </MainCard>
               <MainCard title="Fun Fact of the Day">
                 <span>Test</span>
