@@ -1,0 +1,22 @@
+@import '../../../assets/scss/variables.scss';
+
+.fun-fact {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  &__stat {
+    font-weight: bold;
+    font-size: 5rem;
+    line-height: 1.2;
+    color: $orange-dark;
+    transition: color 0.5s;
+
+    &.dark {
+      color: $purple-dark;
+      transition: color 0.5s;
+    }
+  }
+}
