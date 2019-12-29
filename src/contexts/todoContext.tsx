@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 
 import TodoContextInterface from 'interfaces/TodoContext';
 // import RootStateInterface from 'interfaces/RootState';
-import { setToDos, setToDoError, updateToDo } from 'reducers/ToDoDux';
+import { setToDos, setToDoError, updateToDo, addToDo } from 'reducers/ToDoDux';
 import ApiService from 'services/apiService';
 
 const defaultContextData = {
@@ -24,6 +24,7 @@ const TodoContext = React.createContext<TodoContextInterface>(
 const TodoProvider = props => {
   const dispatch = useDispatch();
   // const selectTodos = (state: RootStateInterface) => state.todos;
+  // const { todos } = useSelector(selectTodos);
 
   const loadTodos = () => {
     const fetchData = async () => {
@@ -37,9 +38,24 @@ const TodoProvider = props => {
         toast.error(
           'Failed to retrieve tasks. Please refresh the page to try again.'
         );
+        throw new Error(error.message);
       }
     };
     fetchData();
+  };
+
+  const createTodo = async code => {
+    try {
+      console.log(code);
+      const responses = await ApiService.post('todos', code);
+      dispatch(addToDo(responses.data));
+    } catch (error) {
+      dispatch(setToDoError());
+      toast.error(
+        'Failed to create task. Please refresh the page to try again.'
+      );
+      throw new Error(error.message);
+    }
   };
 
   const updateTodo = async (id, code) => {
@@ -55,7 +71,12 @@ const TodoProvider = props => {
     }
   };
 
-  return <TodoContext.Provider value={{ loadTodos, updateTodo }} {...props} />;
+  return (
+    <TodoContext.Provider
+      value={{ loadTodos, createTodo, updateTodo }}
+      {...props}
+    />
+  );
 };
 
 const useTodo = () => {
