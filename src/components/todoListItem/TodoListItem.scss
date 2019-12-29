@@ -27,6 +27,10 @@
       &.has-bottom-border {
         border-bottom: 1px solid $primary;
       }
+
+      &::before {
+        border: 0.1rem $primary solid !important;
+      }
     }
 
     &.not-expanded {

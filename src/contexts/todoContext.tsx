@@ -46,7 +46,6 @@ const TodoProvider = props => {
 
   const createTodo = async code => {
     try {
-      console.log(code);
       const responses = await ApiService.post('todos', code);
       dispatch(addToDo(responses.data));
     } catch (error) {
