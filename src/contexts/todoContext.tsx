@@ -32,11 +32,10 @@ const TodoProvider = props => {
         const todos = responses.data;
         todos.sort((a, b) => Date.parse(a.endTime) - Date.parse(b.endTime));
         dispatch(setToDos(todos));
-        dispatch(setToDoError(false));
       } catch (error) {
-        dispatch(setToDoError(true));
+        dispatch(setToDoError());
         toast.error(
-          'Failed to retrieve todos. Please refresh the page to try again.'
+          'Failed to retrieve tasks. Please refresh the page to try again.'
         );
       }
     };
@@ -47,13 +46,11 @@ const TodoProvider = props => {
     try {
       const responses = await ApiService.patch(`todos/${id}`, code);
       dispatch(updateToDo(responses.data));
-      dispatch(setToDoError(false));
     } catch (error) {
-      dispatch(setToDoError(true));
+      dispatch(setToDoError());
       toast.error(
-        'Something went wrong. Please refresh the page to try again.'
+        'Failed to update tasks. Please refresh the page to try again.'
       );
-      throw new Error(error.message);
     }
   };
 

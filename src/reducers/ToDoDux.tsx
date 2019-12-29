@@ -18,13 +18,15 @@ const todos = createSlice({
   reducers: {
     setToDos: (state, action: PayloadAction<ToDo[]>) => {
       state.todos = action.payload;
+      state.isTodoError = false;
     },
     updateToDo: (state, action: PayloadAction<ToDo>) => {
       const foundIndex = state.todos.findIndex(x => x.id === action.payload.id);
       state.todos[foundIndex] = action.payload;
+      state.isTodoError = false;
     },
-    setToDoError: (state, action: PayloadAction<boolean>) => {
-      state.isTodoError = action.payload;
+    setToDoError: state => {
+      state.isTodoError = true;
     }
   }
 });

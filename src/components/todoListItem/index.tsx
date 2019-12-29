@@ -14,8 +14,7 @@ const TodoListItem = ({ todo, isExpanded = false, currentKey, keyLimit }) => {
   const handleCheck = async () => {
     try {
       await updateTodo(id, { completed: !completed });
-      setIsChecked(!completed);
-      if (!completed) {
+      if (!isChecked) {
         toast.success(`👍 Great job! ${title} completed!`);
       } else {
         toast.error(`😮 Oh no, what happened?`);
@@ -32,8 +31,7 @@ const TodoListItem = ({ todo, isExpanded = false, currentKey, keyLimit }) => {
         className="is-checkradio is-success list-item__content__checkbox"
         id={id}
         name={id}
-        defaultChecked={isChecked}
-        checked={isChecked}
+        defaultChecked={completed}
         onClick={handleCheck}
       />
       <label

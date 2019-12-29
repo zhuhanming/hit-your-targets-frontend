@@ -23,7 +23,7 @@ const Main = () => {
   const [state, setState] = useReducer((s, a) => ({ ...s, ...a }), {
     isLoading: true,
     isError: false,
-    title: ''
+    title: randomGreeting(capitalize(name))
   });
 
   useEffect(() => {
@@ -32,9 +32,7 @@ const Main = () => {
     if (!didCancel) {
       loadTodos();
       setState({
-        title: randomGreeting(capitalize(name)),
-        isLoading: false,
-        isError: isTodoError
+        isLoading: false
       });
     }
 
@@ -42,6 +40,7 @@ const Main = () => {
       didCancel = true;
     };
   }, [isTodoError, loadTodos, name]);
+
   return (
     <>
       <PageContainer titleText={state.title} className="main-content">

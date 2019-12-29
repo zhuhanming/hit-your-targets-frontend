@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import TodoListItem from 'components/todoListItem';
 import TodoListItemGhost from 'components/todoListItem/TodoListItemGhost';
@@ -34,16 +35,18 @@ const TasksForToday = ({ todos, isLoading }) => {
   return (
     <div className="tasks">
       <ul>
-        {todos.map((ele, key) => {
-          return (
-            <TodoListItem
-              todo={ele}
-              currentKey={key}
-              key={`list-item-${ele.id}`}
-              keyLimit={length - 1}
-            />
-          );
-        })}
+        <ReactCSSTransitionGroup transitionName="example">
+          {todos.map((ele, key) => {
+            return (
+              <TodoListItem
+                todo={ele}
+                currentKey={key}
+                key={`list-item-${ele.id}`}
+                keyLimit={length - 1}
+              />
+            );
+          })}
+        </ReactCSSTransitionGroup>
       </ul>
       <button type="button" className="is-size-7 tasks__cta as-non-button">
         <Link to={LIST}>View More</Link>
