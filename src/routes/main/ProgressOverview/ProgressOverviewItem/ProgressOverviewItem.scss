@@ -54,24 +54,24 @@
 
 .progress {
   &::-webkit-progress-value {
-    background: $light-mode-gradient !important;
+    background: $light-mode-horizontal-gradient !important;
   }
   &::-moz-progress-bar {
-    background: $light-mode-gradient !important;
+    background: $light-mode-horizontal-gradient !important;
   }
   &::-ms-fill {
-    background: $light-mode-gradient !important;
+    background: $light-mode-horizontal-gradient !important;
   }
 
   &.dark {
     &::-webkit-progress-value {
-      background: $dark-mode-gradient !important;
+      background: $dark-mode-horizontal-gradient !important;
     }
     &::-moz-progress-bar {
-      background: $dark-mode-gradient !important;
+      background: $dark-mode-horizontal-gradient !important;
     }
     &::-ms-fill {
-      background: $dark-mode-gradient !important;
+      background: $dark-mode-horizontal-gradient !important;
     }
   }
 }
