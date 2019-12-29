@@ -9,7 +9,7 @@ const PageContainer = ({ children, titleText, className = '' }) => {
   // children should be wrapped up in column
   return (
     <div className={`page-container ${className}`}>
-      <div className="columns is-marginless">
+      <div className="columns is-marginless title-container">
         <PageSection>
           <PageTitle titleText={titleText} />
         </PageSection>
