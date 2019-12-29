@@ -1,0 +1,16 @@
+@import '../../../../assets/scss/variables.scss';
+
+.todo-field {
+  padding-top: 0.5rem;
+  padding-bottom: 0.6rem;
+
+  &__input {
+    background: $grey-light;
+    border: none;
+    border-radius: 7px;
+  }
+
+  &__validation {
+    display: none;
+  }
+}
