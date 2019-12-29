@@ -1,0 +1,17 @@
+.progress-item {
+  &__title-ghost {
+    width: 5rem;
+  }
+  &__date-ghost {
+    width: 2rem;
+  }
+
+  &__content-ghost {
+    width: 100%;
+    padding: 0.3rem 0;
+  }
+
+  &__bar-ghost {
+    width: 100%;
+  }
+}
