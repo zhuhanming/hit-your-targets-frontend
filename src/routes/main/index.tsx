@@ -11,6 +11,7 @@ import PageSection from 'components/pageSection';
 import MainCard from './MainCard';
 import CalendarCard from './CalendarCard';
 import TasksForToday from './TasksForToday';
+import FunFact from './FunFact';
 
 import './Main.scss';
 import ProgressOverview from './ProgressOverview';
@@ -58,7 +59,7 @@ const Main = () => {
                 <ProgressOverview todos={todos} isLoading={state.isLoading} />
               </MainCard>
               <MainCard title="Fun Fact of the Day">
-                <span>Test</span>
+                <FunFact />
               </MainCard>
             </div>
           </div>
