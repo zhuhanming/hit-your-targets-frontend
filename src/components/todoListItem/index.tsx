@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 
@@ -7,23 +8,31 @@ import { useTodo } from 'contexts/todoContext';
 import './TodoListItem.scss';
 
 const TodoListItem = ({ todo, isExpanded = false, currentKey, keyLimit }) => {
-  const { title, completed, endTime, id } = todo;
+  const { title, completed, endTime, id, subtodos } = todo;
   const [isChecked, setIsChecked] = useState(completed);
   const { updateTodo } = useTodo();
   const displayDate = getDisplayDate(endTime);
+  const hasSubtodos = subtodos.length > 0;
   const warning = isWarning(endTime);
   const handleCheck = async () => {
-    try {
-      setIsChecked(true);
-      await updateTodo(id, { completed: !completed });
-      toast.success(`👍 Great job! ${title} completed!`);
-    } catch (error) {
-      setIsChecked(false);
+    if (!hasSubtodos) {
+      try {
+        setIsChecked(true);
+        await updateTodo(id, { completed: !completed });
+        toast.success(`👍 Great job! ${title} completed!`);
+      } catch (error) {
+        setIsChecked(false);
+      }
     }
   };
 
   return (
-    <li className="list-item">
+    <li
+      className={`list-item ${
+        hasSubtodos && !isExpanded ? 'tooltip is-tooltip-bottom' : ''
+      }`}
+      data-tooltip="There are incomplete subtasks for this task."
+    >
       <input
         type="checkbox"
         className="is-checkradio is-success list-item__content__checkbox"
@@ -31,9 +40,12 @@ const TodoListItem = ({ todo, isExpanded = false, currentKey, keyLimit }) => {
         name={id}
         checked={isChecked}
         onChange={handleCheck}
+        // eslint-disable-next-line no-param-reassign
+        ref={el => el && (el.indeterminate = hasSubtodos)}
+        disabled={hasSubtodos}
       />
       <label
-        className={`list-item__content ${
+        className={`list-item__content tooltip-container ${
           currentKey < keyLimit ? 'has-bottom-border' : ''
         }`}
         htmlFor={id}
