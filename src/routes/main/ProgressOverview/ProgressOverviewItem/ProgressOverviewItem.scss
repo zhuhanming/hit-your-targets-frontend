@@ -1,0 +1,77 @@
+@import '../../../../assets/scss/variables.scss';
+
+.progress-item {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 0.5rem;
+  padding-top: 0.3rem;
+
+  &.has-bottom-border {
+    border-bottom: 1px solid $grey-light;
+    border-radius: 0 !important;
+  }
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+
+    span {
+      display: block;
+      font-size: 0.9rem;
+    }
+  }
+
+  &__title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__amount {
+    font-weight: bold;
+    font-size: 0.6rem !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__days {
+    font-size: 0.6rem !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__date {
+    font-weight: bold;
+  }
+
+  &__bar {
+    margin: 0.2rem 0 !important;
+    height: 0.7rem;
+  }
+}
+
+.progress {
+  &::-webkit-progress-value {
+    background: $light-mode-gradient !important;
+  }
+  &::-moz-progress-bar {
+    background: $light-mode-gradient !important;
+  }
+  &::-ms-fill {
+    background: $light-mode-gradient !important;
+  }
+
+  &.dark {
+    &::-webkit-progress-value {
+      background: $dark-mode-gradient !important;
+    }
+    &::-moz-progress-bar {
+      background: $dark-mode-gradient !important;
+    }
+    &::-ms-fill {
+      background: $dark-mode-gradient !important;
+    }
+  }
+}
