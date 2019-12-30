@@ -4,7 +4,13 @@ import { toast } from 'react-toastify';
 
 import TodoContextInterface from 'interfaces/TodoContext';
 // import RootStateInterface from 'interfaces/RootState';
-import { setToDos, setToDoError, updateToDo, addToDo } from 'reducers/ToDoDux';
+import {
+  setToDos,
+  setToDoError,
+  updateToDo,
+  addToDo,
+  deleteToDo
+} from 'reducers/ToDoDux';
 import ApiService from 'services/apiService';
 
 const defaultContextData = {
@@ -70,9 +76,23 @@ const TodoProvider = props => {
     }
   };
 
+  const deleteTodo = async id => {
+    try {
+      const responses = await ApiService.delete(`todos/${id}`);
+      // console.log(responses);
+      dispatch(deleteToDo(responses.data));
+    } catch (error) {
+      dispatch(setToDoError());
+      toast.error(
+        'Failed to delete task. Please refresh the page to try again.'
+      );
+      throw new Error(error.message);
+    }
+  };
+
   return (
     <TodoContext.Provider
-      value={{ loadTodos, createTodo, updateTodo }}
+      value={{ loadTodos, createTodo, updateTodo, deleteTodo }}
       {...props}
     />
   );

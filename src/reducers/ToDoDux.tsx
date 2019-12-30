@@ -30,12 +30,22 @@ const todos = createSlice({
       state.todos.sort((a, b) => Date.parse(a.endTime) - Date.parse(b.endTime));
       state.isTodoError = false;
     },
+    deleteToDo: (state, action: PayloadAction<number>) => {
+      state.todos = state.todos.filter(x => x.id !== action.payload);
+      state.isTodoError = false;
+    },
     setToDoError: state => {
       state.isTodoError = true;
     }
   }
 });
 
-export const { setToDos, updateToDo, addToDo, setToDoError } = todos.actions;
+export const {
+  setToDos,
+  updateToDo,
+  addToDo,
+  setToDoError,
+  deleteToDo
+} = todos.actions;
 
 export default todos.reducer;
