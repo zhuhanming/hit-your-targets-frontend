@@ -61,11 +61,15 @@ const TodoList = ({ todos, isLoading, isError, setFocus, focus }) => {
       break;
     case View.COMPLETED:
       todos = todos.filter(todo => todo.completed);
+      todos.sort(
+        (a, b) => Date.parse(b.completeTime) - Date.parse(a.completeTime)
+      );
       break;
     default:
       break;
   }
   const { length } = todos;
+
   return (
     <div className="todo-list">
       <ViewSelector />
