@@ -2,6 +2,7 @@
 /* eslint-disable no-return-assign */
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
+import moment from 'moment';
 
 import { getDisplayDate, isWarning } from 'utils/timeUtils';
 import { useTodo } from 'contexts/todoContext';
@@ -28,11 +29,15 @@ const TodoListItem = ({
       if (!hasSubtodos) {
         try {
           setIsChecked(true);
-          await updateTodo(id, { completed: !completed });
+          await updateTodo(id, {
+            completed: !completed,
+            completeTime: moment().format()
+          });
           if (!completed) {
             setFocus(null);
             toast.success(`👍 Great job! ${title} completed!`);
           } else {
+            setFocus(null);
             toast.warn('😮 Oh dear, what happened?');
           }
         } catch (error) {
@@ -56,6 +61,8 @@ const TodoListItem = ({
       data-tooltip={`${
         hasSubtodos
           ? 'There are incomplete subtasks for this task.'
+          : completed
+          ? 'Click again to mark as undone.'
           : 'Click again to mark as done.'
       }`}
     >
@@ -87,7 +94,11 @@ const TodoListItem = ({
         >
           {title}
         </div>
-        <div className={`list-item__date ${warning ? 'has-text-danger' : ''}`}>
+        <div
+          className={`list-item__date ${
+            warning ? 'has-text-danger' : isInFocus ? 'is-in-focus' : ''
+          }`}
+        >
           {displayDate}
         </div>
       </label>

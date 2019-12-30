@@ -6,6 +6,7 @@ import RootStateInterface from 'interfaces/RootState';
 import PageContainer from 'components/pageContainer';
 import PageSection from 'components/pageSection';
 import TodoList from './TodoList';
+import TodoContainer from './TodoContainer';
 
 import './List.scss';
 
@@ -56,7 +57,10 @@ const List = () => {
         </PageContainer>
       </div>
       <div className="column is-half is-marginless is-paddingless is-very-transparent list-view__column">
-        {/* <TodoContainer> */}
+        <TodoContainer
+          id={state.taskInFocus}
+          setFocus={id => setState({ taskInFocus: id })}
+        />
       </div>
     </div>
   );
