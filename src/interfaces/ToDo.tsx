@@ -6,6 +6,7 @@ export default interface ToDo {
   description: string;
   startTime: string;
   endTime: string;
+  completeTime: string;
   // tags: string[];
   completed: boolean;
   createdAt: string;
