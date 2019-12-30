@@ -11,11 +11,12 @@ const Settings = () => {
   return (
     <>
       <PageContainer titleText="Settings">
-        <button type="button" className="button" onClick={logout}>
+        <button
+          type="button"
+          className="button is-rounded is-danger"
+          onClick={logout}
+        >
           Logout
-        </button>
-        <button type="button" className="button" onClick={toggle}>
-          Change Theme
         </button>
       </PageContainer>
     </>
