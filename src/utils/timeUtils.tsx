@@ -18,7 +18,7 @@ const isThisWeek = (date: moment.Moment): boolean => {
 const getDisplayDate = (endTime: string): string => {
   const endTimeDate = moment(endTime);
   if (isToday(endTimeDate)) {
-    return 'Today';
+    return endTimeDate.format('H:mma');
   }
   if (isTomorrow(endTimeDate)) {
     return 'Tomorrow';

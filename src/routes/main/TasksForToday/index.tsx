@@ -58,7 +58,7 @@ const TasksForToday = ({ todos, isLoading, isError }) => {
         >
           {todos.length === 0 && (
             <article className="message is-success">
-              <span className="message-body">
+              <span className="message-body tasks__empty-text">
                 Great job, you&apos;re done for the day!
               </span>
             </article>
