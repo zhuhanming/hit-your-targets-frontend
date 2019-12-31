@@ -6,13 +6,13 @@ import rootReducer from 'reducers/rootReducer';
 
 const persistConfig = {
   key: 'hit-your-targets',
-  storage,
-}
+  storage
+};
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const customizedMiddleware = getDefaultMiddleware({
-  serializableCheck: false,
+  serializableCheck: false
 });
 
 const store = configureStore({
@@ -24,6 +24,7 @@ export const persistor = persistStore(store);
 
 if (process.env.NODE_ENV === 'development' && module.hot) {
   module.hot.accept('reducers/rootReducer', () => {
+    // eslint-disable-next-line global-require
     const newRootReducer = require('reducers/rootReducer').default;
     store.replaceReducer(newRootReducer);
   });
