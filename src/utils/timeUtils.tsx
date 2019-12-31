@@ -49,12 +49,17 @@ const getDaysRemaining = (endTime: string, completed: boolean) => {
     return 'DUE TOMORROW';
   }
   if (endTimeDate.isBefore(moment())) {
-    const numberOfDays = moment().diff(endTimeDate, 'days');
-    if (completed) return `${numberOfDays} DAYS AGO`;
-    return `${numberOfDays} DAYS OVERDUE`;
+    const numberOfDays =
+      moment().diff(endTimeDate, 'days') === 0
+        ? 1
+        : moment().diff(endTimeDate, 'days');
+
+    if (completed)
+      return `${numberOfDays} ${numberOfDays === 1 ? 'DAY' : 'DAYS'} AGO`;
+    return `${numberOfDays} ${numberOfDays === 1 ? 'DAY' : 'DAYS'} OVERDUE`;
   }
   const numberOfDays = endTimeDate.diff(moment(), 'days');
-  return `${numberOfDays} DAYS REMAINING`;
+  return `${numberOfDays} ${numberOfDays === 1 ? 'DAY' : 'DAYS'} REMAINING`;
 };
 
 export { getDisplayDate, isWarning, getDaysRemaining };
