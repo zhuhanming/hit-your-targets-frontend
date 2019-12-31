@@ -63,6 +63,19 @@ const TodoProvider = props => {
     }
   };
 
+  const createSubTodo = async (id, code) => {
+    try {
+      const responses = await ApiService.post(`todos/${id}/subtodos`, code);
+      dispatch(updateToDo(responses.data));
+    } catch (error) {
+      dispatch(setToDoError());
+      toast.error(
+        'Failed to create subtask. Please refresh the page to try again.'
+      );
+      throw new Error(error.message);
+    }
+  };
+
   const updateTodo = async (id, code) => {
     try {
       const responses = await ApiService.patch(`todos/${id}`, code);
@@ -71,6 +84,22 @@ const TodoProvider = props => {
       dispatch(setToDoError());
       toast.error(
         'Failed to update tasks. Please refresh the page to try again.'
+      );
+      throw new Error(error.message);
+    }
+  };
+
+  const updateSubTodo = async (todoId, subtodoId, code) => {
+    try {
+      const responses = await ApiService.patch(
+        `todos/${todoId}/subtodos/${subtodoId}`,
+        code
+      );
+      dispatch(updateToDo(responses.data));
+    } catch (error) {
+      dispatch(setToDoError());
+      toast.error(
+        'Failed to update subtask. Please refresh the page to try again.'
       );
       throw new Error(error.message);
     }
@@ -90,9 +119,33 @@ const TodoProvider = props => {
     }
   };
 
+  const deleteSubTodo = async (todoId, subtodoId) => {
+    try {
+      const responses = await ApiService.delete(
+        `todos/${todoId}/subtodos/${subtodoId}`
+      );
+      // console.log(responses);
+      dispatch(updateToDo(responses.data));
+    } catch (error) {
+      dispatch(setToDoError());
+      toast.error(
+        'Failed to delete subtask. Please refresh the page to try again.'
+      );
+      throw new Error(error.message);
+    }
+  };
+
   return (
     <TodoContext.Provider
-      value={{ loadTodos, createTodo, updateTodo, deleteTodo }}
+      value={{
+        loadTodos,
+        createTodo,
+        createSubTodo,
+        updateTodo,
+        updateSubTodo,
+        deleteTodo,
+        deleteSubTodo
+      }}
       {...props}
     />
   );
