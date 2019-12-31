@@ -11,7 +11,7 @@ import { toast } from 'react-toastify';
 import './TodoCreationField.scss';
 
 const TodoCreationField = () => {
-  const { viewSelected } = useView();
+  const { viewSelected, updateView } = useView();
   const { createTodo } = useTodo();
   const { register, handleSubmit, watch, errors } = useForm({
     reValidateMode: 'onSubmit'
@@ -43,6 +43,9 @@ const TodoCreationField = () => {
         await createTodo(code);
         toast.success(`${data.title} created!`);
         e.target.reset();
+        if (viewSelected === View.COMPLETED) {
+          updateView(View.TODAY);
+        }
       } catch (error) {
         console.log(error);
       }
