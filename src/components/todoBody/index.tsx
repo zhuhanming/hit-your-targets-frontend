@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
 import { useTodo } from 'contexts/todoContext';
+import { useTheme } from 'contexts/themeContext';
 import TodoBodyHeader from './TodoBodyHeader';
 import DateTimePicker from './DateTimePicker';
 
@@ -11,6 +12,7 @@ import './TodoBody.scss';
 
 const TodoBody = ({ todo, setFocus }) => {
   const { updateTodo } = useTodo();
+  const { theme } = useTheme();
   // const [isError, setIsError] = useState(false);
   const { id, title, description } = todo;
   const initialState = { title, description };
@@ -54,7 +56,7 @@ const TodoBody = ({ todo, setFocus }) => {
         <p className="tag is-primary">Work in Progress!</p>
       </div>
       <textarea
-        className="todo-body__description"
+        className={`todo-body__description ${theme}`}
         name="description"
         rows={6}
         ref={register}

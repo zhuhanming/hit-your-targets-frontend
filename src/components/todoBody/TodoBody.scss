@@ -58,6 +58,26 @@
     font-size: 1.1rem;
     font-weight: 300;
     // min-height: 3.3rem;
+    color: $dark;
+
+    &.dark {
+      color: $black;
+      &::-webkit-input-placeholder {
+        color: $dark;
+      }
+      &:-moz-placeholder {
+        color: $dark;
+      }
+      &::-moz-placeholder {
+        color: $dark;
+      }
+      &:-ms-input-placeholder {
+        color: $dark;
+      }
+      &::placeholder {
+        color: $dark;
+      }
+    }
   }
 
   &__time {
