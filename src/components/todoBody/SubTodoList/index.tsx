@@ -5,7 +5,7 @@ import SubTodoCreationField from './SubTodoCreationField';
 
 import './SubTodoList.scss';
 
-const SubTodoList = ({ todo, setFocus }) => {
+const SubTodoList = ({ todo, setFocus, isMobile }) => {
   const { id, startTime, endTime, subtodos, title } = todo;
   const { length } = subtodos;
   const numberCompleted = subtodos.filter(subtodo => subtodo.completed).length;
@@ -29,6 +29,7 @@ const SubTodoList = ({ todo, setFocus }) => {
               isOneAwayFromCompletion={isOneFromCompletion}
               todoTitle={title}
               setFocus={setFocus}
+              isMobile={isMobile}
             />
           );
         })}

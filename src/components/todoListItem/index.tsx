@@ -61,7 +61,7 @@ const TodoListItem = ({
       data-tooltip={`${
         hasSubtodos
           ? completed
-            ? 'You can create new subtasks or uncheck existing ones.'
+            ? 'You can create new subtasks or uncheck completed ones.'
             : 'There are incomplete subtasks for this task.'
           : completed
           ? 'Click again to mark as undone.'
@@ -101,7 +101,13 @@ const TodoListItem = ({
         </div>
         <div
           className={`list-item__date ${
-            warning ? 'has-text-danger' : isInFocus ? 'is-in-focus' : ''
+            completed
+              ? 'has-text-success '
+              : warning
+              ? 'has-text-danger'
+              : isInFocus
+              ? 'is-in-focus'
+              : ''
           }`}
         >
           {displayDate}

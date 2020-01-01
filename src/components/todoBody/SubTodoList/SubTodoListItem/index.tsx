@@ -22,7 +22,8 @@ const SubTodoListItem = ({
   todoTitle,
   isFullyCompleted,
   isOneAwayFromCompletion,
-  setFocus
+  setFocus,
+  isMobile
 }) => {
   const { title, completed, endTime, id, startTime } = subTodo;
   const [isChecked, setIsChecked] = useState(completed);
@@ -69,11 +70,11 @@ const SubTodoListItem = ({
           }!`
         );
       } else if (isFullyCompleted) {
-        toast.warn(`Oh dear! What happened?`);
+        toast.warn(`Oh dear! What happened? Task is now incomplete.`);
       } else {
         toast.warn('😅 No rush there!');
       }
-      if (isOneAwayFromCompletion || isFullyCompleted) {
+      if ((isOneAwayFromCompletion || isFullyCompleted) && !isMobile) {
         setFocus(null);
       }
     } catch (error) {

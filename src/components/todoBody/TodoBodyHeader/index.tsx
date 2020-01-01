@@ -8,7 +8,7 @@ import { useTodo } from 'contexts/todoContext';
 
 import '../TodoBody.scss';
 
-const TodoBodyHeader = ({ todo, setFocus }) => {
+const TodoBodyHeader = ({ todo, setFocus, isMobile }) => {
   const { updateTodo, deleteTodo } = useTodo();
 
   const { title, id, subtodos, completed, updatedAt } = todo;
@@ -25,7 +25,7 @@ const TodoBodyHeader = ({ todo, setFocus }) => {
       } else {
         toast.warn("Don't lose heart!");
       }
-      setFocus(null);
+      if (!isMobile) setFocus(null);
     }
   };
 

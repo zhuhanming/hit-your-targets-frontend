@@ -63,7 +63,7 @@ const TodoBody = ({ todo, setFocus, isMobile = false }) => {
         onSubmit={handleSubmit(onSubmit)}
         key={`form-${id}`}
       >
-        <TodoBodyHeader todo={todo} setFocus={setFocus} />
+        <TodoBodyHeader todo={todo} setFocus={setFocus} isMobile={isMobile} />
         <textarea
           className="todo-body__title is-size-4"
           name="title"
@@ -89,7 +89,7 @@ const TodoBody = ({ todo, setFocus, isMobile = false }) => {
           defaultValue={description}
         />
       </form>
-      <SubTodoList todo={todo} setFocus={setFocus} />
+      <SubTodoList todo={todo} setFocus={setFocus} isMobile={isMobile} />
     </div>
   );
 };
