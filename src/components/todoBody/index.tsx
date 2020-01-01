@@ -22,7 +22,7 @@ const TodoBody = ({ todo, setFocus }) => {
     autosize(document.querySelectorAll('textarea'));
   });
 
-  const { register, handleSubmit, getValues } = useForm({
+  const { register, handleSubmit, getValues, setValue } = useForm({
     mode: 'onBlur'
   });
   const onSubmit = data => console.log(data);
@@ -30,9 +30,13 @@ const TodoBody = ({ todo, setFocus }) => {
   const handleTodoBlur = () => {
     try {
       const newState = getValues();
-      if (!_.isEqual(newState, initialState)) {
+      if (newState.title.length === 0) {
+        toast.error('Your task title cannot be empty!');
+        setValue('title', title, true);
+        autosize.update(document.querySelectorAll('textarea'));
+      } else if (!_.isEqual(newState, initialState)) {
         updateTodo(id, newState);
-        toast.success(`Nice! ${title} updated!`);
+        toast.success(`Nice! ${newState.title} updated!`);
       }
     } catch (error) {
       console.log(error.message);
@@ -65,7 +69,7 @@ const TodoBody = ({ todo, setFocus }) => {
         <textarea
           className={`todo-body__description ${theme}`}
           name="description"
-          rows={4}
+          rows={1}
           ref={register}
           onBlur={handleTodoBlur}
           placeholder="Description"
