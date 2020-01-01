@@ -30,8 +30,13 @@ const TodoBody = ({ todo, setFocus }) => {
   const handleTodoBlur = () => {
     try {
       const newState = getValues();
+      console.log(newState);
       if (newState.title.length === 0) {
         toast.error('Your task title cannot be empty!');
+        setValue('title', title, true);
+        autosize.update(document.querySelectorAll('textarea'));
+      } else if (newState.title.length > 50) {
+        toast.error('Your task name is too long! Remember, short and sweet!');
         setValue('title', title, true);
         autosize.update(document.querySelectorAll('textarea'));
       } else if (!_.isEqual(newState, initialState)) {
@@ -76,7 +81,7 @@ const TodoBody = ({ todo, setFocus }) => {
           defaultValue={description}
         />
       </form>
-      <SubTodoList todo={todo} />
+      <SubTodoList todo={todo} setFocus={setFocus} />
     </div>
   );
 };
