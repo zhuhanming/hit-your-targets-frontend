@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import { useForm } from 'react-hook-form';
+import autosize from 'autosize';
 
 import { useTodo } from 'contexts/todoContext';
 
@@ -22,10 +23,9 @@ const SubTodoListItem = ({
   const { title, completed, endTime, id, startTime } = subTodo;
   const [isChecked, setIsChecked] = useState(completed);
   const { updateSubTodo, deleteSubTodo } = useTodo();
-  const { register, handleSubmit, getValues } = useForm({
+  const { register, getValues, setValue } = useForm({
     mode: 'onBlur'
   });
-  const onSubmit = data => console.log(data);
   const startTimeDate = new Date(Date.parse(startTime));
   const endTimeDate = new Date(Date.parse(endTime));
   const todoStartTimeDate = new Date(Date.parse(todoStartTime));
@@ -34,9 +34,13 @@ const SubTodoListItem = ({
   const handleSubTodoBlur = () => {
     try {
       const newState = getValues();
-      if (newState.title !== title) {
+      if (newState.title.length === 0) {
+        toast.error('You need to have a title for this subtask!');
+        setValue('title', title);
+        autosize.update(document.querySelectorAll('textarea'));
+      } else if (newState.title !== title) {
         updateSubTodo(todoId, id, newState);
-        toast.success(`Nice! ${title} updated!`);
+        toast.success(`Nice! ${newState.title} updated!`);
       }
     } catch (error) {
       console.log(error.message);
@@ -63,12 +67,8 @@ const SubTodoListItem = ({
     if (Date.parse(date) === Date.parse(startTime)) return;
     try {
       if (date < startTimeDate) {
-        if (date < todoStartTimeDate) {
-          toast.error('Your subtask cannot start before the task does!');
-        } else {
-          updateSubTodo(todoId, id, { startTime: moment(date).format() });
-          toast.success(`Nice! ${title} updated!`);
-        }
+        updateSubTodo(todoId, id, { startTime: moment(date).format() });
+        toast.success(`Nice! ${title} updated!`);
       } else {
         const newEndTime =
           Date.parse(endTime) + (Date.parse(date) - Date.parse(startTime));
@@ -78,8 +78,6 @@ const SubTodoListItem = ({
             endTime: moment(newEndTime).format()
           });
           toast.success(`Nice! ${title} updated!`);
-        } else if (date > todoEndTime) {
-          toast.error('Your subtask cannot start after the parent task ends!');
         } else {
           updateSubTodo(todoId, id, {
             startTime: moment(date).format(),
@@ -107,8 +105,26 @@ const SubTodoListItem = ({
       );
   };
 
+  const handleDelete = () => {
+    const confirmDelete = window.confirm(
+      'Are you sure you want to delete this subtask? You cannot undo this action.'
+    );
+    if (confirmDelete) {
+      try {
+        deleteSubTodo(todoId, id);
+        toast.success(`${title} has been deleted!`);
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
+  };
+
   return (
-    <li className="subtodo-list-item">
+    <li
+      className={`subtodo-list-item ${
+        currentKey < keyLimit ? 'has-bottom-border' : ''
+      } `}
+    >
       <div className="subtodo-list-item__first-row">
         <input
           type="checkbox"
@@ -120,29 +136,29 @@ const SubTodoListItem = ({
           // eslint-disable-next-line no-param-reassign
         />
         <label
-          className={`subtodo-list-item__checkbox tooltip-container ${
-            currentKey < keyLimit ? 'has-bottom-border' : ''
-          } `}
+          className="subtodo-list-item__checkbox tooltip-container"
           htmlFor={`subtodo-${id}`}
         />
         <div className="subtodo-list-item__content">
-          <input
-            className="subtodo-list-item__title__input is-size-6"
+          <textarea
+            className="subtodo-list-item__title__textarea"
             name="title"
-            type="text"
             ref={register({ required: true })}
             onBlur={handleSubTodoBlur}
             autoComplete="off"
             defaultValue={title}
+            rows={1}
           />
           <div className="subtodo-list-item__second-row">
-            <div className="subtodo-list-item__date">
+            <div className="subtodo-list-item__time">
               <span>Start: </span>
               <DatePicker
                 id={`subTodoStartTime-${id}`}
                 selected={startTimeDate}
                 name={`subTodoStartTime-${id}`}
-                className="is-size-6 subtodo-body__time__picker"
+                className="subtodo-list-item__time__picker"
+                minDate={todoStartTimeDate}
+                maxDate={todoEndTimeDate}
                 timeFormat="HH:mm"
                 showTimeSelect
                 timeIntervals={15}
@@ -156,12 +172,13 @@ const SubTodoListItem = ({
                 id={`subTodoEndTime-${id}`}
                 selected={endTimeDate}
                 name={`subTodoEndTime-${id}`}
-                className="is-size-6 subtodo-body__time__picker"
+                className="subtodo-list-item__time__picker"
                 timeFormat="HH:mm"
                 showTimeSelect
+                minDate={startTimeDate}
+                maxDate={todoEndTimeDate}
                 timeIntervals={15}
                 timeCaption="Time"
-                minDate={startTimeDate}
                 dateFormat="d MMM yy, HH:mm aa"
                 onChange={date => handleEndTimeChange(date)}
               />
@@ -169,8 +186,8 @@ const SubTodoListItem = ({
             <div className="subtodo-list-item__delete">
               <button
                 type="button"
-                className="as-non-button"
-                onClick={() => deleteSubTodo(todoId, id)}
+                className="as-non-button subtodo-list-item__delete__button"
+                onClick={handleDelete}
               >
                 Delete
               </button>

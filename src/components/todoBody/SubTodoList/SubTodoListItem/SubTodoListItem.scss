@@ -7,29 +7,68 @@
     border: none;
     background: none;
     resize: none;
+    font-size: 0.9rem !important;
 
     &:focus {
       outline: none;
     }
   }
 
+  &__textarea {
+    width: 100%;
+  }
+
   &__first-row {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     padding-bottom: 1rem;
     width: 100%;
   }
 
   &__checkbox {
-    margin-top: 0 !important;
+    margin: 0 !important;
+    padding: 0.75rem 1.25rem !important;
   }
 
   &__content {
     flex: 1;
+    display: flex;
+    flex-direction: column;
   }
 
   &__second-row {
     display: flex;
     justify-content: space-between;
+    font-size: 0.8rem;
+    font-weight: lighter;
+  }
+
+  &__time {
+    &__picker {
+      color: inherit;
+      font-size: inherit;
+      font-weight: inherit;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    span {
+      font-weight: bold;
+    }
+  }
+
+  &__delete {
+    &__button {
+      font-size: inherit;
+      color: inherit;
+      font-weight: inherit;
+
+      &:hover {
+        font-weight: bold;
+        color: black;
+      }
+    }
   }
 }
