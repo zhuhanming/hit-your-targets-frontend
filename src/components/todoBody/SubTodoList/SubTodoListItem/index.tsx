@@ -18,11 +18,15 @@ const SubTodoListItem = ({
   keyLimit,
   todoId,
   todoStartTime,
-  todoEndTime
+  todoEndTime,
+  todoTitle,
+  isFullyCompleted,
+  isOneAwayFromCompletion,
+  setFocus
 }) => {
   const { title, completed, endTime, id, startTime } = subTodo;
   const [isChecked, setIsChecked] = useState(completed);
-  const { updateSubTodo, deleteSubTodo } = useTodo();
+  const { updateSubTodo, deleteSubTodo, updateTodo } = useTodo();
   const { register, getValues, setValue } = useForm({
     mode: 'onBlur'
   });
@@ -49,17 +53,31 @@ const SubTodoListItem = ({
 
   const handleCheck = async () => {
     try {
-      setIsChecked(!isChecked);
       await updateSubTodo(todoId, id, {
         completed: !completed
       });
+      if (isOneAwayFromCompletion || isFullyCompleted) {
+        await updateTodo(todoId, {
+          completed: !completed
+        });
+      }
+      setIsChecked(!isChecked);
       if (!completed) {
-        toast.success(`👍 Great job! ${title} completed!`);
+        toast.success(
+          `👍 Great job! ${title} completed${
+            isOneAwayFromCompletion ? ` and ${todoTitle} is fully done` : ''
+          }!`
+        );
+      } else if (isFullyCompleted) {
+        toast.warn(`Oh dear! What happened?`);
       } else {
-        toast.warn('😮 No rush there!');
+        toast.warn('😅 No rush there!');
+      }
+      if (isOneAwayFromCompletion || isFullyCompleted) {
+        setFocus(null);
       }
     } catch (error) {
-      // setIsChecked(false);
+      // setIsChecked(completed);
     }
   };
 
@@ -123,7 +141,16 @@ const SubTodoListItem = ({
     <li
       className={`subtodo-list-item ${
         currentKey < keyLimit ? 'has-bottom-border' : ''
-      } `}
+      } ${
+        (isOneAwayFromCompletion && !completed) || isFullyCompleted
+          ? 'tooltip is-tooltip-top'
+          : ''
+      }`}
+      data-tooltip={`${
+        isFullyCompleted
+          ? 'Unchecking this will mark this task incomplete!'
+          : 'Completing this will complete the task!'
+      }`}
     >
       <div className="subtodo-list-item__first-row">
         <input
@@ -151,37 +178,40 @@ const SubTodoListItem = ({
           />
           <div className="subtodo-list-item__second-row">
             <div className="subtodo-list-item__time">
-              <span>Start: </span>
-              <DatePicker
-                id={`subTodoStartTime-${id}`}
-                selected={startTimeDate}
-                name={`subTodoStartTime-${id}`}
-                className="subtodo-list-item__time__picker"
-                minDate={todoStartTimeDate}
-                maxDate={todoEndTimeDate}
-                timeFormat="HH:mm"
-                showTimeSelect
-                timeIntervals={15}
-                timeCaption="Time"
-                dateFormat="d MMM yy, HH:mm aa"
-                onChange={date => handleStartTimeChange(date)}
-              />
-              <span>End: </span>
-
-              <DatePicker
-                id={`subTodoEndTime-${id}`}
-                selected={endTimeDate}
-                name={`subTodoEndTime-${id}`}
-                className="subtodo-list-item__time__picker"
-                timeFormat="HH:mm"
-                showTimeSelect
-                minDate={startTimeDate}
-                maxDate={todoEndTimeDate}
-                timeIntervals={15}
-                timeCaption="Time"
-                dateFormat="d MMM yy, HH:mm aa"
-                onChange={date => handleEndTimeChange(date)}
-              />
+              <div>
+                <span>Start: </span>
+                <DatePicker
+                  id={`subTodoStartTime-${id}`}
+                  selected={startTimeDate}
+                  name={`subTodoStartTime-${id}`}
+                  className="subtodo-list-item__time__picker"
+                  minDate={todoStartTimeDate}
+                  maxDate={todoEndTimeDate}
+                  timeFormat="HH:mm"
+                  showTimeSelect
+                  timeIntervals={15}
+                  timeCaption="Time"
+                  dateFormat="d MMM yy, HH:mm aa"
+                  onChange={date => handleStartTimeChange(date)}
+                />
+              </div>
+              <div>
+                <span>End: </span>
+                <DatePicker
+                  id={`subTodoEndTime-${id}`}
+                  selected={endTimeDate}
+                  name={`subTodoEndTime-${id}`}
+                  className="subtodo-list-item__time__picker"
+                  timeFormat="HH:mm"
+                  showTimeSelect
+                  minDate={startTimeDate}
+                  maxDate={todoEndTimeDate}
+                  timeIntervals={15}
+                  timeCaption="Time"
+                  dateFormat="d MMM yy, HH:mm aa"
+                  onChange={date => handleEndTimeChange(date)}
+                />
+              </div>
             </div>
             <div className="subtodo-list-item__delete">
               <button

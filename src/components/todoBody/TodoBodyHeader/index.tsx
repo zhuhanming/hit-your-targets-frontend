@@ -57,7 +57,7 @@ const TodoBodyHeader = ({ todo, setFocus }) => {
             checked={completed}
             onChange={handleComplete}
             // eslint-disable-next-line no-param-reassign
-            ref={el => el && (el.indeterminate = hasSubtodos)}
+            ref={el => el && (el.indeterminate = hasSubtodos && !completed)}
             disabled={hasSubtodos}
           />
           {/*  eslint-disable-next-line jsx-a11y/label-has-associated-control */}

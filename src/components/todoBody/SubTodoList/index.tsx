@@ -5,13 +5,17 @@ import SubTodoCreationField from './SubTodoCreationField';
 
 import './SubTodoList.scss';
 
-const SubTodoList = ({ todo }) => {
-  const { id, startTime, endTime, subtodos } = todo;
+const SubTodoList = ({ todo, setFocus }) => {
+  const { id, startTime, endTime, subtodos, title } = todo;
   const { length } = subtodos;
+  const numberCompleted = subtodos.filter(subtodo => subtodo.completed).length;
+  const isOneFromCompletion = length - numberCompleted === 1;
+  const isFullyCompleted = length === numberCompleted;
+  const newSubtodos = subtodos.slice().sort((a, b) => a.id - b.id);
   return (
     <>
       <ul>
-        {subtodos.map((subtodo, key) => {
+        {newSubtodos.map((subtodo, key) => {
           return (
             <SubTodoListItem
               subTodo={subtodo}
@@ -21,6 +25,10 @@ const SubTodoList = ({ todo }) => {
               todoStartTime={startTime}
               todoEndTime={endTime}
               key={`subtodo-${subtodo.id}`}
+              isFullyCompleted={isFullyCompleted}
+              isOneAwayFromCompletion={isOneFromCompletion}
+              todoTitle={title}
+              setFocus={setFocus}
             />
           );
         })}
@@ -29,6 +37,7 @@ const SubTodoList = ({ todo }) => {
         id={id}
         todoStartTime={startTime}
         todoEndTime={endTime}
+        isFullyCompleted={isFullyCompleted}
       />
     </>
   );

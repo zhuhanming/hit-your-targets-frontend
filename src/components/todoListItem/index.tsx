@@ -60,7 +60,9 @@ const TodoListItem = ({
       }`}
       data-tooltip={`${
         hasSubtodos
-          ? 'There are incomplete subtasks for this task.'
+          ? completed
+            ? 'You can create new subtasks or uncheck existing ones.'
+            : 'There are incomplete subtasks for this task.'
           : completed
           ? 'Click again to mark as undone.'
           : 'Click again to mark as done.'
@@ -74,7 +76,7 @@ const TodoListItem = ({
         checked={isChecked}
         onChange={handleCheck}
         // eslint-disable-next-line no-param-reassign
-        ref={el => el && (el.indeterminate = hasSubtodos)}
+        ref={el => el && (el.indeterminate = hasSubtodos && !completed)}
         disabled={
           (!isExpanded && hasSubtodos) ||
           (isExpanded && isInFocus && hasSubtodos)

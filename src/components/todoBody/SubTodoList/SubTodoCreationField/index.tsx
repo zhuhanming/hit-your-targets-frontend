@@ -7,8 +7,13 @@ import { useTodo } from 'contexts/todoContext';
 
 import './SubTodoCreationField.scss';
 
-const SubTodoCreationField = ({ id, todoStartTime, todoEndTime }) => {
-  const { createSubTodo } = useTodo();
+const SubTodoCreationField = ({
+  id,
+  todoStartTime,
+  todoEndTime,
+  isFullyCompleted
+}) => {
+  const { createSubTodo, updateTodo } = useTodo();
   const { register, handleSubmit } = useForm({
     reValidateMode: 'onSubmit'
   });
@@ -29,6 +34,11 @@ const SubTodoCreationField = ({ id, todoStartTime, todoEndTime }) => {
       };
       try {
         await createSubTodo(id, code);
+        if (isFullyCompleted) {
+          await updateTodo(id, {
+            completed: false
+          });
+        }
         toast.success(`${data.title} created!`);
         e.target.reset();
       } catch (error) {

@@ -44,6 +44,8 @@
   }
 
   &__time {
+    display: flex;
+    flex-wrap: wrap;
     &__picker {
       color: inherit;
       font-size: inherit;
