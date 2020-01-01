@@ -1,12 +1,10 @@
 import React from 'react';
 
 import { useAuth } from 'contexts/authContext';
-import { useTheme } from 'contexts/themeContext';
 import PageContainer from 'components/pageContainer';
 
 const Settings = () => {
   const { logout } = useAuth();
-  const { toggle } = useTheme();
 
   return (
     <>

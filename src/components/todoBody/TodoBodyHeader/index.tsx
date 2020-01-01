@@ -1,7 +1,6 @@
 /* eslint-disable no-return-assign */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import moment from 'moment';
 import { toast } from 'react-toastify';
 
@@ -11,7 +10,6 @@ import '../TodoBody.scss';
 
 const TodoBodyHeader = ({ todo, setFocus }) => {
   const { updateTodo, deleteTodo } = useTodo();
-  const dispatch = useDispatch();
 
   const { title, id, subtodos, completed, updatedAt } = todo;
   const hasSubtodos = subtodos.length > 0;

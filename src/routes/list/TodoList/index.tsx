@@ -6,7 +6,6 @@ import moment from 'moment';
 import TodoListItem from 'components/todoListItem';
 import TodoListItemGhost from 'components/todoListItem/TodoListItemGhost';
 import { useView } from 'contexts/viewContext';
-import { useTodo } from 'contexts/todoContext';
 import ViewSelector from 'components/viewSelector';
 import ErrorMessage from 'components/errorMessage';
 import { View } from 'interfaces/ViewContext';

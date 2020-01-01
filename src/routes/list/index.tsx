@@ -1,7 +1,6 @@
 import React, { useReducer, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import { useTodo } from 'contexts/todoContext';
 import RootStateInterface from 'interfaces/RootState';

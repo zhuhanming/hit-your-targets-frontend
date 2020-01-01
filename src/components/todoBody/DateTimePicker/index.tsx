@@ -4,7 +4,6 @@ import { toast } from 'react-toastify';
 import DatePicker from 'react-datepicker';
 
 import { useTodo } from 'contexts/todoContext';
-import { isWarning } from 'utils/timeUtils';
 
 import 'react-datepicker/dist/react-datepicker.css';
 import '../TodoBody.scss';
@@ -14,7 +13,6 @@ const DateTimePicker = ({ todo }) => {
   const { id, title, startTime, endTime } = todo;
   const startTimeDate = new Date(Date.parse(startTime));
   const endTimeDate = new Date(Date.parse(endTime));
-  const warning = isWarning(endTime);
 
   const handleStartTimeChange = date => {
     if (Date.parse(date) === Date.parse(startTime)) return;
