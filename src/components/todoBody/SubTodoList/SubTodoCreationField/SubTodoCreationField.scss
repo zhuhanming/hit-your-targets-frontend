@@ -1,0 +1,16 @@
+.subtodo-field {
+  &__input {
+    border: none;
+    background: none;
+    padding: 0;
+    box-shadow: none;
+    color: inherit;
+    // font-weight: 300;
+
+    &:focus {
+      outline: none;
+      border: none;
+      box-shadow: none;
+    }
+  }
+}

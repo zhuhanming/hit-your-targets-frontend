@@ -44,7 +44,7 @@ const SubTodoCreationField = ({ id, todoStartTime, todoEndTime }) => {
           name="title"
           type="text"
           autoComplete="off"
-          placeholder="+ Add a Subtask"
+          placeholder="+ Press enter to add a Subtask"
           ref={register}
         />
       </div>
