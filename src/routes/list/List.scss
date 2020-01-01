@@ -1,8 +1,17 @@
+@import '../../assets/scss/variables.scss';
+
 .list-view {
   min-height: 100%;
   height: 100%;
 
   &__column {
     height: 100%;
+  }
+
+  &__focused-task {
+    display: none;
+    @include from($tablet) {
+      display: initial;
+    }
   }
 }

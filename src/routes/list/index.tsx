@@ -56,7 +56,7 @@ const List = () => {
           </PageSection>
         </PageContainer>
       </div>
-      <div className="column is-half is-marginless is-paddingless is-very-transparent list-view__column">
+      <div className="column is-half is-marginless is-paddingless is-very-transparent list-view__column list-view__focused-task">
         <TodoContainer
           id={state.taskInFocus}
           setFocus={id => setState({ taskInFocus: id })}
