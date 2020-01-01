@@ -5,6 +5,17 @@
   display: flex;
   flex-direction: column;
 
+  &__back {
+    color: inherit;
+    font-size: inherit;
+    margin-bottom: 1.5rem;
+    font-weight: lighter;
+
+    &:hover {
+      font-weight: bold;
+    }
+  }
+
   &__container {
     padding-top: 2.25rem;
     padding-bottom: 2.25rem;

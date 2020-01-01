@@ -12,7 +12,7 @@ import SubTodoList from './SubTodoList';
 
 import './TodoBody.scss';
 
-const TodoBody = ({ todo, setFocus }) => {
+const TodoBody = ({ todo, setFocus, isMobile = false }) => {
   const { updateTodo } = useTodo();
   const { theme } = useTheme();
   // const [isError, setIsError] = useState(false);
@@ -30,7 +30,6 @@ const TodoBody = ({ todo, setFocus }) => {
   const handleTodoBlur = () => {
     try {
       const newState = getValues();
-      console.log(newState);
       if (newState.title.length === 0) {
         toast.error('Your task title cannot be empty!');
         setValue('title', title, true);
@@ -50,6 +49,15 @@ const TodoBody = ({ todo, setFocus }) => {
 
   return (
     <div className="todo-body__container">
+      {isMobile && (
+        <button
+          type="button"
+          className="as-non-button todo-body__back"
+          onClick={() => setFocus(null)}
+        >
+          &larr; Back to List
+        </button>
+      )}
       <form
         className="todo-body"
         onSubmit={handleSubmit(onSubmit)}
