@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import _ from 'lodash';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
+import autosize from 'autosize';
 
 import { useTodo } from 'contexts/todoContext';
 import { useTheme } from 'contexts/themeContext';
 import TodoBodyHeader from './TodoBodyHeader';
 import DateTimePicker from './DateTimePicker';
+import SubTodoList from './SubTodoList';
 
 import './TodoBody.scss';
 
@@ -16,6 +18,9 @@ const TodoBody = ({ todo, setFocus }) => {
   // const [isError, setIsError] = useState(false);
   const { id, title, description } = todo;
   const initialState = { title, description };
+  useEffect(() => {
+    autosize(document.querySelectorAll('textarea'));
+  });
 
   const { register, handleSubmit, getValues } = useForm({
     mode: 'onBlur'
@@ -35,36 +40,40 @@ const TodoBody = ({ todo, setFocus }) => {
   };
 
   return (
-    <form
-      className="todo-body"
-      onSubmit={handleSubmit(onSubmit)}
-      key={`form-${id}`}
-    >
-      <TodoBodyHeader todo={todo} setFocus={setFocus} />
-      <input
-        className="todo-body__title is-size-4"
-        name="title"
-        type="text"
-        ref={register({ required: true })}
-        onBlur={handleTodoBlur}
-        autoComplete="off"
-        defaultValue={title}
-      />
-      <DateTimePicker todo={todo} />
-      <div className="todo-body__tag">
-        <p className="todo-body__tag__label">Tags</p>
-        <p className="tag is-primary">Work in Progress!</p>
-      </div>
-      <textarea
-        className={`todo-body__description ${theme}`}
-        name="description"
-        rows={6}
-        ref={register}
-        onBlur={handleTodoBlur}
-        placeholder="Description"
-        defaultValue={description}
-      />
-    </form>
+    <div className="todo-body__container">
+      <form
+        className="todo-body"
+        onSubmit={handleSubmit(onSubmit)}
+        key={`form-${id}`}
+      >
+        <TodoBodyHeader todo={todo} setFocus={setFocus} />
+        <textarea
+          className="todo-body__title is-size-4"
+          name="title"
+          // type="text"
+          ref={register({ required: true })}
+          onBlur={handleTodoBlur}
+          autoComplete="off"
+          defaultValue={title}
+          rows={1}
+        />
+        <DateTimePicker todo={todo} />
+        <div className="todo-body__tag">
+          <p className="todo-body__tag__label">Tags</p>
+          <p className="tag is-primary">Work in Progress!</p>
+        </div>
+        <textarea
+          className={`todo-body__description ${theme}`}
+          name="description"
+          rows={4}
+          ref={register}
+          onBlur={handleTodoBlur}
+          placeholder="Description"
+          defaultValue={description}
+        />
+      </form>
+      <SubTodoList todo={todo} />
+    </div>
   );
 };
 
