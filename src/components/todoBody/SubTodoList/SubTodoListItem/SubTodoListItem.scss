@@ -1,6 +1,12 @@
+@import '../../../../assets/scss/variables.scss';
+
 .subtodo-list-item {
   display: flex;
   flex-direction: column;
+
+  &.has-bottom-border {
+    // border-bottom: 1px $grey-light solid;
+  }
 
   input,
   textarea {
@@ -21,7 +27,8 @@
   &__first-row {
     display: flex;
     align-items: center;
-    padding-bottom: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
     width: 100%;
   }
 
