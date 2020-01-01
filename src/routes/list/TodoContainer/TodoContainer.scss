@@ -3,13 +3,13 @@
 .todo-container {
   height: 100%;
   width: 100%;
-  padding: 0rem 2rem;
+  padding: 0 2rem;
   display: flex;
   flex-direction: column;
 
-  // @include from($mobile) {
-  //   padding: 1.5rem 2rem;
-  // }
+  @media screen and (max-width: $mobile) {
+    padding: 0;
+  }
 
   &__columns {
     height: 100%;

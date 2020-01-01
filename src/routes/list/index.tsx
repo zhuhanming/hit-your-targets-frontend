@@ -1,5 +1,7 @@
 import React, { useReducer, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { useMediaQuery } from 'react-responsive';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import { useTodo } from 'contexts/todoContext';
 import RootStateInterface from 'interfaces/RootState';
@@ -19,6 +21,8 @@ const List = () => {
     isError: false,
     taskInFocus: null
   });
+
+  const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
 
   useEffect(() => {
     let didCancel = false;
@@ -43,25 +47,40 @@ const List = () => {
 
   return (
     <div className="columns is-marginless is-paddingless list-view">
-      <div className="column is-half is-marginless is-paddingless list-view__column">
-        <PageContainer titleText="List View">
-          <PageSection>
-            <TodoList
-              todos={todos}
-              isLoading={state.isLoading}
-              isError={state.isError}
+      {isMobile && state.taskInFocus && (
+        <div className="is-very-transparent list-view__mobile">
+          <TodoContainer
+            id={state.taskInFocus}
+            setFocus={id => setState({ taskInFocus: id })}
+            todos={todos}
+            isMobile={isMobile}
+          />
+        </div>
+      )}
+      {(!isMobile || (isMobile && !state.taskInFocus)) && (
+        <>
+          <div className="column is-half is-marginless is-paddingless list-view__column">
+            <PageContainer titleText="List View">
+              <PageSection>
+                <TodoList
+                  todos={todos}
+                  isLoading={state.isLoading}
+                  isError={state.isError}
+                  setFocus={id => setState({ taskInFocus: id })}
+                  focus={state.taskInFocus}
+                />
+              </PageSection>
+            </PageContainer>
+          </div>
+          <div className="column is-half is-marginless is-paddingless is-very-transparent list-view__column list-view__focused-task">
+            <TodoContainer
+              id={state.taskInFocus}
               setFocus={id => setState({ taskInFocus: id })}
-              focus={state.taskInFocus}
+              todos={todos}
             />
-          </PageSection>
-        </PageContainer>
-      </div>
-      <div className="column is-half is-marginless is-paddingless is-very-transparent list-view__column list-view__focused-task">
-        <TodoContainer
-          id={state.taskInFocus}
-          setFocus={id => setState({ taskInFocus: id })}
-        />
-      </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };

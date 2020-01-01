@@ -1,15 +1,11 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 
 import TodoBody from 'components/todoBody';
-import RootStateInterface from 'interfaces/RootState';
 import ErrorMessage from 'components/errorMessage';
 
 import './TodoContainer.scss';
 
-const TodoContainer = ({ id, setFocus }) => {
-  const selectTodos = (state: RootStateInterface) => state.todos;
-  const { todos } = useSelector(selectTodos);
+const TodoContainer = ({ id, setFocus, todos, isMobile = false }) => {
   if (id === null) return <></>;
   const todo = todos.find(ele => ele.id === id);
   if (typeof todo === 'undefined')
@@ -23,10 +19,10 @@ const TodoContainer = ({ id, setFocus }) => {
       </div>
     );
   return (
-    <div className="todo-container ">
+    <div className="todo-container">
       <div className="columns is-marginless is-multiline todo-container__columns">
         <div className="column is-full todo-container__column">
-          <TodoBody todo={todo} setFocus={setFocus} />
+          <TodoBody todo={todo} setFocus={setFocus} isMobile={isMobile} />
         </div>
       </div>
     </div>
