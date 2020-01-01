@@ -75,7 +75,10 @@ const TodoListItem = ({
         onChange={handleCheck}
         // eslint-disable-next-line no-param-reassign
         ref={el => el && (el.indeterminate = hasSubtodos)}
-        disabled={hasSubtodos}
+        disabled={
+          (!isExpanded && hasSubtodos) ||
+          (isExpanded && isInFocus && hasSubtodos)
+        }
       />
       <label
         className={`list-item__content tooltip-container ${
