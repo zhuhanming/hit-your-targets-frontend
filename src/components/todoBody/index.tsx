@@ -55,7 +55,7 @@ const TodoBody = ({ todo, setFocus, isMobile = false }) => {
           className="as-non-button todo-body__back"
           onClick={() => setFocus(null)}
         >
-          &larr; Back to List
+          &larr;&nbsp;&nbsp;&nbsp;Back to List
         </button>
       )}
       <form
