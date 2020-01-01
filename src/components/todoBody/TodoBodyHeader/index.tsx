@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import { useDispatch } from 'react-redux';
@@ -13,6 +14,8 @@ const TodoBodyHeader = ({ todo, setFocus }) => {
   const dispatch = useDispatch();
 
   const { title, id, subtodos, completed, updatedAt } = todo;
+  const hasSubtodos = subtodos.length > 0;
+
   const handleComplete = () => {
     if (Array.isArray(subtodos) && subtodos.length === 0) {
       updateTodo(id, {
@@ -53,6 +56,9 @@ const TodoBodyHeader = ({ todo, setFocus }) => {
             name="completed"
             checked={completed}
             onChange={handleComplete}
+            // eslint-disable-next-line no-param-reassign
+            ref={el => el && (el.indeterminate = hasSubtodos)}
+            disabled={hasSubtodos}
           />
           {/*  eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           <label htmlFor="completed-checkbox" />
