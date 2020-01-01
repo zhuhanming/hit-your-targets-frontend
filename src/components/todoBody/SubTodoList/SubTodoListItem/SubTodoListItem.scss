@@ -1,0 +1,35 @@
+.subtodo-list-item {
+  display: flex;
+  flex-direction: column;
+
+  input,
+  textarea {
+    border: none;
+    background: none;
+    resize: none;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__first-row {
+    display: flex;
+    align-items: flex-start;
+    padding-bottom: 1rem;
+    width: 100%;
+  }
+
+  &__checkbox {
+    margin-top: 0 !important;
+  }
+
+  &__content {
+    flex: 1;
+  }
+
+  &__second-row {
+    display: flex;
+    justify-content: space-between;
+  }
+}
