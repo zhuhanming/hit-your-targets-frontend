@@ -17,6 +17,11 @@
   padding-left: $navbar-width;
   padding-top: 0;
 
+  @include from($tablet) {
+    max-height: 100%;
+    overflow: hidden;
+  }
+
   @media only screen and (max-width: $tablet) {
     height: auto;
   }
