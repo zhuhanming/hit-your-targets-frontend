@@ -14,4 +14,9 @@
   &__columns {
     height: 100%;
   }
+
+  &__column {
+    max-height: 100%;
+    // overflow: scroll;
+  }
 }

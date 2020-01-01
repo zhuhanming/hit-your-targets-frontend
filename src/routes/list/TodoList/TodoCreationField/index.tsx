@@ -13,7 +13,7 @@ import './TodoCreationField.scss';
 const TodoCreationField = () => {
   const { viewSelected, updateView } = useView();
   const { createTodo } = useTodo();
-  const { register, handleSubmit, watch, errors } = useForm({
+  const { register, handleSubmit } = useForm({
     reValidateMode: 'onSubmit'
   });
   const onSubmit = async (data, e) => {

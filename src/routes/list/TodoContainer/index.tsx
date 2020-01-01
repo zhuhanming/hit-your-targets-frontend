@@ -25,7 +25,7 @@ const TodoContainer = ({ id, setFocus }) => {
   return (
     <div className="todo-container ">
       <div className="columns is-marginless is-multiline todo-container__columns">
-        <div className="column is-full">
+        <div className="column is-full todo-container__column">
           <TodoBody todo={todo} setFocus={setFocus} />
         </div>
       </div>
