@@ -54,8 +54,8 @@ const TodoCreationField = () => {
 
   const placeholderText =
     viewSelected === View.NEXT_SEVEN_DAYS
-      ? 'Create a task due this week.'
-      : 'Create a task due today.';
+      ? 'Press enter to create a task due this week.'
+      : 'Press enter to create a task due today.';
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="todo-field">
