@@ -1,10 +1,9 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import CurrentUser from 'interfaces/CurrentUser';
-import CurrentFilters from 'interfaces/CurrentFilters';
 import { View } from 'interfaces/ViewContext';
 
-export interface CurrentMisc extends CurrentFilters {
+export interface CurrentMisc {
   user: CurrentUser;
   theme: string;
   view: View;
@@ -17,7 +16,6 @@ const initialState: CurrentMisc = {
     displayImageUrl: null,
     lastRetrieved: null
   },
-  filters: [],
   theme: '',
   view: View.TODAY
 };
@@ -32,9 +30,6 @@ const misc = createSlice({
     setView: (state, action: PayloadAction<View>) => {
       state.view = action.payload;
     },
-    updateFilter: (state, action: PayloadAction<CurrentFilters>) => {
-      state.filters = action.payload.filters;
-    },
     updateTheme: (state, action: PayloadAction<string>) => {
       state.theme = action.payload;
     },
@@ -45,20 +40,10 @@ const misc = createSlice({
         displayImageUrl: null,
         lastRetrieved: null
       };
-    },
-    clearFilters: state => {
-      state.filters = [];
     }
   }
 });
 
-export const {
-  setUser,
-  updateFilter,
-  updateTheme,
-  setView,
-  clearUser,
-  clearFilters
-} = misc.actions;
+export const { setUser, updateTheme, setView, clearUser } = misc.actions;
 
 export default misc.reducer;
