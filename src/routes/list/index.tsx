@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
 
 import { useTodo } from 'contexts/todoContext';
+import { useSearch } from 'contexts/searchContext';
 import RootStateInterface from 'interfaces/RootState';
 import PageContainer from 'components/pageContainer';
 import PageSection from 'components/pageSection';
@@ -13,8 +14,10 @@ import './List.scss';
 
 const List = () => {
   const { loadTodos } = useTodo();
+  const { getFilteredTodos } = useSearch();
   const selectTodos = (state: RootStateInterface) => state.todos;
   const { todos } = useSelector(selectTodos);
+  const filteredTodos = getFilteredTodos(todos);
   const [state, setState] = useReducer((s, a) => ({ ...s, ...a }), {
     isLoading: true,
     isError: false,
@@ -51,7 +54,7 @@ const List = () => {
           <TodoContainer
             id={state.taskInFocus}
             setFocus={id => setState({ taskInFocus: id })}
-            todos={todos}
+            todos={filteredTodos}
             isMobile={isMobile}
           />
         </div>
@@ -62,7 +65,7 @@ const List = () => {
             <PageContainer titleText="List View">
               <PageSection>
                 <TodoList
-                  todos={todos}
+                  todos={filteredTodos}
                   isLoading={state.isLoading}
                   isError={state.isError}
                   setFocus={id => setState({ taskInFocus: id })}
@@ -75,7 +78,7 @@ const List = () => {
             <TodoContainer
               id={state.taskInFocus}
               setFocus={id => setState({ taskInFocus: id })}
-              todos={todos}
+              todos={filteredTodos}
             />
           </div>
         </>
