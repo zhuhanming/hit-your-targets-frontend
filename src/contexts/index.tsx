@@ -4,6 +4,7 @@ import { UserProvider } from './userContext';
 import { ThemeProvider } from './themeContext';
 import { TodoProvider } from './todoContext';
 import { ViewProvider } from './viewContext';
+import { SearchProvider } from './searchContext';
 
 const AppProviders = ({ children }) => {
   return (
@@ -11,7 +12,9 @@ const AppProviders = ({ children }) => {
       <UserProvider>
         <ThemeProvider>
           <TodoProvider>
-            <ViewProvider>{children}</ViewProvider>
+            <ViewProvider>
+              <SearchProvider>{children}</SearchProvider>
+            </ViewProvider>
           </TodoProvider>
         </ThemeProvider>
       </UserProvider>
