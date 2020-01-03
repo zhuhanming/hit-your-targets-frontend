@@ -7,7 +7,7 @@ export default interface ToDo {
   startTime: string;
   endTime: string;
   completeTime: string;
-  // tags: string[];
+  tags: string[];
   completed: boolean;
   createdAt: string;
   updatedAt: string;

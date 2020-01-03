@@ -19,10 +19,20 @@ const SearchProvider = props => {
   const getFilteredTodos = (todos: ToDo[]) => {
     if (searchType === SearchType.TITLE) {
       if (titleString === '') return todos;
-    } else if (searchType === SearchType.TAG) {
+      return todos.filter(todo => todo.title.indexOf(titleString) !== -1);
+    }
+    if (searchType === SearchType.TAG) {
       if (tags.length === 0) return todos;
-    } else {
-      return todos;
+      if (searchLogic === SearchLogic.ALL) {
+        return todos.filter(todo =>
+          tags.every(tag => todo.tags.indexOf(tag) >= 0)
+        );
+      }
+      if (searchLogic === SearchLogic.ANY) {
+        return todos.filter(todo =>
+          todo.tags.some(tag => tags.indexOf(tag) >= 0)
+        );
+      }
     }
     return todos;
   };
