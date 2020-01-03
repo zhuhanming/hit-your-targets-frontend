@@ -1,20 +1,19 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { useView } from 'contexts/viewContext';
 import { useTheme } from 'contexts/themeContext';
+import { useSearch } from 'contexts/searchContext';
 import { View } from 'interfaces/ViewContext';
-import RootStateInterface from 'interfaces/RootState';
 import { startSearch, cancelSearch } from 'reducers/SearchDux';
 
 import './ViewSelector.scss';
 
 const ViewSelector = () => {
   const { viewSelected, updateView } = useView();
+  const { searchType } = useSearch();
   const dispatch = useDispatch();
   const { theme } = useTheme();
-  const selectSearch = (state: RootStateInterface) => state.search;
-  const { searchType } = useSelector(selectSearch);
   const handleViewClick = (newView: View) => {
     if (viewSelected !== newView) {
       updateView(newView);
@@ -79,7 +78,9 @@ const ViewSelector = () => {
       <div className="selector__tag">
         <button
           type="button"
-          className={`as-non-button ${theme}`}
+          className={`as-non-button ${theme} ${
+            searchType ? 'has-text-danger' : ''
+          }`}
           onClick={handleSearchClick}
         >
           {searchType ? 'Cancel Search' : 'Search'}

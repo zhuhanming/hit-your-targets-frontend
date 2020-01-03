@@ -6,15 +6,18 @@ import moment from 'moment';
 import TodoListItem from 'components/todoListItem';
 import TodoListItemGhost from 'components/todoListItem/TodoListItemGhost';
 import { useView } from 'contexts/viewContext';
+import { useSearch } from 'contexts/searchContext';
 import ViewSelector from 'components/viewSelector';
 import ErrorMessage from 'components/errorMessage';
 import { View } from 'interfaces/ViewContext';
+import SearchBar from 'components/searchBar';
 
 import TodoCreationField from './TodoCreationField';
 import './TodoList.scss';
 
 const TodoList = ({ todos, isLoading, isError, setFocus, focus }) => {
   const { viewSelected } = useView();
+  const { searchType } = useSearch();
   if (isError)
     return (
       <div className="todo-list">
@@ -72,7 +75,8 @@ const TodoList = ({ todos, isLoading, isError, setFocus, focus }) => {
   return (
     <div className="todo-list">
       <ViewSelector />
-      <TodoCreationField />
+      {searchType === null && <TodoCreationField />}
+      {searchType && <SearchBar />}
       <div className="box todo-list__box is-slightly-transparent is-not-loading">
         <ReactCSSTransitionGroup
           transitionName="fade"
@@ -104,10 +108,17 @@ const TodoList = ({ todos, isLoading, isError, setFocus, focus }) => {
               transitionEnterTimeout={500}
               transitionLeaveTimeout={500}
             >
-              {todos.length === 0 && (
+              {todos.length === 0 && searchType === null && (
                 <article className="message is-success">
                   <span className="message-body tasks__empty-text">
                     Create a task by typing into the field above!
+                  </span>
+                </article>
+              )}
+              {todos.length === 0 && searchType && (
+                <article className="message is-danger">
+                  <span className="message-body tasks__empty-text">
+                    No task found that meets the requirements!
                   </span>
                 </article>
               )}
