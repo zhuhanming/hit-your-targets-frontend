@@ -1,0 +1,16 @@
+@import '../../assets/scss/variables.scss';
+
+.search-field {
+  padding-top: 0.5rem;
+  padding-bottom: 0.6rem;
+
+  &__input {
+    background: #e0f3ff;
+    // border: none;
+    border-radius: 7px;
+  }
+
+  &__validation {
+    display: none;
+  }
+}
