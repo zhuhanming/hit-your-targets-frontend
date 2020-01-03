@@ -19,7 +19,10 @@ const SearchProvider = props => {
   const getFilteredTodos = (todos: ToDo[]) => {
     if (searchType === SearchType.TITLE) {
       if (titleString === '') return todos;
-      return todos.filter(todo => todo.title.indexOf(titleString) !== -1);
+      return todos.filter(
+        todo =>
+          todo.title.toLowerCase().indexOf(titleString.toLowerCase()) !== -1
+      );
     }
     if (searchType === SearchType.TAG) {
       if (tags.length === 0) return todos;
@@ -37,7 +40,12 @@ const SearchProvider = props => {
     return todos;
   };
 
-  return <SearchContext.Provider value={{ getFilteredTodos }} {...props} />;
+  return (
+    <SearchContext.Provider
+      value={{ searchType, getFilteredTodos, titleString, tags, searchLogic }}
+      {...props}
+    />
+  );
 };
 
 const useSearch = () => {
