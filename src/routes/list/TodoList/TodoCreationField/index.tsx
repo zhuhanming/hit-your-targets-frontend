@@ -37,7 +37,8 @@ const TodoCreationField = () => {
             : moment()
                 .endOf('day')
                 .format(),
-        completed: false
+        completed: false,
+        tags: []
       };
       try {
         await createTodo(code);
