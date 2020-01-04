@@ -9,6 +9,7 @@ import { useTheme } from 'contexts/themeContext';
 import TodoBodyHeader from './TodoBodyHeader';
 import DateTimePicker from './DateTimePicker';
 import SubTodoList from './SubTodoList';
+import TagsInputField from './TagsInputField';
 
 import './TodoBody.scss';
 
@@ -77,7 +78,8 @@ const TodoBody = ({ todo, setFocus, isMobile = false }) => {
         <DateTimePicker todo={todo} />
         <div className="todo-body__tag">
           <p className="todo-body__tag__label">Tags</p>
-          <p className="tag is-primary">Work in Progress!</p>
+          {/* <p className="tag is-primary">Work in Progress!</p> */}
+          <TagsInputField todo={todo} />
         </div>
         <textarea
           className={`todo-body__description ${theme}`}
