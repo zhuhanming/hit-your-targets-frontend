@@ -13,16 +13,21 @@ const TagsInputField = ({ todo }) => {
   const { id, tags } = todo;
   const { length } = tags;
 
-  const handleChange = updatedTags => {
+  const handleChange = (updatedTags: string[]) => {
     if (length >= 5 && updatedTags.length >= length) {
       toast.info('You can only have up to 5 tags for every task!');
     } else {
-      const code = { tags: updatedTags.map(tag => capitalize(tag)) };
-      try {
-        updateTodo(id, code);
-        toast.success('Tags updated!');
-      } catch (error) {
-        console.log(error);
+      const newTags = [...new Set(updatedTags.map(capitalize))];
+      if (newTags.length < updatedTags.length) {
+        toast.warn('That tag has already been added!');
+      } else {
+        const code = { tags: newTags };
+        try {
+          updateTodo(id, code);
+          toast.success('Tags updated!');
+        } catch (error) {
+          console.log(error);
+        }
       }
     }
   };
