@@ -2,12 +2,15 @@ import React from 'react';
 
 import TodoBody from 'components/todoBody';
 import ErrorMessage from 'components/errorMessage';
+import { useSearch } from 'contexts/searchContext';
 
 import './TodoContainer.scss';
 
 const TodoContainer = ({ id, setFocus, todos, isMobile = false }) => {
+  const { searchType } = useSearch();
   if (id === null) return <></>;
   const todo = todos.find(ele => ele.id === id);
+  if (typeof todo === 'undefined' && searchType) return <></>;
   if (typeof todo === 'undefined')
     return (
       <div className="todo-container">
