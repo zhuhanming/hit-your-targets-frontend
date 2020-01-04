@@ -24,10 +24,9 @@ const SearchBar = () => {
   const dispatch = useDispatch();
   const [isDropdownActive, setIsDropdownActive] = useState(false);
 
-  const placeholderText =
-    viewSelected === View.COMPLETED
-      ? 'Search through your completed tasks by its title.'
-      : 'Search through your current tasks by its title.';
+  const placeholderText = `Search through your ${
+    viewSelected === View.COMPLETED ? 'completed' : 'current'
+  } tasks by their titles.`;
 
   const handleChange = e => {
     if (searchType === SearchType.TITLE) {
@@ -126,12 +125,11 @@ const SearchBar = () => {
             inputProps={{
               className: 'react-tagsinput-input input tags-field',
               placeholder: `${
-                // eslint-disable-next-line no-nested-ternary
                 tags.length > 0
                   ? 'Add tag'
-                  : viewSelected === View.COMPLETED
-                  ? 'Search through your completed tasks by its tags.'
-                  : 'Search through your current tasks by its tags.'
+                  : `Search through your ${
+                      viewSelected === View.COMPLETED ? 'completed' : 'current'
+                    } tasks by their tags.`
               }`
             }}
           />
