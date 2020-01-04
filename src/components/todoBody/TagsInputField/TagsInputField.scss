@@ -1,0 +1,56 @@
+@import '../../../assets/scss/variables.scss';
+
+.react-tagsinput {
+  overflow: scroll;
+  flex: 1;
+  display: flex;
+  margin-left: 1rem;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  span {
+    display: flex;
+    align-items: center;
+  }
+
+  &-tag {
+    // background-color: #cde69c;
+    // border-radius: 1rem;
+    // border: 1px solid #a5d24a;
+    // color: #638421;
+    display: inline-block;
+    // font-family: sans-serif;
+    // font-weight: 400;
+    margin-bottom: 0.15rem;
+    margin-top: 0.15rem;
+    margin-right: 0.3rem;
+    a::before {
+      content: ' ×';
+    }
+  }
+
+  &-remove {
+    padding-left: 0.3rem;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  &-input {
+    background: transparent;
+    border: 0;
+    font-size: 1rem;
+    font-weight: lighter;
+    outline: none;
+    overflow: visible;
+    width: 100%;
+    min-width: 5rem;
+
+    &.hide {
+      display: none;
+    }
+  }
+}
