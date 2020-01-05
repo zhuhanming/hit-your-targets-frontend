@@ -35,7 +35,7 @@ const TodoBody = ({ todo, setFocus, isMobile = false }) => {
         toast.error('Your task title cannot be empty!');
         setValue('title', title, true);
         autosize.update(document.querySelectorAll('textarea'));
-      } else if (newState.title.length > 50) {
+      } else if (newState.title.length > 80) {
         toast.error('Your task name is too long! Remember, short and sweet!');
         setValue('title', title, true);
         autosize.update(document.querySelectorAll('textarea'));

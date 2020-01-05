@@ -21,7 +21,7 @@ const TodoCreationField = () => {
       toast.info(
         'Type your task into the field above and press enter to create it!'
       );
-    } else if (data.title.length > 50) {
+    } else if (data.title.length > 80) {
       toast.error('Your task name is too long! Remember, short and sweet!');
     } else {
       const code = {

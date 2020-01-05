@@ -23,7 +23,7 @@ const SubTodoCreationField = ({
       toast.info(
         'Type your subtask into the field above and press enter to create it!'
       );
-    } else if (data.title.length > 30) {
+    } else if (data.title.length > 60) {
       toast.error('Your subtask name is too long! Remember, short and sweet!');
     } else {
       const code = {

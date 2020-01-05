@@ -43,6 +43,10 @@ const SubTodoListItem = ({
         toast.error('You need to have a title for this subtask!');
         setValue('title', title);
         autosize.update(document.querySelectorAll('textarea'));
+      } else if (newState.title.length > 60) {
+        toast.error(
+          'Your subtask name is too long! Remember, short and sweet!'
+        );
       } else if (newState.title !== title) {
         updateSubTodo(todoId, id, newState);
         toast.success(`Nice! ${newState.title} updated!`);
