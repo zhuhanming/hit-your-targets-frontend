@@ -13,6 +13,7 @@
     @include from($tablet) {
       display: initial;
     }
+    overflow: hidden;
   }
 
   &__mobile {
