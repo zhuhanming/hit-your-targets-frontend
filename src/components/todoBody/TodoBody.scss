@@ -37,10 +37,10 @@
 
     i {
       color: $dark;
-      transition: color 0.5s;
+      transition: color 0.2s;
       &:hover {
-        color: $black;
-        transition: color 0.5s;
+        color: $danger;
+        transition: color 0.2s;
         cursor: pointer;
       }
     }
