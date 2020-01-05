@@ -13,14 +13,15 @@ import {
   setTitleString,
   setTags,
   setSearchLogic,
-  setSearch
+  setSearch,
+  SearchLogic
 } from 'reducers/SearchDux';
 
 import './SearchBar.scss';
 
 const SearchBar = () => {
   const { viewSelected } = useView();
-  const { searchType, titleString, tags } = useSearch();
+  const { searchType, titleString, tags, searchLogic } = useSearch();
   const dispatch = useDispatch();
   const [isDropdownActive, setIsDropdownActive] = useState(false);
 
@@ -48,7 +49,11 @@ const SearchBar = () => {
     }
   };
 
-  console.log(tags);
+  const handleChangeSearchLogic = (newSearchLogic: SearchLogic) => {
+    if (newSearchLogic !== searchLogic) {
+      dispatch(setSearchLogic(newSearchLogic));
+    }
+  };
 
   return (
     <form className="search-field">
@@ -115,24 +120,49 @@ const SearchBar = () => {
           />
         )}
         {searchType === SearchType.TAG && (
-          <TagsInput
-            value={tags}
-            onChange={handleTagsInput}
-            tagProps={{
-              className: 'tag is-primary react-tagsinput-tag',
-              classNameRemove: 'react-tagsinput-remove'
-            }}
-            inputProps={{
-              className: 'react-tagsinput-input input tags-field',
-              placeholder: `${
-                tags.length > 0
-                  ? 'Add tag'
-                  : `Search through your ${
-                      viewSelected === View.COMPLETED ? 'completed' : 'current'
-                    } tasks by their tags.`
-              }`
-            }}
-          />
+          <div className="tags-search">
+            <TagsInput
+              value={tags}
+              onChange={handleTagsInput}
+              tagProps={{
+                className: 'tag is-primary react-tagsinput-tag',
+                classNameRemove: 'react-tagsinput-remove'
+              }}
+              inputProps={{
+                className: 'react-tagsinput-input input tags-field',
+                placeholder: `${
+                  tags.length > 0
+                    ? 'Add tag'
+                    : `Search through your ${
+                        viewSelected === View.COMPLETED
+                          ? 'completed'
+                          : 'current'
+                      } tasks by their tags.`
+                }`
+              }}
+            />
+            <div className="tags-search__logic">
+              <button
+                type="button"
+                className={`as-non-button is-size-7 ${
+                  searchLogic === SearchLogic.ALL ? '' : 'is-light-grey'
+                }`}
+                onClick={() => handleChangeSearchLogic(SearchLogic.ALL)}
+              >
+                All
+              </button>
+              <span className="tags-search__logic__sep is-light-grey"> | </span>
+              <button
+                type="button"
+                className={`as-non-button is-size-7 ${
+                  searchLogic === SearchLogic.ANY ? '' : 'is-light-grey'
+                }`}
+                onClick={() => handleChangeSearchLogic(SearchLogic.ANY)}
+              >
+                Any
+              </button>
+            </div>
+          </div>
         )}
       </div>
     </form>
