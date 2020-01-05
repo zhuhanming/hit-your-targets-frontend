@@ -71,7 +71,7 @@ body {
 @mixin light-gradient() {
   background: $body-bg-light;
   position: relative;
-  z-index: 100;
+  z-index: 1;
 }
 
 @mixin dark-gradient() {
@@ -84,6 +84,6 @@ body {
   left: 0;
   opacity: 0;
   width: 100%;
-  z-index: -100;
+  z-index: -1;
   transition: opacity $change-theme-duration;
 }
