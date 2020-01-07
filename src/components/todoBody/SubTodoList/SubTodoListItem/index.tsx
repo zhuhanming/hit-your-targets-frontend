@@ -66,7 +66,6 @@ const SubTodoListItem = ({
           completed: !completed
         });
       }
-      setIsChecked(!isChecked);
       if (!completed) {
         toast.success(
           `👍 Great job! ${title} completed${
@@ -78,6 +77,7 @@ const SubTodoListItem = ({
       } else {
         toast.warn('😅 No rush there!');
       }
+      setIsChecked(!isChecked);
       if ((isOneAwayFromCompletion || isFullyCompleted) && !isMobile) {
         setFocus(null);
       }
