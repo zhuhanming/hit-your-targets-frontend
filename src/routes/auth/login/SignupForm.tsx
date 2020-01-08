@@ -39,8 +39,8 @@ const SignupForm = ({
 
   const handleSignup = async data => {
     setIsLoading(true);
-    await signup(data).catch(() => {
-      handleError();
+    await signup(data).catch(e => {
+      handleError(e);
       setIsLoading(false);
     });
   };

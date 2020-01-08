@@ -11,7 +11,8 @@ const Login = () => {
   const [state, setState] = useReducer((s, a) => ({ ...s, ...a }), {
     email: null,
     isSignedUp: true,
-    isError: false
+    isError: false,
+    errorMessage: null
   });
 
   return (
@@ -29,23 +30,43 @@ const Login = () => {
             <div className="column is-full">
               <div className="box is-slightly-transparent">
                 {state.isError && (
-                  <ErrorMessage message="Something went wrong. Please try again." />
+                  <ErrorMessage
+                    message={`${
+                      state.errorMessage
+                        ? state.errorMessage
+                        : 'Something went wrong. Please try again.'
+                    }`}
+                  />
                 )}
                 {state.isSignedUp && (
                   <LoginForm
                     email={state.email}
-                    handleError={() => setState({ isError: true })}
+                    handleError={e =>
+                      setState({ isError: true, errorMessage: e.message })
+                    }
                     handleChangeForm={data => {
-                      setState({ email: data, isSignedUp: false });
+                      setState({
+                        email: data,
+                        isSignedUp: false,
+                        isError: false,
+                        errorMessage: null
+                      });
                     }}
                   />
                 )}
                 {!state.isSignedUp && (
                   <SignupForm
                     email={state.email}
-                    handleError={() => setState({ isError: true })}
+                    handleError={e =>
+                      setState({ isError: true, errorMessage: e.message })
+                    }
                     handleChangeForm={data => {
-                      setState({ email: data, isSignedUp: true });
+                      setState({
+                        email: data,
+                        isSignedUp: true,
+                        isError: false,
+                        errorMessage: null
+                      });
                     }}
                   />
                 )}
