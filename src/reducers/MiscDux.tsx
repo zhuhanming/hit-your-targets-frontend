@@ -14,7 +14,8 @@ const initialState: CurrentMisc = {
     name: null,
     email: null,
     displayImageUrl: null,
-    lastRetrieved: null
+    lastRetrieved: null,
+    preferences: null
   },
   theme: '',
   view: View.TODAY
@@ -38,7 +39,8 @@ const misc = createSlice({
         name: null,
         email: null,
         displayImageUrl: null,
-        lastRetrieved: null
+        lastRetrieved: null,
+        preferences: null
       };
     }
   }
