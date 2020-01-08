@@ -78,7 +78,11 @@ const SubTodoListItem = ({
         toast.warn('😅 No rush there!');
       }
       setIsChecked(!isChecked);
-      if ((isOneAwayFromCompletion || isFullyCompleted) && !isMobile) {
+      if (
+        ((isOneAwayFromCompletion && !completed) ||
+          (isFullyCompleted && completed)) &&
+        !isMobile
+      ) {
         setFocus(null);
       }
     } catch (error) {
