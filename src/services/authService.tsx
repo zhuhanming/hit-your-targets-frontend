@@ -31,7 +31,6 @@ const login = async code => {
   const response = await ApiService.post('/auth/login', code).catch(error => {
     return Promise.reject(new Error(error));
   });
-  console.log(response);
   return TokenUtils.storeToken(response);
 };
 
@@ -65,7 +64,6 @@ const getUser = async () => {
   try {
     const response = await ApiService.get('auth/me');
     if (response.status === 200) {
-      console.log(response.data);
       const userData = response.data;
       store.dispatch(setUser({ ...userData, lastRetrieved: Date.now() }));
       return userData;
