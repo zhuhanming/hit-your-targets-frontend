@@ -17,7 +17,7 @@ const logout = () => {
 
 const signup = async code => {
   const response = await ApiService.post('/signup', code).catch(error => {
-    return Promise.reject(new Error(error.message));
+    return Promise.reject(new Error(error));
   });
   if (response.data.message === 'Account already exists') {
     return Promise.reject(
@@ -29,7 +29,12 @@ const signup = async code => {
 
 const login = async code => {
   const response = await ApiService.post('/auth/login', code).catch(error => {
-    return Promise.reject(new Error(error));
+    if (error.message === 'Request failed with status code 401') {
+      return Promise.reject(
+        new Error('Invalid login credentials, please try again.')
+      );
+    }
+    return Promise.reject(new Error('Something went wrong, please try again.'));
   });
   return TokenUtils.storeToken(response);
 };

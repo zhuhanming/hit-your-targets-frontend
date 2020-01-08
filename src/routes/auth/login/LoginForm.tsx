@@ -35,8 +35,8 @@ const LoginForm = ({
 
   const handleLogin = async data => {
     setIsLoading(true);
-    await login(data).catch(() => {
-      handleError();
+    await login(data).catch(e => {
+      handleError(e);
       setIsLoading(false);
     });
   };
