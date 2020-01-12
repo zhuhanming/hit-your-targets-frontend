@@ -1,11 +1,31 @@
+@import '../../../../assets/scss/variables.scss';
+
 .subtodo-field {
   &__input {
     border: none;
     background: none;
     padding: 0;
     box-shadow: none;
-    color: inherit;
-    // font-weight: 300;
+    color: $dark;
+
+    &.dark {
+      color: $black;
+      &::-webkit-input-placeholder {
+        color: $dark;
+      }
+      &:-moz-placeholder {
+        color: $dark;
+      }
+      &::-moz-placeholder {
+        color: $dark;
+      }
+      &:-ms-input-placeholder {
+        color: $dark;
+      }
+      &::placeholder {
+        color: $dark;
+      }
+    }
 
     &:focus {
       outline: none;

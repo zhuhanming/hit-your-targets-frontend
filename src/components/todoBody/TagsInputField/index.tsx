@@ -4,12 +4,14 @@ import TagsInput from 'react-tagsinput';
 // import 'react-tagsinput/react-tagsinput.css';
 
 import { useTodo } from 'contexts/todoContext';
+import { useTheme } from 'contexts/themeContext';
 import { capitalize } from 'utils/index';
 
 import './TagsInputField.scss';
 
 const TagsInputField = ({ todo }) => {
   const { updateTodo } = useTodo();
+  const { theme } = useTheme();
   const { id, tags } = todo;
   const { length } = tags;
 
@@ -41,7 +43,9 @@ const TagsInputField = ({ todo }) => {
         classNameRemove: 'react-tagsinput-remove'
       }}
       inputProps={{
-        className: `react-tagsinput-input ${length === 5 ? 'hide' : ''}`,
+        className: `react-tagsinput-input ${theme} ${
+          length === 5 ? 'hide' : ''
+        }`,
         placeholder: 'Add a tag'
       }}
     />

@@ -48,6 +48,26 @@
     overflow: visible;
     width: 100%;
     min-width: 5rem;
+    color: $dark;
+
+    &.dark {
+      color: $black;
+      &::-webkit-input-placeholder {
+        color: $dark;
+      }
+      &:-moz-placeholder {
+        color: $dark;
+      }
+      &::-moz-placeholder {
+        color: $dark;
+      }
+      &:-ms-input-placeholder {
+        color: $dark;
+      }
+      &::placeholder {
+        color: $dark;
+      }
+    }
 
     &.hide {
       display: none;

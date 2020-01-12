@@ -3,6 +3,7 @@ import moment from 'moment';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
+import { useTheme } from 'contexts/themeContext';
 import { useTodo } from 'contexts/todoContext';
 
 import './SubTodoCreationField.scss';
@@ -14,6 +15,7 @@ const SubTodoCreationField = ({
   isFullyCompleted
 }) => {
   const { createSubTodo, updateTodo } = useTodo();
+  const { theme } = useTheme();
   const { register, handleSubmit } = useForm({
     reValidateMode: 'onSubmit'
   });
@@ -50,7 +52,7 @@ const SubTodoCreationField = ({
     <form onSubmit={handleSubmit(onSubmit)} className="subtodo-field">
       <div className="control">
         <input
-          className="input subtodo-field__input"
+          className={`input subtodo-field__input ${theme}`}
           name="title"
           type="text"
           autoComplete="off"
