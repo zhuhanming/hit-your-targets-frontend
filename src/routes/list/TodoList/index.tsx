@@ -118,7 +118,8 @@ const TodoList = ({ todos, isLoading, isError, setFocus, focus }) => {
               {todos.length === 0 && searchType && (
                 <article className="message is-danger">
                   <span className="message-body tasks__empty-text">
-                    No task found that meets the requirements!
+                    No task found that meets the requirements! Try changing your
+                    search or the selected view!
                   </span>
                 </article>
               )}
