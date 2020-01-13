@@ -37,6 +37,7 @@ const List = () => {
         });
       } catch (error) {
         setState({
+          isLoading: false,
           isError: true
         });
       }
