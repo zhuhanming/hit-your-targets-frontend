@@ -13,6 +13,8 @@
   transition: color $change-theme-duration;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 
   @include light-gradient();
 
@@ -40,6 +42,8 @@
   &.dark {
     color: $black;
     transition: color $change-theme-duration;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
     &::before {
       opacity: 1;
     }
