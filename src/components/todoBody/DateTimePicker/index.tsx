@@ -14,9 +14,8 @@ const DateTimePicker = ({ todo }) => {
   const { id, title, startTime, endTime, subtodos } = todo;
   const startTimeDate = new Date(Date.parse(startTime));
   const endTimeDate = new Date(Date.parse(endTime));
-  const latestEndTimeDate = subtodos
-    ? getLatestDeadline(subtodos)
-    : startTimeDate;
+  const latestEndTimeDate =
+    subtodos.length > 0 ? getLatestDeadline(subtodos) : startTimeDate;
 
   const handleStartTimeChange = date => {
     if (Date.parse(date) === Date.parse(startTime)) return;
