@@ -71,6 +71,7 @@ const List = () => {
                   isError={state.isError}
                   setFocus={id => setState({ taskInFocus: id })}
                   focus={state.taskInFocus}
+                  isMobile={isMobile}
                 />
               </PageSection>
             </PageContainer>

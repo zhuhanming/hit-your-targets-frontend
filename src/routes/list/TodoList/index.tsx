@@ -15,13 +15,20 @@ import SearchBar from 'components/searchBar';
 import TodoCreationField from './TodoCreationField';
 import './TodoList.scss';
 
-const TodoList = ({ todos, isLoading, isError, setFocus, focus }) => {
+const TodoList = ({
+  todos,
+  isLoading,
+  isError,
+  setFocus,
+  focus,
+  isMobile = false
+}) => {
   const { viewSelected } = useView();
   const { searchType } = useSearch();
   if (isError)
     return (
       <div className="todo-list">
-        <ViewSelector />
+        <ViewSelector isMobile={isMobile} />
         <TodoCreationField />
         <div className="box todo-list__box is-slightly-transparent">
           <ErrorMessage message="Failed to retrieve tasks. Please refresh your page to try again." />
@@ -32,7 +39,7 @@ const TodoList = ({ todos, isLoading, isError, setFocus, focus }) => {
   if (isLoading)
     return (
       <div className="todo-list">
-        <ViewSelector />
+        <ViewSelector isMobile={isMobile} />
         <TodoCreationField />
         <div className="box todo-list__box is-slightly-transparent">
           <TodoListItemGhost />
@@ -74,7 +81,7 @@ const TodoList = ({ todos, isLoading, isError, setFocus, focus }) => {
 
   return (
     <div className="todo-list">
-      <ViewSelector />
+      <ViewSelector isMobile={isMobile} />
       {searchType === null && <TodoCreationField />}
       {searchType && <SearchBar />}
       <div className="box todo-list__box is-slightly-transparent is-not-loading">

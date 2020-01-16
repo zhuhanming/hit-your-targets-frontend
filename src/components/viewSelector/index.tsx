@@ -9,7 +9,7 @@ import { startSearch, cancelSearch } from 'reducers/SearchDux';
 
 import './ViewSelector.scss';
 
-const ViewSelector = () => {
+const ViewSelector = ({ isMobile = false }) => {
   const { viewSelected, updateView } = useView();
   const { searchType } = useSearch();
   const dispatch = useDispatch();
@@ -83,7 +83,8 @@ const ViewSelector = () => {
           }`}
           onClick={handleSearchClick}
         >
-          {searchType ? 'Cancel Search' : 'Search'}
+          {/* eslint-disable-next-line no-nested-ternary */}
+          {searchType ? (isMobile ? 'Cancel' : 'Cancel Search') : 'Search'}
         </button>
       </div>
     </div>
