@@ -1,5 +1,5 @@
 import React from 'react';
-import Lottie from 'react-lottie';
+import { Lottie } from '@crello/react-lottie';
 import FadeIn from 'react-fade-in';
 
 import animationData from 'assets/animations/loading.json';
@@ -21,7 +21,7 @@ const Loading = ({ className = '' }) => {
   return (
     <div className={`loading ${className} ${theme}`}>
       <FadeIn>
-        <Lottie options={defaultOptions} width="auto" height="auto" />
+        <Lottie config={defaultOptions} width="auto" height="auto" />
       </FadeIn>
     </div>
   );
