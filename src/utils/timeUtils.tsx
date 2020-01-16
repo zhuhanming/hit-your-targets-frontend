@@ -1,4 +1,5 @@
 import moment from 'moment';
+import SubToDo from 'interfaces/SubToDo';
 
 const isToday = (date: moment.Moment): boolean => {
   return date.isSame(moment(), 'day');
@@ -62,4 +63,12 @@ const getDaysRemaining = (endTime: string, completed: boolean) => {
   return `${numberOfDays} ${numberOfDays === 1 ? 'DAY' : 'DAYS'} REMAINING`;
 };
 
-export { getDisplayDate, isWarning, getDaysRemaining };
+const getLatestDeadline = (subtodos: SubToDo[]) => {
+  return new Date(
+    subtodos.reduce((a, b) => {
+      return new Date(a.endTime) > new Date(b.endTime) ? a : b;
+    }).endTime
+  );
+};
+
+export { getDisplayDate, isWarning, getDaysRemaining, getLatestDeadline };

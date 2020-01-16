@@ -4,15 +4,19 @@ import { toast } from 'react-toastify';
 import DatePicker from 'react-datepicker';
 
 import { useTodo } from 'contexts/todoContext';
+import { getLatestDeadline } from 'utils/timeUtils';
 
 import 'react-datepicker/dist/react-datepicker.css';
 import '../TodoBody.scss';
 
 const DateTimePicker = ({ todo }) => {
   const { updateTodo } = useTodo();
-  const { id, title, startTime, endTime } = todo;
+  const { id, title, startTime, endTime, subtodos } = todo;
   const startTimeDate = new Date(Date.parse(startTime));
   const endTimeDate = new Date(Date.parse(endTime));
+  const latestEndTimeDate = subtodos
+    ? getLatestDeadline(subtodos)
+    : startTimeDate;
 
   const handleStartTimeChange = date => {
     if (Date.parse(date) === Date.parse(startTime)) return;
@@ -34,14 +38,16 @@ const DateTimePicker = ({ todo }) => {
   };
 
   const handleEndTimeChange = date => {
-    if (date > startTimeDate)
-      try {
-        updateTodo(id, { endTime: moment(date).format() });
-        toast.success(`Nice! ${title} updated!`);
-      } catch (error) {
-        console.log(error.message);
-      }
-    else toast.error('Woah! End time must be after start time!');
+    if (date > startTimeDate) {
+      if (date > latestEndTimeDate) {
+        try {
+          updateTodo(id, { endTime: moment(date).format() });
+          toast.success(`Nice! ${title} updated!`);
+        } catch (error) {
+          console.log(error.message);
+        }
+      } else toast.error('Your task cannot end before your subtasks end!');
+    } else toast.error('Woah! End time must be after start time!');
   };
 
   return (
