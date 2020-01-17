@@ -1,0 +1,44 @@
+@import '../../assets/scss/variables.scss';
+
+.confirmation-modal-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__header {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  &__message {
+    font-weight: normal;
+    line-height: 2rem;
+    margin: 1.2rem 0;
+    text-align: center;
+
+    &--subtext {
+      font-size: 0.8rem;
+    }
+
+    &--link {
+      font-weight: normal;
+      text-decoration: underline;
+      color: $dark;
+    }
+  }
+
+  &__actions {
+    text-align: right;
+    padding-top: 1rem;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__button {
+    margin: 0 0.4rem;
+  }
+}
