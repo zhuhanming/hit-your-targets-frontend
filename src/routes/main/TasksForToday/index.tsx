@@ -1,11 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { TransitionGroup } from 'react-transition-group';
 
 import TodoListItem from 'components/todoListItem';
 import TodoListItemGhost from 'components/todoListItem/TodoListItemGhost';
 import { LIST } from 'constants/routes';
 import ErrorMessage from 'components/errorMessage';
+import SlideTransition from 'components/slideTransition';
+import FadeTransition from 'components/fadeTransition';
 
 import './TasksForToday.scss';
 
@@ -32,38 +34,30 @@ const TasksForToday = ({ todos, isLoading, isError }) => {
   // eslint-disable-next-line no-param-reassign
   if (todos.length > 5) todos = todos.slice(0, 5);
   const { length } = todos;
+
+  const items =
+    length > 0 ? (
+      todos.map((ele, key) => {
+        return (
+          <SlideTransition key={`list-item-${ele.id}`}>
+            <TodoListItem todo={ele} currentKey={key} keyLimit={length - 1} />
+          </SlideTransition>
+        );
+      })
+    ) : (
+      <FadeTransition key="tasks-empty">
+        <article className="message is-success">
+          <span className="message-body tasks__empty-text">
+            Great job, you&apos;re done for the day!
+          </span>
+        </article>
+      </FadeTransition>
+    );
+
   return (
     <div className="tasks">
       <ul className="todo-list">
-        <ReactCSSTransitionGroup
-          transitionName="slide"
-          transitionEnterTimeout={500}
-          transitionLeaveTimeout={500}
-        >
-          {todos.map((ele, key) => {
-            return (
-              <TodoListItem
-                todo={ele}
-                currentKey={key}
-                key={`list-item-${ele.id}`}
-                keyLimit={length - 1}
-              />
-            );
-          })}
-        </ReactCSSTransitionGroup>
-        <ReactCSSTransitionGroup
-          transitionName="fade"
-          transitionEnterTimeout={500}
-          transitionLeaveTimeout={500}
-        >
-          {todos.length === 0 && (
-            <article className="message is-success">
-              <span className="message-body tasks__empty-text">
-                Great job, you&apos;re done for the day!
-              </span>
-            </article>
-          )}
-        </ReactCSSTransitionGroup>
+        <TransitionGroup>{items}</TransitionGroup>
       </ul>
       <button type="button" className="is-size-7 tasks__cta as-non-button">
         <Link to={LIST}>View More</Link>
