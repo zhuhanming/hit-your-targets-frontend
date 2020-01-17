@@ -31,7 +31,7 @@ const AuthProvider = props => {
 
   if (!firstAttemptFinished) {
     if (isPending) {
-      return <Loading className="app unauth" />;
+      return <Loading />;
     }
     if (isRejected && error) {
       return (
