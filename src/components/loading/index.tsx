@@ -12,7 +12,7 @@ const defaultOptions = {
   autoplay: true,
   animationData,
   rendererSettings: {
-    preserveAspectRatio: 'xMidYMid meet'
+    preserveAspectRatio: 'xMidYMid slice'
   }
 };
 
