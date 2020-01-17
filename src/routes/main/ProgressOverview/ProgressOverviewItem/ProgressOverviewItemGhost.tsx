@@ -6,7 +6,7 @@ import './ProgressOverviewItemGhost.scss';
 const ProgressOverviewItem = () => {
   return (
     <li className="progress-item">
-      <SkeletonTheme color="#C3C3C3">
+      <SkeletonTheme>
         <div className="progress-item__content progress-item__content-ghost">
           <span className="progress-item__title progress-item__title-ghost">
             <Skeleton />
