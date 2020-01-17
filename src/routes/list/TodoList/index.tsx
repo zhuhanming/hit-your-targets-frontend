@@ -13,11 +13,21 @@ import { View } from 'interfaces/ViewContext';
 import SearchBar from 'components/searchBar';
 import SlideTransition from 'components/slideTransition';
 import FadeTransition from 'components/fadeTransition';
+import ToDo from 'interfaces/ToDo';
 
 import TodoCreationField from './TodoCreationField';
 import './TodoList.scss';
 
-const TodoList = ({
+interface TodoListProps {
+  todos: ToDo[];
+  isLoading: boolean;
+  isError: boolean;
+  setFocus: (id: number | null) => void;
+  focus: null | number;
+  isMobile?: boolean;
+}
+
+const TodoList: React.SFC<TodoListProps> = ({
   todos,
   isLoading,
   isError,
@@ -84,7 +94,7 @@ const TodoList = ({
   const items =
     // eslint-disable-next-line no-nested-ternary
     length > 0 ? (
-      todos.map((ele: { id: any }, key: any) => {
+      todos.map((ele: ToDo, key: number) => {
         return (
           <SlideTransition key={`list-item-${ele.id}`}>
             <TodoListItem
