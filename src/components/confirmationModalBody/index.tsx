@@ -7,7 +7,9 @@ const ConfirmationModalBody = ({
   confirmButtonText = 'Confirm',
   cancelButtonText = 'Cancel',
   handleConfirm,
-  handleCancel
+  handleCancel,
+  confirmButtonClassName = '',
+  cancelButtonClassName = ''
 }) => {
   return (
     <div className="confirmation-modal-body">
@@ -21,14 +23,14 @@ const ConfirmationModalBody = ({
         <button
           onClick={handleConfirm}
           type="button"
-          className="confirmation-modal-body__button button is-primary"
+          className={`confirmation-modal-body__button button ${confirmButtonClassName}`}
         >
           {confirmButtonText}
         </button>
         <button
           onClick={handleCancel}
           type="button"
-          className="confirmation-modal-body__button button is-light"
+          className={`confirmation-modal-body__button button ${cancelButtonClassName}`}
         >
           {cancelButtonText}
         </button>
