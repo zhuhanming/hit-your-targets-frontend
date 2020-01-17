@@ -1,15 +1,18 @@
 /* eslint-disable no-return-assign */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from 'react';
+import React, { useState } from 'react';
 import moment from 'moment';
 import { toast } from 'react-toastify';
 
 import { useTodo } from 'contexts/todoContext';
+import Modal from 'components/modal';
+import ConfirmationModalBody from 'components/confirmationModalBody';
 
 import '../TodoBody.scss';
 
 const TodoBodyHeader = ({ todo, setFocus, isMobile }) => {
   const { updateTodo, deleteTodo } = useTodo();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { title, id, subtodos, completed, updatedAt } = todo;
   const hasSubtodos = subtodos.length > 0;
@@ -30,21 +33,27 @@ const TodoBodyHeader = ({ todo, setFocus, isMobile }) => {
   };
 
   const deleteItem = () => {
-    const toDelete = window.confirm(
-      'Are you sure you want to delete this task? You cannot undo this action.'
-    );
-    if (toDelete)
-      try {
-        deleteTodo(id);
-        toast.success(`${title} has been deleted!`);
-        setFocus(null);
-      } catch (error) {
-        console.log(error.message);
-      }
+    try {
+      deleteTodo(id);
+      toast.success(`${title} has been deleted!`);
+      setFocus(null);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   return (
     <>
+      <Modal isOpen={isModalOpen} handleClose={() => setIsModalOpen(false)}>
+        <ConfirmationModalBody
+          message="Are you sure you want to delete this task? You cannot undo this action."
+          handleConfirm={deleteItem}
+          handleCancel={() => setIsModalOpen(false)}
+          confirmButtonClassName="is-danger"
+          cancelButtonClassName="is-light"
+          confirmButtonText="Delete"
+        />
+      </Modal>
       <div className="todo-body__top-bar">
         <div className="todo-body__completed">
           <input
@@ -65,7 +74,7 @@ const TodoBodyHeader = ({ todo, setFocus, isMobile }) => {
             {`Last updated ${moment(updatedAt).fromNow()}`}
           </p>
         </div>
-        <button type="button" onClick={deleteItem}>
+        <button type="button" onClick={() => setIsModalOpen(true)}>
           <i className="fas fa-trash" />
         </button>
       </div>
