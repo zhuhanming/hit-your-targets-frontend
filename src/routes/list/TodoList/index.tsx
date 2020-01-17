@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import React from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { TransitionGroup } from 'react-transition-group';
 import moment from 'moment';
 
 import TodoListItem from 'components/todoListItem';
@@ -11,6 +11,8 @@ import ViewSelector from 'components/viewSelector';
 import ErrorMessage from 'components/errorMessage';
 import { View } from 'interfaces/ViewContext';
 import SearchBar from 'components/searchBar';
+import SlideTransition from 'components/slideTransition';
+import FadeTransition from 'components/fadeTransition';
 
 import TodoCreationField from './TodoCreationField';
 import './TodoList.scss';
@@ -79,60 +81,55 @@ const TodoList = ({
   }
   const { length } = todos;
 
+  const items =
+    // eslint-disable-next-line no-nested-ternary
+    length > 0 ? (
+      todos.map((ele: { id: any }, key: any) => {
+        return (
+          <SlideTransition key={`list-item-${ele.id}`}>
+            <TodoListItem
+              todo={ele}
+              currentKey={key}
+              keyLimit={length - 1}
+              isExpanded
+              setFocus={setFocus}
+              focus={focus}
+            />
+          </SlideTransition>
+        );
+      })
+    ) : searchType === null ? (
+      <FadeTransition key="empty-todo-list">
+        <article className="message is-success">
+          <span className="message-body tasks__empty-text">
+            Create a task by typing into the field above!
+          </span>
+        </article>
+      </FadeTransition>
+    ) : (
+      <FadeTransition key="no-todo-found">
+        <article className="message is-danger">
+          <span className="message-body tasks__empty-text">
+            No task found that meets the requirements! Try changing your search
+            or the selected view!
+          </span>
+        </article>
+      </FadeTransition>
+    );
+
   return (
     <div className="todo-list">
       <ViewSelector isMobile={isMobile} />
       {searchType === null && <TodoCreationField />}
       {searchType && <SearchBar />}
       <div className="box todo-list__box is-slightly-transparent is-not-loading">
-        <ReactCSSTransitionGroup
-          transitionName="fade"
-          transitionEnterTimeout={500}
-          transitionLeaveTimeout={500}
-        >
-          <ul className="todo-list__list" key={`todo-list-${viewSelected}`}>
-            <ReactCSSTransitionGroup
-              transitionName="slide"
-              transitionEnterTimeout={500}
-              transitionLeaveTimeout={500}
-            >
-              {todos.map((ele, key) => {
-                return (
-                  <TodoListItem
-                    todo={ele}
-                    currentKey={key}
-                    key={`list-item-${ele.id}`}
-                    keyLimit={length - 1}
-                    isExpanded
-                    setFocus={setFocus}
-                    focus={focus}
-                  />
-                );
-              })}
-            </ReactCSSTransitionGroup>
-            <ReactCSSTransitionGroup
-              transitionName="fade"
-              transitionEnterTimeout={500}
-              transitionLeaveTimeout={500}
-            >
-              {todos.length === 0 && searchType === null && (
-                <article className="message is-success">
-                  <span className="message-body tasks__empty-text">
-                    Create a task by typing into the field above!
-                  </span>
-                </article>
-              )}
-              {todos.length === 0 && searchType && (
-                <article className="message is-danger">
-                  <span className="message-body tasks__empty-text">
-                    No task found that meets the requirements! Try changing your
-                    search or the selected view!
-                  </span>
-                </article>
-              )}
-            </ReactCSSTransitionGroup>
-          </ul>
-        </ReactCSSTransitionGroup>
+        <TransitionGroup>
+          <FadeTransition key={`todo-list-${viewSelected}`}>
+            <ul className="todo-list__list">
+              <TransitionGroup>{items}</TransitionGroup>
+            </ul>
+          </FadeTransition>
+        </TransitionGroup>
       </div>
     </div>
   );
