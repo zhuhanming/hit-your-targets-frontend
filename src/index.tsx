@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Modal from 'react-modal';
 
 import App from 'app';
 import AppProviders from 'contexts';
@@ -22,6 +23,8 @@ toast.configure({
   pauseOnHover: true,
   draggable: true
 });
+
+Modal.setAppElement('#root');
 
 const render = () => {
   ReactDOM.render(
