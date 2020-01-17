@@ -23,7 +23,7 @@ const LoginForm = ({
   const [isLoading, setIsLoading] = useState(false);
 
   const getDefaultValues = () => {
-    if (email) return { email };
+    if (email) return { email, password: '' };
     return {};
   };
 

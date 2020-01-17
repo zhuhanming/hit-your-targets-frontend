@@ -23,7 +23,8 @@ const SignupForm = ({
   const [isLoading, setIsLoading] = useState(false);
 
   const getDefaultValues = () => {
-    if (email) return { email };
+    if (email)
+      return { email, name: '', password: '', passwordConfirmation: '' };
     return {};
   };
 
