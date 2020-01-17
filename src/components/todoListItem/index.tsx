@@ -6,16 +6,27 @@ import moment from 'moment';
 
 import { getDisplayDate, isWarning } from 'utils/timeUtils';
 import { useTodo } from 'contexts/todoContext';
+import ToDo from 'interfaces/ToDo';
 
 import './TodoListItem.scss';
 
-const TodoListItem = ({
+interface TodoListItemProps {
+  todo: ToDo;
+  isExpanded?: boolean;
+  currentKey: number;
+  keyLimit: number;
+  setFocus?: (id: number | null) => void;
+  focus?: null | number;
+}
+
+const TodoListItem: React.SFC<TodoListItemProps> = ({
   todo,
   isExpanded = false,
   currentKey,
   keyLimit,
   focus = null,
-  setFocus = id => null
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  setFocus = (id: number | null) => {}
 }) => {
   const { title, completed, endTime, id, subtodos } = todo;
   const [isChecked, setIsChecked] = useState(completed);
@@ -71,8 +82,8 @@ const TodoListItem = ({
       <input
         type="checkbox"
         className="is-checkradio is-success list-item__content__checkbox"
-        id={id}
-        name={id}
+        id={id.toString()}
+        name={id.toString()}
         checked={isChecked}
         onChange={handleCheck}
         // eslint-disable-next-line no-param-reassign
@@ -92,7 +103,7 @@ const TodoListItem = ({
             ? ''
             : 'not-expanded'
         } `}
-        htmlFor={id}
+        htmlFor={id.toString()}
       >
         <div
           className={`list-item__title ${isChecked ? 'has-text-success' : ''} `}
