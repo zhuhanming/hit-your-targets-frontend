@@ -15,7 +15,7 @@ const TodoListItem = () => {
       />
       <label className="list-item__content">
         <div className="list-item__title">
-          <SkeletonTheme color="#C3C3C3">
+          <SkeletonTheme>
             <Skeleton />
           </SkeletonTheme>
         </div>
