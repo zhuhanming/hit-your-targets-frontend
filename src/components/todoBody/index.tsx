@@ -3,6 +3,7 @@ import _ from 'lodash';
 import { useForm, Controller } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import autosize from 'autosize';
+import * as Sentry from '@sentry/browser';
 
 import { useTodo } from 'contexts/todoContext';
 import { useTheme } from 'contexts/themeContext';
@@ -59,7 +60,7 @@ const TodoBody: React.SFC<TodoBodyProps> = ({
         toast.success(`Nice! ${newState.title} updated!`);
       }
     } catch (error) {
-      console.log(error.message);
+      Sentry.captureException(error);
     }
   };
 

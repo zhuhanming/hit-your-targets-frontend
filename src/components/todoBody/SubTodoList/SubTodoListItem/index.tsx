@@ -7,6 +7,7 @@ import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import { useForm } from 'react-hook-form';
 import autosize from 'autosize';
+import * as Sentry from '@sentry/browser';
 
 import { useTodo } from 'contexts/todoContext';
 import Modal from 'components/modal';
@@ -70,7 +71,7 @@ const SubTodoListItem: React.FC<SubTodoListItemProps> = ({
         toast.success(`Nice! ${newState.title} updated!`);
       }
     } catch (error) {
-      console.log(error.message);
+      Sentry.captureException(error);
     }
   };
 
@@ -105,7 +106,7 @@ const SubTodoListItem: React.FC<SubTodoListItemProps> = ({
       }
     } catch (error) {
       // setIsChecked(completed);
-      console.log(error.message);
+      Sentry.captureException(error);
     }
   };
 
@@ -133,7 +134,7 @@ const SubTodoListItem: React.FC<SubTodoListItemProps> = ({
         }
       }
     } catch (error) {
-      console.log(error.message);
+      Sentry.captureException(error);
     }
   };
 
@@ -144,7 +145,7 @@ const SubTodoListItem: React.FC<SubTodoListItemProps> = ({
         updateSubTodo(todoId, id, { endTime: moment(date).format() });
         toast.success(`Nice! ${title} updated!`);
       } catch (error) {
-        console.log(error.message);
+        Sentry.captureException(error);
       }
     else
       toast.error(
@@ -158,7 +159,7 @@ const SubTodoListItem: React.FC<SubTodoListItemProps> = ({
       setIsModalOpen(false);
       toast.success(`${title} has been deleted!`);
     } catch (error) {
-      console.log(error.message);
+      Sentry.captureException(error);
     }
   };
 

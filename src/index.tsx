@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Modal from 'react-modal';
+import * as Sentry from '@sentry/browser';
 
 import App from 'app';
 import AppProviders from 'contexts';
@@ -14,6 +15,10 @@ import store, { persistor } from 'app/store';
 
 import * as serviceWorker from './serviceWorker';
 import './index.scss';
+
+Sentry.init({
+  dsn: 'https://1b70d05e3e604dc2b6b0765b3a258621@sentry.io/1971017'
+});
 
 toast.configure({
   position: 'bottom-center',

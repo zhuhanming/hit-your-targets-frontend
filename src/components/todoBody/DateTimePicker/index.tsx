@@ -2,6 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import { toast } from 'react-toastify';
 import DatePicker from 'react-datepicker';
+import * as Sentry from '@sentry/browser';
 
 import { useTodo } from 'contexts/todoContext';
 import { getLatestDeadline } from 'utils/timeUtils';
@@ -37,7 +38,7 @@ const DateTimePicker: React.SFC<DateTimePickerProps> = ({ todo }) => {
       }
       toast.success(`Nice! ${title} updated!`);
     } catch (error) {
-      console.log(error.message);
+      Sentry.captureException(error);
     }
   };
 
@@ -49,7 +50,7 @@ const DateTimePicker: React.SFC<DateTimePickerProps> = ({ todo }) => {
           updateTodo(id, { endTime: moment(date).format() });
           toast.success(`Nice! ${title} updated!`);
         } catch (error) {
-          console.log(error.message);
+          Sentry.captureException(error);
         }
       } else toast.error('Your task cannot end before your subtasks end!');
     } else toast.error('Woah! End time must be after start time!');

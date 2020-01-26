@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import moment from 'moment';
+import * as Sentry from '@sentry/browser';
 
 import { useTodo } from 'contexts/todoContext';
 import { useView } from 'contexts/viewContext';
@@ -10,13 +11,13 @@ import { toast } from 'react-toastify';
 
 import './TodoCreationField.scss';
 
-const TodoCreationField = () => {
+const TodoCreationField: React.SFC = () => {
   const { viewSelected, updateView } = useView();
   const { createTodo } = useTodo();
   const { register, handleSubmit } = useForm({
     reValidateMode: 'onSubmit'
   });
-  const onSubmit = async (data, e) => {
+  const onSubmit = async (data, e): Promise<void> => {
     if (data.title.length === 0) {
       toast.info(
         'Type your task into the field above and press enter to create it!'
@@ -48,7 +49,7 @@ const TodoCreationField = () => {
           updateView(View.TODAY);
         }
       } catch (error) {
-        console.log(error);
+        Sentry.captureException(error);
       }
     }
   };

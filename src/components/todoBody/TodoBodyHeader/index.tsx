@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import moment from 'moment';
 import { toast } from 'react-toastify';
+import * as Sentry from '@sentry/browser';
 
 import { useTodo } from 'contexts/todoContext';
 import Modal from 'components/modal';
@@ -42,7 +43,7 @@ const TodoBodyHeader: React.SFC<TodoBodyHeaderProps> = ({
         }
         if (!isMobile) setFocus(null);
       } catch (error) {
-        console.log(error.message);
+        Sentry.captureException(error);
       }
     }
   };
@@ -53,7 +54,7 @@ const TodoBodyHeader: React.SFC<TodoBodyHeaderProps> = ({
       toast.success(`${title} has been deleted!`);
       setFocus(null);
     } catch (error) {
-      console.log(error.message);
+      Sentry.captureException(error);
     }
   };
 

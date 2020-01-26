@@ -2,6 +2,7 @@ import React from 'react';
 import { toast } from 'react-toastify';
 import TagsInput from 'react-tagsinput';
 // import 'react-tagsinput/react-tagsinput.css';
+import * as Sentry from '@sentry/browser';
 
 import { useTodo } from 'contexts/todoContext';
 import { useTheme } from 'contexts/themeContext';
@@ -33,7 +34,7 @@ const TagsInputField: React.SFC<TagsInputFieldProps> = ({ todo }) => {
           updateTodo(id, code);
           toast.success('Tags updated!');
         } catch (error) {
-          console.log(error);
+          Sentry.captureException(error);
         }
       }
     }

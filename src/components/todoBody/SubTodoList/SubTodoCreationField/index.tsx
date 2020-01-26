@@ -2,6 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
+import * as Sentry from '@sentry/browser';
 
 import { useTheme } from 'contexts/themeContext';
 import { useTodo } from 'contexts/todoContext';
@@ -55,7 +56,7 @@ const SubTodoCreationField: React.SFC<SubTodoCreationFieldProps> = ({
         toast.success(`${data.title} created!`);
         e.target.reset();
       } catch (error) {
-        console.log(error);
+        Sentry.captureException(error);
       }
     }
   };
