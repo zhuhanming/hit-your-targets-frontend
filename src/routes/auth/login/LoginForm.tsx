@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, FieldError, DeepPartial } from 'react-hook-form';
 
 import { useAuth } from 'contexts/authContext';
 import { useTheme } from 'contexts/themeContext';
@@ -13,16 +13,19 @@ type LoginFormProps = {
   handleChangeForm: Function;
 };
 
-const LoginForm = ({
+const LoginForm: React.SFC<LoginFormProps> = ({
   email,
   handleError,
   handleChangeForm
-}: LoginFormProps) => {
+}) => {
   const { login } = useAuth();
   const { theme } = useTheme();
   const [isLoading, setIsLoading] = useState(false);
 
-  const getDefaultValues = () => {
+  const getDefaultValues = (): DeepPartial<{
+    email?: string;
+    password?: string;
+  }> => {
     if (email) return { email, password: '' };
     return {};
   };
@@ -33,7 +36,7 @@ const LoginForm = ({
     }
   );
 
-  const handleLogin = async data => {
+  const handleLogin = async (data): Promise<void> => {
     setIsLoading(true);
     await login(data).catch(e => {
       handleError(e);
@@ -41,7 +44,7 @@ const LoginForm = ({
     });
   };
 
-  const onChangeForm = () => {
+  const onChangeForm = (): void => {
     const value = getValues().email;
     handleChangeForm(value);
   };
@@ -73,7 +76,9 @@ const LoginForm = ({
               })}
             />
             {errors.email && (
-              <p className="help is-danger">{(errors.email as any).message}</p>
+              <p className="help is-danger">
+                {(errors.email as FieldError).message}
+              </p>
             )}
           </div>
         </div>
@@ -92,7 +97,9 @@ const LoginForm = ({
             />
           </div>
           {errors.password && (
-            <p className="help is-danger">{(errors.password as any).message}</p>
+            <p className="help is-danger">
+              {(errors.password as FieldError).message}
+            </p>
           )}
         </div>
 
