@@ -1,6 +1,11 @@
 import React from 'react';
 
-const ErrorMessage = ({
+interface ErrorMessageProps {
+  message?: string;
+  className?: string;
+}
+
+const ErrorMessage: React.SFC<ErrorMessageProps> = ({
   message = 'Failed to fetch some data. Please refresh the page to try again.',
   className = ''
 }) => {
