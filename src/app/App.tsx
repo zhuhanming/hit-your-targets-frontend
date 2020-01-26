@@ -5,11 +5,14 @@ import { useUser } from 'contexts/userContext';
 import Loading from 'components/loading';
 import './App.scss';
 
-const loadAuthenticatedApp = () => import('./AuthenticatedApp');
+type ModuleType = typeof import('./AuthenticatedApp');
+
+const loadAuthenticatedApp = (): Promise<ModuleType> =>
+  import('./AuthenticatedApp');
 const AuthenticatedApp = React.lazy(loadAuthenticatedApp);
 const UnauthenticatedApp = React.lazy(() => import('./UnauthenticatedApp'));
 
-const App: React.FC = () => {
+const App: React.SFC = () => {
   const user = useUser();
 
   React.useEffect(() => {
