@@ -2,7 +2,17 @@ import React from 'react';
 
 import './ConfirmationModalBody.scss';
 
-const ConfirmationModalBody = ({
+interface ConfirmationModalBodyProps {
+  message: string;
+  confirmButtonText?: string;
+  cancelButtonText?: string;
+  handleConfirm: VoidFunction;
+  handleCancel: VoidFunction;
+  confirmButtonClassName?: string;
+  cancelButtonClassName?: string;
+}
+
+const ConfirmationModalBody: React.SFC<ConfirmationModalBodyProps> = ({
   message,
   confirmButtonText = 'Confirm',
   cancelButtonText = 'Cancel',
