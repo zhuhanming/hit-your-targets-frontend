@@ -41,7 +41,7 @@ const isWarning = (endTime: string) => {
   return endTimeDate.isSameOrBefore(moment(), 'day');
 };
 
-const getDaysRemaining = (endTime: string, completed: boolean) => {
+const getDaysRemaining = (endTime: string, completed: boolean): string => {
   const endTimeDate = moment(endTime);
   if (isToday(endTimeDate)) {
     return 'DUE TODAY';
@@ -63,7 +63,7 @@ const getDaysRemaining = (endTime: string, completed: boolean) => {
   return `${numberOfDays} ${numberOfDays === 1 ? 'DAY' : 'DAYS'} REMAINING`;
 };
 
-const getLatestDeadline = (subtodos: SubToDo[]) => {
+const getLatestDeadline = (subtodos: SubToDo[]): Date => {
   return new Date(
     subtodos.reduce((a, b) => {
       return new Date(a.endTime) > new Date(b.endTime) ? a : b;
