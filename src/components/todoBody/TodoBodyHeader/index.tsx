@@ -7,32 +7,47 @@ import { toast } from 'react-toastify';
 import { useTodo } from 'contexts/todoContext';
 import Modal from 'components/modal';
 import ConfirmationModalBody from 'components/confirmationModalBody';
+import ToDo from 'interfaces/ToDo';
 
 import '../TodoBody.scss';
 
-const TodoBodyHeader = ({ todo, setFocus, isMobile }) => {
+interface TodoBodyHeaderProps {
+  todo: ToDo;
+  setFocus: (id: number | null) => void;
+  isMobile: boolean;
+}
+
+const TodoBodyHeader: React.SFC<TodoBodyHeaderProps> = ({
+  todo,
+  setFocus,
+  isMobile
+}) => {
   const { updateTodo, deleteTodo } = useTodo();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { title, id, subtodos, completed, updatedAt } = todo;
   const hasSubtodos = subtodos.length > 0;
 
-  const handleComplete = () => {
+  const handleComplete = (): void => {
     if (Array.isArray(subtodos) && subtodos.length === 0) {
-      updateTodo(id, {
-        completed: !completed,
-        completeTime: moment().format()
-      });
-      if (!completed) {
-        toast.success(`👍 Great job! ${title} completed!`);
-      } else {
-        toast.warn("Don't lose heart!");
+      try {
+        updateTodo(id, {
+          completed: !completed,
+          completeTime: moment().format()
+        });
+        if (!completed) {
+          toast.success(`👍 Great job! ${title} completed!`);
+        } else {
+          toast.warn("Don't lose heart!");
+        }
+        if (!isMobile) setFocus(null);
+      } catch (error) {
+        console.log(error.message);
       }
-      if (!isMobile) setFocus(null);
     }
   };
 
-  const deleteItem = () => {
+  const deleteItem = (): void => {
     try {
       deleteTodo(id);
       toast.success(`${title} has been deleted!`);
@@ -44,11 +59,14 @@ const TodoBodyHeader = ({ todo, setFocus, isMobile }) => {
 
   return (
     <>
-      <Modal isOpen={isModalOpen} handleClose={() => setIsModalOpen(false)}>
+      <Modal
+        isOpen={isModalOpen}
+        handleClose={(): void => setIsModalOpen(false)}
+      >
         <ConfirmationModalBody
           message="Are you sure you want to delete this task? You cannot undo this action."
           handleConfirm={deleteItem}
-          handleCancel={() => setIsModalOpen(false)}
+          handleCancel={(): void => setIsModalOpen(false)}
           confirmButtonClassName="is-danger"
           cancelButtonClassName="is-light"
           confirmButtonText="Delete"
@@ -64,7 +82,10 @@ const TodoBodyHeader = ({ todo, setFocus, isMobile }) => {
             checked={completed}
             onChange={handleComplete}
             // eslint-disable-next-line no-param-reassign
-            ref={el => el && (el.indeterminate = hasSubtodos && !completed)}
+            ref={(el: HTMLInputElement): boolean =>
+              // eslint-disable-next-line no-param-reassign
+              el && (el.indeterminate = hasSubtodos && !completed)
+            }
             disabled={hasSubtodos}
           />
           {/*  eslint-disable-next-line jsx-a11y/label-has-associated-control */}
@@ -74,7 +95,7 @@ const TodoBodyHeader = ({ todo, setFocus, isMobile }) => {
             {`Last updated ${moment(updatedAt).fromNow()}`}
           </p>
         </div>
-        <button type="button" onClick={() => setIsModalOpen(true)}>
+        <button type="button" onClick={(): void => setIsModalOpen(true)}>
           <i className="fas fa-trash" />
         </button>
       </div>
