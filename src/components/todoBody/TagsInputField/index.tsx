@@ -6,16 +6,21 @@ import TagsInput from 'react-tagsinput';
 import { useTodo } from 'contexts/todoContext';
 import { useTheme } from 'contexts/themeContext';
 import { capitalize } from 'utils/index';
+import ToDo from 'interfaces/ToDo';
 
 import './TagsInputField.scss';
 
-const TagsInputField = ({ todo }) => {
+interface TagsInputFieldProps {
+  todo: ToDo;
+}
+
+const TagsInputField: React.SFC<TagsInputFieldProps> = ({ todo }) => {
   const { updateTodo } = useTodo();
   const { theme } = useTheme();
   const { id, tags } = todo;
   const { length } = tags;
 
-  const handleChange = (updatedTags: string[]) => {
+  const handleChange = (updatedTags: string[]): void => {
     if (length >= 5 && updatedTags.length >= length) {
       toast.info('You can only have up to 5 tags for every task!');
     } else {
