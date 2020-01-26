@@ -7,5 +7,5 @@ export enum View {
 
 export default interface ViewContextInterface {
   viewSelected: View;
-  updateView: (newView: View) => null;
+  updateView: (newView: View) => void;
 }
