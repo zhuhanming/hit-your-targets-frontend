@@ -5,11 +5,16 @@ import DatePicker from 'react-datepicker';
 
 import { useTodo } from 'contexts/todoContext';
 import { getLatestDeadline } from 'utils/timeUtils';
+import ToDo from 'interfaces/ToDo';
 
 import 'react-datepicker/dist/react-datepicker.css';
 import '../TodoBody.scss';
 
-const DateTimePicker = ({ todo }) => {
+interface DateTimePickerProps {
+  todo: ToDo;
+}
+
+const DateTimePicker: React.SFC<DateTimePickerProps> = ({ todo }) => {
   const { updateTodo } = useTodo();
   const { id, title, startTime, endTime, subtodos } = todo;
   const startTimeDate = new Date(Date.parse(startTime));
@@ -17,10 +22,10 @@ const DateTimePicker = ({ todo }) => {
   const latestEndTimeDate =
     subtodos.length > 0 ? getLatestDeadline(subtodos) : startTimeDate;
 
-  const handleStartTimeChange = date => {
+  const handleStartTimeChange = (date: string): void => {
     if (Date.parse(date) === Date.parse(startTime)) return;
     try {
-      if (date < startTimeDate) {
+      if (new Date(Date.parse(date)) < startTimeDate) {
         updateTodo(id, { startTime: moment(date).format() });
       } else {
         const newEndTime =
@@ -36,9 +41,10 @@ const DateTimePicker = ({ todo }) => {
     }
   };
 
-  const handleEndTimeChange = date => {
-    if (date > startTimeDate) {
-      if (date > latestEndTimeDate) {
+  const handleEndTimeChange = (date: string): void => {
+    const newDate = new Date(Date.parse(date));
+    if (newDate > startTimeDate) {
+      if (newDate > latestEndTimeDate) {
         try {
           updateTodo(id, { endTime: moment(date).format() });
           toast.success(`Nice! ${title} updated!`);
@@ -65,7 +71,7 @@ const DateTimePicker = ({ todo }) => {
           timeIntervals={15}
           timeCaption="Time"
           dateFormat="MMMM d, yyyy HH:mm aa"
-          onChange={date => handleStartTimeChange(date)}
+          onChange={(date: string): void => handleStartTimeChange(date)}
         />
       </div>
       <div className="todo-body__time">
@@ -83,7 +89,7 @@ const DateTimePicker = ({ todo }) => {
           timeCaption="Time"
           minDate={startTimeDate}
           dateFormat="MMMM d, yyyy HH:mm aa"
-          onChange={date => handleEndTimeChange(date)}
+          onChange={(date: string): void => handleEndTimeChange(date)}
         />
       </div>
     </>
