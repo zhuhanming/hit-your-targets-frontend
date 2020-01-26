@@ -3,7 +3,11 @@ import React from 'react';
 import '../Card.scss';
 import './CalendarCard.scss';
 
-const CalendarCard = ({ children, title }) => {
+interface CalendarCardProps {
+  title: string;
+}
+
+const CalendarCard: React.SFC<CalendarCardProps> = ({ children, title }) => {
   return (
     <div className="main-card column is-full ">
       <h2 className="subtitle main-card__title">{title}</h2>
