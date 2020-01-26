@@ -12,32 +12,25 @@ import {
   deleteToDo
 } from 'reducers/ToDoDux';
 import ApiService from 'services/apiService';
+import ToDo from 'interfaces/ToDo';
 
-const defaultContextData = {
-  loadTodos: () => null,
-  createTodo: (data: any) => null,
-  createSubTodo: (data: any) => null,
-  updateTodo: (id: number, data: any) => null,
-  updateSubTodo: (data: any) => null,
-  deleteTodo: (data: any) => null,
-  deleteSubTodo: (data: any) => null
-};
-
-const TodoContext = React.createContext<TodoContextInterface>(
-  defaultContextData
+const TodoContext = React.createContext<TodoContextInterface | undefined>(
+  undefined
 );
 
-const TodoProvider = props => {
+const TodoProvider: React.SFC = props => {
   const dispatch = useDispatch();
   // const selectTodos = (state: RootStateInterface) => state.todos;
   // const { todos } = useSelector(selectTodos);
 
-  const loadTodos = () => {
-    const fetchData = async () => {
+  const loadTodos = (): void => {
+    const fetchData = async (): Promise<void> => {
       try {
         const responses = await ApiService.get('todos');
         const todos = responses.data;
-        todos.sort((a, b) => Date.parse(a.endTime) - Date.parse(b.endTime));
+        todos.sort(
+          (a: ToDo, b: ToDo) => Date.parse(a.endTime) - Date.parse(b.endTime)
+        );
         dispatch(setToDos(todos));
       } catch (error) {
         dispatch(setToDoError());
@@ -50,7 +43,14 @@ const TodoProvider = props => {
     fetchData();
   };
 
-  const createTodo = async code => {
+  const createTodo = async (code: {
+    title: string;
+    description: string;
+    startTime: string;
+    endTime: string;
+    completed: boolean;
+    tags: string[];
+  }): Promise<void> => {
     try {
       const responses = await ApiService.post('todos', code);
       dispatch(addToDo(responses.data));
@@ -63,7 +63,15 @@ const TodoProvider = props => {
     }
   };
 
-  const createSubTodo = async (id, code) => {
+  const createSubTodo = async (
+    id: number,
+    code: {
+      title: string;
+      startTime: string;
+      endTime: string;
+      completed: boolean;
+    }
+  ): Promise<void> => {
     try {
       const responses = await ApiService.post(`todos/${id}/subtodos`, code);
       dispatch(updateToDo(responses.data));
@@ -76,7 +84,18 @@ const TodoProvider = props => {
     }
   };
 
-  const updateTodo = async (id, code) => {
+  const updateTodo = async (
+    id: number,
+    code: {
+      title?: string;
+      description?: string;
+      startTime?: string;
+      endTime?: string;
+      completeTime?: string;
+      tags?: string[];
+      completed?: boolean;
+    }
+  ): Promise<void> => {
     try {
       const responses = await ApiService.patch(`todos/${id}`, code);
       dispatch(updateToDo(responses.data));
@@ -89,7 +108,16 @@ const TodoProvider = props => {
     }
   };
 
-  const updateSubTodo = async (todoId, subtodoId, code) => {
+  const updateSubTodo = async (
+    todoId: number,
+    subtodoId: number,
+    code: {
+      title?: string;
+      startTime?: string;
+      endTime?: string;
+      completed?: boolean;
+    }
+  ): Promise<void> => {
     try {
       const responses = await ApiService.patch(
         `todos/${todoId}/subtodos/${subtodoId}`,
@@ -105,7 +133,7 @@ const TodoProvider = props => {
     }
   };
 
-  const deleteTodo = async id => {
+  const deleteTodo = async (id: number): Promise<void> => {
     try {
       const responses = await ApiService.delete(`todos/${id}`);
       // console.log(responses);
@@ -119,7 +147,10 @@ const TodoProvider = props => {
     }
   };
 
-  const deleteSubTodo = async (todoId, subtodoId) => {
+  const deleteSubTodo = async (
+    todoId: number,
+    subtodoId: number
+  ): Promise<void> => {
     try {
       const responses = await ApiService.delete(
         `todos/${todoId}/subtodos/${subtodoId}`
@@ -151,7 +182,7 @@ const TodoProvider = props => {
   );
 };
 
-const useTodo = () => {
+const useTodo = (): TodoContextInterface => {
   const context = React.useContext(TodoContext);
   if (context === undefined) {
     throw new Error(`useTodo must be used within a TodoProvider`);
