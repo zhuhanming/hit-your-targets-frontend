@@ -4,7 +4,6 @@ import ReactModal from 'react-modal';
 import './Modal.scss';
 
 interface ModalProps {
-  children: React.ReactNode;
   isOpen: boolean;
   handleClose: VoidFunction;
 }
