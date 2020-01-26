@@ -3,7 +3,6 @@ import React from 'react';
 import './PageSection.scss';
 
 interface PageSectionProps {
-  children: React.ReactNode;
   className?: string;
 }
 
