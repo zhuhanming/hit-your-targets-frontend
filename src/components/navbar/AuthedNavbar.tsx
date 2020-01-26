@@ -1,19 +1,16 @@
 import React from 'react';
-// import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 
 import { HOME, LIST, KANBAN, CALENDAR, SETTINGS } from 'constants/routes';
 import { useTheme } from 'contexts/themeContext';
 
-// import ProfileDropdown from './profile-dropdown';
-
 import './AuthedNavbar.scss';
 
-const AuthTabs = ({ pathname }) => {
-  // const hasOverdueTodos = useSelector(state =>
-  //   Object.values(state.chat.unarchived).some(chat => chat.unreadCount > 0)
-  // );
+interface AuthTabsProps {
+  pathname: string;
+}
 
+const AuthTabs: React.SFC<AuthTabsProps> = ({ pathname }) => {
   return (
     <>
       <li className={`${pathname.match(`${HOME}`) ? 'is-active' : ''}`}>
@@ -56,25 +53,15 @@ const AuthTabs = ({ pathname }) => {
           </Link>
         </div>
       </li>
-      {/* <li className={`${pathname.startsWith(`${CHAT}`) ? 'is-active' : ''}`}>
-        <Link to={CHAT}>
-          {hasUnreadMessages ? (
-            <span
-              className="has-badge-rounded has-badge-danger has-badge-small"
-              data-badge=""
-            >
-              Matches
-            </span>
-          ) : (
-          <span>Matches</span>
-          )}
-        </Link>
-      </li> */}
     </>
   );
 };
 
-const AuthedNavbar = ({ isNavbarExpanded }) => {
+interface AuthedNavbarProps {
+  isNavbarExpanded: boolean;
+}
+
+const AuthedNavbar: React.SFC<AuthedNavbarProps> = ({ isNavbarExpanded }) => {
   const { pathname } = useLocation();
   const { theme } = useTheme();
 
