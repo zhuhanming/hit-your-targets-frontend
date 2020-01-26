@@ -4,7 +4,7 @@ import { useTheme } from 'contexts/themeContext';
 
 import './FunFact.scss';
 
-const FunFact = () => {
+const FunFact: React.SFC = () => {
   const { theme } = useTheme();
   return (
     <div className="fun-fact">
