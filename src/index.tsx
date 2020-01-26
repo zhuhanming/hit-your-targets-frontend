@@ -31,7 +31,7 @@ toast.configure({
 
 Modal.setAppElement('#root');
 
-const render = () => {
+const render = (): void => {
   ReactDOM.render(
     <Provider store={store}>
       <PersistGate persistor={persistor}>
