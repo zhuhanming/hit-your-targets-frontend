@@ -4,19 +4,20 @@ import { useSelector } from 'react-redux';
 import SearchContextInterface from 'interfaces/SearchContext';
 import RootStateInterface from 'interfaces/RootState';
 import ToDo from 'interfaces/ToDo';
-import { SearchType, SearchLogic } from 'reducers/SearchDux';
+import { CurrentSearch, SearchType, SearchLogic } from 'reducers/SearchDux';
 
 const SearchContext = React.createContext<SearchContextInterface | undefined>(
   undefined
 );
 
-const SearchProvider = props => {
-  const selectSearch = (state: RootStateInterface) => state.search;
+const SearchProvider: React.SFC = props => {
+  const selectSearch = (state: RootStateInterface): CurrentSearch =>
+    state.search;
   const { searchType, titleString, tags, searchLogic } = useSelector(
     selectSearch
   );
 
-  const getFilteredTodos = (todos: ToDo[]) => {
+  const getFilteredTodos = (todos: ToDo[]): ToDo[] => {
     if (searchType === SearchType.TITLE) {
       if (titleString === '') return todos;
       return todos.filter(
@@ -48,7 +49,7 @@ const SearchProvider = props => {
   );
 };
 
-const useSearch = () => {
+const useSearch = (): SearchContextInterface => {
   const context = React.useContext(SearchContext);
   if (context === undefined) {
     throw new Error(`useSearch must be used within a SearchProvider`);
