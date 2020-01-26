@@ -17,9 +17,9 @@ import {
 // import FacebookCallback from 'routes/auth/facebookCallback';
 import { useTheme } from 'contexts/themeContext';
 
-const redirectToLogin = () => <Redirect to={LOGIN} />;
+const redirectToLogin = (): React.ReactNode => <Redirect to={LOGIN} />;
 
-const UnauthenticatedApp = () => {
+const UnauthenticatedApp: React.SFC = () => {
   const { theme } = useTheme();
   return (
     <Router>
