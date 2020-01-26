@@ -4,10 +4,14 @@ import AuthedNavbar from './AuthedNavbar';
 
 import './Navbar.scss';
 
-const Navbar = ({ isAuthenticated }) => {
+interface NavbarProps {
+  isAuthenticated: boolean;
+}
+
+const Navbar: React.SFC<NavbarProps> = ({ isAuthenticated }) => {
   const [isNavbarExpanded, setIsNavbarExpanded] = useState(false);
 
-  const handleNavbarBurgerClick = () => {
+  const handleNavbarBurgerClick = (): void => {
     setIsNavbarExpanded(!isNavbarExpanded);
   };
 
