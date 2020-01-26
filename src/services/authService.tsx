@@ -7,7 +7,7 @@ import { setToDos } from 'reducers/ToDoDux';
 import { cancelSearch } from 'reducers/SearchDux';
 import ApiService from 'services/apiService';
 
-const logout = () => {
+const logout = (): Promise<void> => {
   TokenUtils.removeToken();
   store.dispatch(clearUser());
   store.dispatch(setToDos([]));
@@ -15,7 +15,7 @@ const logout = () => {
   return Promise.resolve();
 };
 
-const signup = async code => {
+const signup = async (code): Promise<null> => {
   const response = await ApiService.post('/signup', code).catch(error => {
     return Promise.reject(new Error(error));
   });
@@ -27,7 +27,7 @@ const signup = async code => {
   return TokenUtils.storeToken(response);
 };
 
-const login = async code => {
+const login = async (code): Promise<null> => {
   const response = await ApiService.post('/auth/login', code).catch(error => {
     if (error.message === 'Request failed with status code 401') {
       return Promise.reject(
@@ -39,7 +39,7 @@ const login = async code => {
   return TokenUtils.storeToken(response);
 };
 
-const facebookLogin = async code => {
+const facebookLogin = async (code): Promise<null> => {
   const requestBody = {
     redirectUri: `${SITE_URL}/auth/callback`,
     code
@@ -52,7 +52,7 @@ const facebookLogin = async code => {
   return TokenUtils.storeToken(response);
 };
 
-const getFacebookRedirect = () => {
+const getFacebookRedirect = (): Promise<any> => {
   return ApiService.get(`/auth/facebook`, {
     params: {
       redirectUri: `${SITE_URL}/auth/callback`
