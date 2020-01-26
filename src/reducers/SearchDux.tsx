@@ -29,26 +29,26 @@ const search = createSlice({
   name: 'search',
   initialState,
   reducers: {
-    startSearch: state => {
+    startSearch: (state): void => {
       if (!state.searchType) state.searchType = SearchType.TITLE;
     },
-    cancelSearch: state => {
+    cancelSearch: (state): void => {
       if (state.searchType) {
         state.searchType = null;
         state.titleString = '';
         state.tags = [];
       }
     },
-    setSearch: (state, action: PayloadAction<SearchType>) => {
+    setSearch: (state, action: PayloadAction<SearchType>): void => {
       state.searchType = action.payload;
     },
-    setTitleString: (state, action: PayloadAction<string>) => {
+    setTitleString: (state, action: PayloadAction<string>): void => {
       state.titleString = action.payload;
     },
-    setTags: (state, action: PayloadAction<string[]>) => {
+    setTags: (state, action: PayloadAction<string[]>): void => {
       state.tags = action.payload;
     },
-    setSearchLogic: (state, action: PayloadAction<SearchLogic>) => {
+    setSearchLogic: (state, action: PayloadAction<SearchLogic>): void => {
       state.searchLogic = action.payload;
     }
   }
