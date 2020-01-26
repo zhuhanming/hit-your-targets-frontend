@@ -26,7 +26,7 @@ const TodoListItem: React.SFC<TodoListItemProps> = ({
   keyLimit,
   focus = null,
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  setFocus = (id: number | null) => {}
+  setFocus = (id: number | null): void => {}
 }) => {
   const { title, completed, endTime, id, subtodos } = todo;
   const [isChecked, setIsChecked] = useState(completed);
@@ -35,12 +35,13 @@ const TodoListItem: React.SFC<TodoListItemProps> = ({
   const displayDate = getDisplayDate(endTime);
   const hasSubtodos = subtodos.length > 0;
   const warning = isWarning(endTime);
-  const handleCheck = async () => {
+
+  const handleCheck = (): void => {
     if (!isExpanded || isInFocus) {
       if (!hasSubtodos) {
         try {
           setIsChecked(true);
-          await updateTodo(id, {
+          updateTodo(id, {
             completed: !completed,
             completeTime: moment().format()
           });
@@ -87,7 +88,10 @@ const TodoListItem: React.SFC<TodoListItemProps> = ({
         checked={isChecked}
         onChange={handleCheck}
         // eslint-disable-next-line no-param-reassign
-        ref={el => el && (el.indeterminate = hasSubtodos && !completed)}
+        ref={(el: HTMLInputElement): boolean =>
+          // eslint-disable-next-line no-param-reassign
+          el && (el.indeterminate = hasSubtodos && !completed)
+        }
         disabled={
           (!isExpanded && hasSubtodos) ||
           (isExpanded && isInFocus && hasSubtodos)
