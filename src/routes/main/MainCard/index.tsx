@@ -2,7 +2,11 @@ import React from 'react';
 
 import '../Card.scss';
 
-const MainCard = ({ children, title }) => {
+interface MainCardProps {
+  title: string;
+}
+
+const MainCard: React.SFC<MainCardProps> = ({ children, title }) => {
   return (
     <div className="main-card column is-one-third is-full-mobile ">
       <h2 className="subtitle main-card__title">{title}</h2>
