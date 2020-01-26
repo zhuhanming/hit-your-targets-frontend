@@ -4,7 +4,15 @@ import ThemeToggle from './themeToggle';
 
 import './PageTitle.scss';
 
-const PageTitle = ({ titleText, className = '' }) => {
+interface PageTitleProps {
+  titleText: string;
+  className?: string;
+}
+
+const PageTitle: React.SFC<PageTitleProps> = ({
+  titleText,
+  className = ''
+}) => {
   return (
     <div className={`title-container ${className}`}>
       <h1 className="title title-container__text">{titleText}</h1>
