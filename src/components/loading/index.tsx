@@ -16,7 +16,11 @@ const defaultOptions = {
   }
 };
 
-const Loading = ({ className = '' }) => {
+interface LoadingProps {
+  className?: string;
+}
+
+const Loading: React.SFC<LoadingProps> = ({ className = '' }) => {
   const { theme } = useTheme();
   return (
     <div className={`loading ${className} ${theme}`}>
