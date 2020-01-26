@@ -136,7 +136,6 @@ const TodoProvider: React.SFC = props => {
   const deleteTodo = async (id: number): Promise<void> => {
     try {
       const responses = await ApiService.delete(`todos/${id}`);
-      // console.log(responses);
       dispatch(deleteToDo(responses.data));
     } catch (error) {
       dispatch(setToDoError());
@@ -155,7 +154,6 @@ const TodoProvider: React.SFC = props => {
       const responses = await ApiService.delete(
         `todos/${todoId}/subtodos/${subtodoId}`
       );
-      // console.log(responses);
       dispatch(updateToDo(responses.data));
     } catch (error) {
       dispatch(setToDoError());
