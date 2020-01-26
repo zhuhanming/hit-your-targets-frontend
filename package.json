@@ -6,6 +6,7 @@
     "@crello/react-lottie": "0.0.7",
     "@csstools/normalize.css": "^10.1.0",
     "@reduxjs/toolkit": "^1.2.3",
+    "@sentry/browser": "^5.11.1",
     "@testing-library/jest-dom": "^5.0.2",
     "@testing-library/react": "^9.3.3",
     "@testing-library/user-event": "^8.0.4",
