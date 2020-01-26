@@ -4,12 +4,23 @@ import { Link } from 'react-router-dom';
 
 import { LIST } from 'constants/routes';
 import ErrorMessage from 'components/errorMessage';
+import ToDo from 'interfaces/ToDo';
 import ProgressOverviewItem from './ProgressOverviewItem';
 import ProgressOverviewItemGhost from './ProgressOverviewItem/ProgressOverviewItemGhost';
 
 import './ProgressOverview.scss';
 
-const ProgressOverview = ({ todos, isLoading, isError }) => {
+interface ProgressOverviewProps {
+  todos: ToDo[];
+  isLoading: boolean;
+  isError: boolean;
+}
+
+const ProgressOverview: React.SFC<ProgressOverviewProps> = ({
+  todos,
+  isLoading,
+  isError
+}) => {
   if (isLoading)
     return (
       <div className="tasks">
