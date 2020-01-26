@@ -1,15 +1,7 @@
 import React from 'react';
 import { CSSTransition } from 'react-transition-group';
 
-interface FadeTransitionProps {
-  children: React.ReactNode;
-  props?: { [x: string]: any };
-}
-
-const FadeTransition: React.SFC<FadeTransitionProps> = ({
-  children,
-  ...props
-}) => (
+const FadeTransition: React.SFC = ({ children, ...props }) => (
   <CSSTransition
     {...props}
     classNames="fade"
