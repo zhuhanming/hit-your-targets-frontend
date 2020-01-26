@@ -1,11 +1,44 @@
-import ToDo from './ToDo';
-
 export default interface TodoContextInterface {
-  loadTodos: () => null;
-  createTodo: (data: any) => null;
-  createSubTodo: (id: number, data: any) => null;
-  updateTodo: (id: number, data: any) => null;
-  updateSubTodo: (todoId: number, subtodoId: number, data: any) => null;
-  deleteTodo: (id: number) => null;
-  deleteSubTodo: (todoId: number, subtodoId: number) => null;
+  loadTodos: () => void;
+  createTodo: (code: {
+    title: string;
+    description: string;
+    startTime: string;
+    endTime: string;
+    completed: boolean;
+    tags: string[];
+  }) => Promise<void>;
+  createSubTodo: (
+    id: number,
+    code: {
+      title: string;
+      startTime: string;
+      endTime: string;
+      completed: boolean;
+    }
+  ) => Promise<void>;
+  updateTodo: (
+    id: number,
+    code: {
+      title?: string;
+      description?: string;
+      startTime?: string;
+      endTime?: string;
+      completeTime?: string;
+      tags?: string[];
+      completed?: boolean;
+    }
+  ) => Promise<void>;
+  updateSubTodo: (
+    todoId: number,
+    subtodoId: number,
+    code: {
+      title?: string;
+      startTime?: string;
+      endTime?: string;
+      completed?: boolean;
+    }
+  ) => Promise<void>;
+  deleteTodo: (id: number) => Promise<void>;
+  deleteSubTodo: (todoId: number, subtodoId: number) => Promise<void>;
 }
