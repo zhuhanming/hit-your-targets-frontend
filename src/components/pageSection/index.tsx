@@ -2,7 +2,15 @@ import React from 'react';
 
 import './PageSection.scss';
 
-const PageSection = ({ children, className = '' }) => {
+interface PageSectionProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
+const PageSection: React.SFC<PageSectionProps> = ({
+  children,
+  className = ''
+}) => {
   return <div className={`column is-full ${className}`}>{children}</div>;
 };
 
