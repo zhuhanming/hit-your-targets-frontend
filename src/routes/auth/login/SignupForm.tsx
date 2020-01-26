@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, DeepPartial, FieldError } from 'react-hook-form';
 
 import { useAuth } from 'contexts/authContext';
 import { useTheme } from 'contexts/themeContext';
@@ -13,16 +13,21 @@ type SignupFormProps = {
   handleChangeForm: Function;
 };
 
-const SignupForm = ({
+const SignupForm: React.SFC<SignupFormProps> = ({
   email,
   handleError,
   handleChangeForm
-}: SignupFormProps) => {
+}) => {
   const { signup } = useAuth();
   const { theme } = useTheme();
   const [isLoading, setIsLoading] = useState(false);
 
-  const getDefaultValues = () => {
+  const getDefaultValues = (): DeepPartial<{
+    email?: string;
+    password?: string;
+    name?: string;
+    passwordConfirmation?: string;
+  }> => {
     if (email)
       return { email, name: '', password: '', passwordConfirmation: '' };
     return {};
@@ -38,7 +43,7 @@ const SignupForm = ({
     defaultValues: getDefaultValues()
   });
 
-  const handleSignup = async data => {
+  const handleSignup = async (data): Promise<void> => {
     setIsLoading(true);
     await signup(data).catch(e => {
       handleError(e);
@@ -46,7 +51,7 @@ const SignupForm = ({
     });
   };
 
-  const onChangeForm = () => {
+  const onChangeForm = (): void => {
     const value = getValues().email;
     handleChangeForm(value);
   };
@@ -78,7 +83,9 @@ const SignupForm = ({
               })}
             />
             {errors.name && (
-              <p className="help is-danger">{(errors.name as any).message}</p>
+              <p className="help is-danger">
+                {(errors.name as FieldError).message}
+              </p>
             )}
           </div>
         </div>
@@ -105,7 +112,9 @@ const SignupForm = ({
               })}
             />
             {errors.email && (
-              <p className="help is-danger">{(errors.email as any).message}</p>
+              <p className="help is-danger">
+                {(errors.email as FieldError).message}
+              </p>
             )}
           </div>
         </div>
@@ -132,7 +141,7 @@ const SignupForm = ({
             />
             {errors.password && (
               <p className="help is-danger">
-                {(errors.password as any).message}
+                {(errors.password as FieldError).message}
               </p>
             )}
           </div>
@@ -162,7 +171,7 @@ const SignupForm = ({
             />
             {errors.passwordConfirmation && (
               <p className="help is-danger">
-                {(errors.passwordConfirmation as any).message}
+                {(errors.passwordConfirmation as FieldError).message}
               </p>
             )}
           </div>
