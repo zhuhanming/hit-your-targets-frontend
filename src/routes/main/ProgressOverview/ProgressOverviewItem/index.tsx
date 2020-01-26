@@ -3,10 +3,21 @@ import React from 'react';
 import { getDisplayDate, isWarning, getDaysRemaining } from 'utils/timeUtils';
 import { getProgress } from 'utils/progressUtils';
 import { useTheme } from 'contexts/themeContext';
+import ToDo from 'interfaces/ToDo';
 
 import './ProgressOverviewItem.scss';
 
-const ProgressOverviewItem = ({ todo, currentKey, keyLimit }) => {
+interface ProgressOverviewItemProps {
+  todo: ToDo;
+  currentKey: number;
+  keyLimit: number;
+}
+
+const ProgressOverviewItem: React.SFC<ProgressOverviewItemProps> = ({
+  todo,
+  currentKey,
+  keyLimit
+}) => {
   const { theme } = useTheme();
   const { title, endTime, completed, subtodos } = todo;
   const displayDate = getDisplayDate(endTime);
