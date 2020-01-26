@@ -16,25 +16,25 @@ const todos = createSlice({
   name: 'todos',
   initialState,
   reducers: {
-    setToDos: (state, action: PayloadAction<ToDo[]>) => {
+    setToDos: (state, action: PayloadAction<ToDo[]>): void => {
       state.todos = action.payload;
       state.isTodoError = false;
     },
-    updateToDo: (state, action: PayloadAction<ToDo>) => {
+    updateToDo: (state, action: PayloadAction<ToDo>): void => {
       const foundIndex = state.todos.findIndex(x => x.id === action.payload.id);
       state.todos[foundIndex] = action.payload;
       state.isTodoError = false;
     },
-    addToDo: (state, action: PayloadAction<ToDo>) => {
+    addToDo: (state, action: PayloadAction<ToDo>): void => {
       state.todos.push(action.payload);
       state.todos.sort((a, b) => Date.parse(a.endTime) - Date.parse(b.endTime));
       state.isTodoError = false;
     },
-    deleteToDo: (state, action: PayloadAction<number>) => {
+    deleteToDo: (state, action: PayloadAction<number>): void => {
       state.todos = state.todos.filter(x => x.id !== action.payload);
       state.isTodoError = false;
     },
-    setToDoError: state => {
+    setToDoError: (state): void => {
       state.isTodoError = true;
     }
   }
