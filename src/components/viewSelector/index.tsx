@@ -9,18 +9,22 @@ import { startSearch, cancelSearch } from 'reducers/SearchDux';
 
 import './ViewSelector.scss';
 
-const ViewSelector = ({ isMobile = false }) => {
+interface ViewSelectorProps {
+  isMobile?: boolean;
+}
+
+const ViewSelector: React.SFC<ViewSelectorProps> = ({ isMobile = false }) => {
   const { viewSelected, updateView } = useView();
   const { searchType } = useSearch();
   const dispatch = useDispatch();
   const { theme } = useTheme();
-  const handleViewClick = (newView: View) => {
+  const handleViewClick = (newView: View): void => {
     if (viewSelected !== newView) {
       updateView(newView);
     }
   };
 
-  const handleSearchClick = () => {
+  const handleSearchClick = (): void => {
     if (searchType) {
       dispatch(cancelSearch());
     } else {
@@ -39,7 +43,7 @@ const ViewSelector = ({ isMobile = false }) => {
             className={`as-non-button ${theme} ${
               viewSelected === View.TODAY ? 'is-active' : ''
             }`}
-            onClick={() => handleViewClick(View.TODAY)}
+            onClick={(): void => handleViewClick(View.TODAY)}
           >
             Today
           </button>{' '}
@@ -49,7 +53,7 @@ const ViewSelector = ({ isMobile = false }) => {
             className={`as-non-button ${theme} ${
               viewSelected === View.NEXT_SEVEN_DAYS ? 'is-active' : ''
             }`}
-            onClick={() => handleViewClick(View.NEXT_SEVEN_DAYS)}
+            onClick={(): void => handleViewClick(View.NEXT_SEVEN_DAYS)}
           >
             Next 7 Days
           </button>{' '}
@@ -59,7 +63,7 @@ const ViewSelector = ({ isMobile = false }) => {
             className={`as-non-button ${theme} ${
               viewSelected === View.ALL ? 'is-active' : ''
             }`}
-            onClick={() => handleViewClick(View.ALL)}
+            onClick={(): void => handleViewClick(View.ALL)}
           >
             All
           </button>{' '}
@@ -69,7 +73,7 @@ const ViewSelector = ({ isMobile = false }) => {
             className={`as-non-button ${theme} ${
               viewSelected === View.COMPLETED ? 'is-active' : ''
             }`}
-            onClick={() => handleViewClick(View.COMPLETED)}
+            onClick={(): void => handleViewClick(View.COMPLETED)}
           >
             Completed
           </button>
