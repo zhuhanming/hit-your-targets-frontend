@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import _ from 'lodash';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import autosize from 'autosize';
 
 import { useTodo } from 'contexts/todoContext';
 import { useTheme } from 'contexts/themeContext';
+import ToDo from 'interfaces/ToDo';
 import TodoBodyHeader from './TodoBodyHeader';
 import DateTimePicker from './DateTimePicker';
 import SubTodoList from './SubTodoList';
@@ -13,22 +14,36 @@ import TagsInputField from './TagsInputField';
 
 import './TodoBody.scss';
 
-const TodoBody = ({ todo, setFocus, isMobile = false }) => {
+interface TodoBodyProps {
+  todo: ToDo;
+  setFocus: (id: number | null) => void;
+  isMobile?: boolean;
+}
+
+const TodoBody: React.SFC<TodoBodyProps> = ({
+  todo,
+  setFocus,
+  isMobile = false
+}) => {
   const { updateTodo } = useTodo();
   const { theme } = useTheme();
   // const [isError, setIsError] = useState(false);
   const { id, title, description } = todo;
-  const initialState = { title, description };
-  useEffect(() => {
-    autosize(document.querySelectorAll('textarea'));
-  });
 
-  const { register, handleSubmit, getValues, setValue } = useForm({
+  type FormData = {
+    title: string;
+    description: string;
+  };
+  const initialState: FormData = { title, description };
+  const { getValues, setValue, control } = useForm<FormData>({
     mode: 'onBlur'
   });
-  const onSubmit = data => console.log(data);
 
-  const handleTodoBlur = () => {
+  useEffect(() => {
+    autosize(document.querySelectorAll('textarea'));
+  }, []);
+
+  const handleTodoBlur = (): void => {
     try {
       const newState = getValues();
       if (newState.title.length === 0) {
@@ -49,31 +64,28 @@ const TodoBody = ({ todo, setFocus, isMobile = false }) => {
   };
 
   return (
-    <div className="todo-body__container">
+    <div className="todo-body__container" key={`todo-body-${id}`}>
       {isMobile && (
         <button
           type="button"
           className="as-non-button todo-body__back"
-          onClick={() => setFocus(null)}
+          onClick={(): void => setFocus(null)}
         >
           &larr;&nbsp;&nbsp;&nbsp;Back to List
         </button>
       )}
-      <form
-        className="todo-body"
-        onSubmit={handleSubmit(onSubmit)}
-        key={`form-${id}`}
-      >
+      <form className="todo-body" key={`form-${id}`}>
         <TodoBodyHeader todo={todo} setFocus={setFocus} isMobile={isMobile} />
-        <textarea
-          className="todo-body__title is-size-4"
+        <Controller
+          as="textarea"
+          control={control}
+          rules={{ required: true }}
           name="title"
-          // type="text"
-          ref={register({ required: true })}
           onBlur={handleTodoBlur}
-          autoComplete="off"
           defaultValue={title}
           rows={1}
+          className="todo-body__title is-size-4"
+          autoComplete="off"
         />
         <DateTimePicker todo={todo} />
         <div className="todo-body__tag">
@@ -81,14 +93,15 @@ const TodoBody = ({ todo, setFocus, isMobile = false }) => {
           {/* <p className="tag is-primary">Work in Progress!</p> */}
           <TagsInputField todo={todo} />
         </div>
-        <textarea
-          className={`todo-body__description ${theme}`}
+        <Controller
+          as="textarea"
+          control={control}
           name="description"
-          rows={1}
-          ref={register}
           onBlur={handleTodoBlur}
-          placeholder="Description"
           defaultValue={description}
+          rows={1}
+          className={`todo-body__description ${theme}`}
+          placeholder="Description"
         />
       </form>
       <SubTodoList todo={todo} setFocus={setFocus} isMobile={isMobile} />
