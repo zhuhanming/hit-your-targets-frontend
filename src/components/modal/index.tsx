@@ -3,7 +3,13 @@ import ReactModal from 'react-modal';
 
 import './Modal.scss';
 
-const Modal = ({ children, isOpen, handleClose }) => {
+interface ModalProps {
+  children: React.ReactNode;
+  isOpen: boolean;
+  handleClose: VoidFunction;
+}
+
+const Modal: React.SFC<ModalProps> = ({ children, isOpen, handleClose }) => {
   return (
     <ReactModal
       isOpen={isOpen}
