@@ -1,4 +1,8 @@
-const retryPromise = (promise, retriesLeft = 5, interval = 1000) => {
+const retryPromise = (
+  promise,
+  retriesLeft = 5,
+  interval = 1000
+): Promise<unknown> => {
   return new Promise((resolve, reject) => {
     promise()
       .then(resolve)
@@ -18,13 +22,13 @@ const retryPromise = (promise, retriesLeft = 5, interval = 1000) => {
   });
 };
 
-const capitalize = (word: string) => {
+const capitalize = (word: string): string => {
   return word.replace(/(?:^|\s)\S/g, a => {
     return a.toUpperCase();
   });
 };
 
-const randomGreeting = (name: string) => {
+const randomGreeting = (name: string): string => {
   const greetings = [
     `Welcome back, ${name}`,
     `How are you today, ${name}?`,
