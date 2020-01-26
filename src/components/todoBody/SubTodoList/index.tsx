@@ -1,11 +1,22 @@
 import React from 'react';
 
+import ToDo from 'interfaces/ToDo';
 import SubTodoListItem from './SubTodoListItem';
 import SubTodoCreationField from './SubTodoCreationField';
 
 import './SubTodoList.scss';
 
-const SubTodoList = ({ todo, setFocus, isMobile }) => {
+interface SubTodoListProps {
+  todo: ToDo;
+  setFocus: (id: number | null) => void;
+  isMobile: boolean;
+}
+
+const SubTodoList: React.SFC<SubTodoListProps> = ({
+  todo,
+  setFocus,
+  isMobile
+}) => {
   const { id, startTime, endTime, subtodos, title } = todo;
   const { length } = subtodos;
   const numberCompleted = subtodos.filter(subtodo => subtodo.completed).length;
