@@ -6,7 +6,7 @@ import PageSection from 'components/pageSection';
 
 import './Settings.scss';
 
-const Settings = () => {
+const Settings: React.SFC = () => {
   const { logout } = useAuth();
 
   return (
