@@ -10,7 +10,7 @@ const AuthContext = React.createContext<AuthContextInterface | undefined>(
   undefined
 );
 
-const AuthProvider = props => {
+const AuthProvider: React.SFC = props => {
   const [firstAttemptFinished, setFirstAttemptFinished] = React.useState(false);
   const {
     data = null,
@@ -43,28 +43,33 @@ const AuthProvider = props => {
     }
   }
 
-  const signup = code =>
+  const signup = (code: {
+    name: string;
+    email: string;
+    password: string;
+    passwordConfirmation: string;
+  }): Promise<void> =>
     AuthService.signup(code)
       .then(reload)
       .catch(e => {
         return Promise.reject(new Error(e.message));
       });
 
-  const login = code =>
+  const login = (code: { email: string; password: string }): Promise<void> =>
     AuthService.login(code)
       .then(reload)
       .catch(e => {
         return Promise.reject(new Error(e.message));
       });
 
-  const logout = () => AuthService.logout().then(reload);
+  const logout = (): Promise<void> => AuthService.logout().then(reload);
 
   return (
     <AuthContext.Provider value={{ data, signup, login, logout }} {...props} />
   );
 };
 
-const useAuth = () => {
+const useAuth = (): AuthContextInterface => {
   const context = React.useContext(AuthContext);
   if (context === undefined) {
     throw new Error(`useAuth must be used within a AuthProvider`);
