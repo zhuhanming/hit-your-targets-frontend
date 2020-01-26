@@ -6,7 +6,7 @@ import { TodoProvider } from './todoContext';
 import { ViewProvider } from './viewContext';
 import { SearchProvider } from './searchContext';
 
-const AppProviders = ({ children }) => {
+const AppProviders: React.SFC = ({ children }) => {
   return (
     <AuthProvider>
       <UserProvider>
