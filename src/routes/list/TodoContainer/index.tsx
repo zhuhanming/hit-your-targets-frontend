@@ -3,10 +3,23 @@ import React from 'react';
 import TodoBody from 'components/todoBody';
 import ErrorMessage from 'components/errorMessage';
 import { useSearch } from 'contexts/searchContext';
+import ToDo from 'interfaces/ToDo';
 
 import './TodoContainer.scss';
 
-const TodoContainer = ({ id, setFocus, todos, isMobile = false }) => {
+interface TodoContainerProps {
+  id: number | null;
+  setFocus: (id: number | null) => void;
+  todos: ToDo[];
+  isMobile?: boolean;
+}
+
+const TodoContainer: React.SFC<TodoContainerProps> = ({
+  id,
+  setFocus,
+  todos,
+  isMobile = false
+}) => {
   const { searchType } = useSearch();
   if (id === null) return <></>;
   const todo = todos.find(ele => ele.id === id);
