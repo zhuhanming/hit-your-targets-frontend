@@ -19,7 +19,7 @@ import {
 
 import './SearchBar.scss';
 
-const SearchBar = () => {
+const SearchBar: React.SFC = () => {
   const { viewSelected } = useView();
   const { searchType, titleString, tags, searchLogic } = useSearch();
   const dispatch = useDispatch();
@@ -29,18 +29,18 @@ const SearchBar = () => {
     viewSelected === View.COMPLETED ? 'completed' : 'current'
   } tasks by their titles.`;
 
-  const handleChange = e => {
+  const handleChange = (e: { target: HTMLInputElement }): void => {
     if (searchType === SearchType.TITLE) {
       dispatch(setTitleString(e.target.value));
     }
   };
 
-  const handleChangeSearchType = (newSearchType: SearchType) => {
+  const handleChangeSearchType = (newSearchType: SearchType): void => {
     if (newSearchType !== searchType) dispatch(setSearch(newSearchType));
     setIsDropdownActive(false);
   };
 
-  const handleTagsInput = (newTags: string[]) => {
+  const handleTagsInput = (newTags: string[]): void => {
     const newSearchTags = [...new Set(newTags.map(capitalize))];
     if (newSearchTags.length < newTags.length) {
       toast.warn('That tag is already being searched for!');
@@ -49,7 +49,7 @@ const SearchBar = () => {
     }
   };
 
-  const handleChangeSearchLogic = (newSearchLogic: SearchLogic) => {
+  const handleChangeSearchLogic = (newSearchLogic: SearchLogic): void => {
     if (newSearchLogic !== searchLogic) {
       dispatch(setSearchLogic(newSearchLogic));
     }
@@ -68,7 +68,7 @@ const SearchBar = () => {
             className="button search-field__dropdown__button"
             aria-haspopup="true"
             aria-controls="dropdown-menu"
-            onClick={() => setIsDropdownActive(!isDropdownActive)}
+            onClick={(): void => setIsDropdownActive(!isDropdownActive)}
           >
             <span>
               {searchType === SearchType.TITLE ? 'By Title' : 'By Tags'}
@@ -89,7 +89,7 @@ const SearchBar = () => {
               className={`dropdown-item search-field__dropdown__item ${
                 searchType === SearchType.TITLE ? 'is-active' : ''
               }`}
-              onClick={() => handleChangeSearchType(SearchType.TITLE)}
+              onClick={(): void => handleChangeSearchType(SearchType.TITLE)}
             >
               By Title
             </button>
@@ -98,7 +98,7 @@ const SearchBar = () => {
               className={`dropdown-item search-field__dropdown__item ${
                 searchType === SearchType.TAG ? 'is-active' : ''
               }`}
-              onClick={() => handleChangeSearchType(SearchType.TAG)}
+              onClick={(): void => handleChangeSearchType(SearchType.TAG)}
             >
               By Tags
             </button>
@@ -147,7 +147,7 @@ const SearchBar = () => {
                 className={`as-non-button is-size-7 ${
                   searchLogic === SearchLogic.ALL ? '' : 'is-light-grey'
                 }`}
-                onClick={() => handleChangeSearchLogic(SearchLogic.ALL)}
+                onClick={(): void => handleChangeSearchLogic(SearchLogic.ALL)}
               >
                 All
               </button>
@@ -157,7 +157,7 @@ const SearchBar = () => {
                 className={`as-non-button is-size-7 ${
                   searchLogic === SearchLogic.ANY ? '' : 'is-light-grey'
                 }`}
-                onClick={() => handleChangeSearchLogic(SearchLogic.ANY)}
+                onClick={(): void => handleChangeSearchLogic(SearchLogic.ANY)}
               >
                 Any
               </button>
