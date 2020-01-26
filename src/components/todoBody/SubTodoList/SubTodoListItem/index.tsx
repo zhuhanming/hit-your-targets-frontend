@@ -11,10 +11,25 @@ import autosize from 'autosize';
 import { useTodo } from 'contexts/todoContext';
 import Modal from 'components/modal';
 import ConfirmationModalBody from 'components/confirmationModalBody';
+import SubToDo from 'interfaces/SubToDo';
 
 import './SubTodoListItem.scss';
 
-const SubTodoListItem = ({
+interface SubTodoListItemProps {
+  subTodo: SubToDo;
+  currentKey: number;
+  keyLimit: number;
+  todoId: number;
+  todoStartTime: string;
+  todoEndTime: string;
+  todoTitle: string;
+  isFullyCompleted: boolean;
+  isOneAwayFromCompletion: boolean;
+  setFocus: (id: number | null) => void;
+  isMobile: boolean;
+}
+
+const SubTodoListItem: React.FC<SubTodoListItemProps> = ({
   subTodo,
   currentKey,
   keyLimit,
@@ -39,7 +54,7 @@ const SubTodoListItem = ({
   const todoStartTimeDate = new Date(Date.parse(todoStartTime));
   const todoEndTimeDate = new Date(Date.parse(todoEndTime));
 
-  const handleSubTodoBlur = () => {
+  const handleSubTodoBlur = (): void => {
     try {
       const newState = getValues();
       if (newState.title.length === 0) {
@@ -59,13 +74,13 @@ const SubTodoListItem = ({
     }
   };
 
-  const handleCheck = async () => {
+  const handleCheck = (): void => {
     try {
-      await updateSubTodo(todoId, id, {
+      updateSubTodo(todoId, id, {
         completed: !completed
       });
       if (isOneAwayFromCompletion || isFullyCompleted) {
-        await updateTodo(todoId, {
+        updateTodo(todoId, {
           completed: !completed
         });
       }
@@ -90,13 +105,14 @@ const SubTodoListItem = ({
       }
     } catch (error) {
       // setIsChecked(completed);
+      console.log(error.message);
     }
   };
 
-  const handleStartTimeChange = date => {
+  const handleStartTimeChange = (date: string): void => {
     if (Date.parse(date) === Date.parse(startTime)) return;
     try {
-      if (date < startTimeDate) {
+      if (new Date(Date.parse(date)) < startTimeDate) {
         updateSubTodo(todoId, id, { startTime: moment(date).format() });
         toast.success(`Nice! ${title} updated!`);
       } else {
@@ -121,8 +137,9 @@ const SubTodoListItem = ({
     }
   };
 
-  const handleEndTimeChange = date => {
-    if (date > startTimeDate && date <= todoEndTimeDate)
+  const handleEndTimeChange = (date: string): void => {
+    const newDate = new Date(Date.parse(date));
+    if (newDate > startTimeDate && newDate <= todoEndTimeDate)
       try {
         updateSubTodo(todoId, id, { endTime: moment(date).format() });
         toast.success(`Nice! ${title} updated!`);
@@ -135,7 +152,7 @@ const SubTodoListItem = ({
       );
   };
 
-  const handleDelete = () => {
+  const handleDelete = (): void => {
     try {
       deleteSubTodo(todoId, id);
       setIsModalOpen(false);
@@ -147,11 +164,14 @@ const SubTodoListItem = ({
 
   return (
     <>
-      <Modal isOpen={isModalOpen} handleClose={() => setIsModalOpen(false)}>
+      <Modal
+        isOpen={isModalOpen}
+        handleClose={(): void => setIsModalOpen(false)}
+      >
         <ConfirmationModalBody
           message="Are you sure you want to delete this subtask? You cannot undo this action."
           handleConfirm={handleDelete}
-          handleCancel={() => setIsModalOpen(false)}
+          handleCancel={(): void => setIsModalOpen(false)}
           confirmButtonClassName="is-danger"
           cancelButtonClassName="is-light"
           confirmButtonText="Delete"
@@ -211,7 +231,9 @@ const SubTodoListItem = ({
                     timeIntervals={15}
                     timeCaption="Time"
                     dateFormat="d MMM yy, HH:mm aa"
-                    onChange={date => handleStartTimeChange(date)}
+                    onChange={(date: string): void =>
+                      handleStartTimeChange(date)
+                    }
                   />
                 </div>
                 <div>
@@ -228,7 +250,7 @@ const SubTodoListItem = ({
                     timeIntervals={15}
                     timeCaption="Time"
                     dateFormat="d MMM yy, HH:mm aa"
-                    onChange={date => handleEndTimeChange(date)}
+                    onChange={(date: string): void => handleEndTimeChange(date)}
                   />
                 </div>
               </div>
@@ -236,7 +258,7 @@ const SubTodoListItem = ({
                 <button
                   type="button"
                   className="as-non-button subtodo-list-item__delete__button"
-                  onClick={() => setIsModalOpen(true)}
+                  onClick={(): void => setIsModalOpen(true)}
                 >
                   Delete
                 </button>
