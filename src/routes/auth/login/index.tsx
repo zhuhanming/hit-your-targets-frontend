@@ -7,13 +7,29 @@ import SignupForm from './SignupForm';
 
 import '../Auth.scss';
 
-const Login = () => {
-  const [state, setState] = useReducer((s, a) => ({ ...s, ...a }), {
-    email: null,
-    isSignedUp: true,
-    isError: false,
-    errorMessage: null
-  });
+const Login: React.SFC = () => {
+  const [state, setState] = useReducer(
+    (
+      s: {
+        email: string | null;
+        isSignedUp: boolean;
+        isError: boolean;
+        errorMessage: string | null;
+      },
+      a: {
+        email?: string | null;
+        isSignedUp?: boolean;
+        isError?: boolean;
+        errorMessage?: string | null;
+      }
+    ) => ({ ...s, ...a }),
+    {
+      email: null,
+      isSignedUp: true,
+      isError: false,
+      errorMessage: null
+    }
+  );
 
   return (
     <>
@@ -41,10 +57,10 @@ const Login = () => {
                 {state.isSignedUp && (
                   <LoginForm
                     email={state.email}
-                    handleError={e =>
+                    handleError={(e: Error): void =>
                       setState({ isError: true, errorMessage: e.message })
                     }
-                    handleChangeForm={data => {
+                    handleChangeForm={(data: string): void => {
                       setState({
                         email: data,
                         isSignedUp: false,
@@ -57,10 +73,10 @@ const Login = () => {
                 {!state.isSignedUp && (
                   <SignupForm
                     email={state.email}
-                    handleError={e =>
+                    handleError={(e: Error): void =>
                       setState({ isError: true, errorMessage: e.message })
                     }
-                    handleChangeForm={data => {
+                    handleChangeForm={(data: string): void => {
                       setState({
                         email: data,
                         isSignedUp: true,
