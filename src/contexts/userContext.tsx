@@ -6,12 +6,12 @@ const UserContext = React.createContext<UserContextInterface | undefined>(
   undefined
 );
 
-const UserProvider = props => {
+const UserProvider: React.SFC = props => {
   const { data } = useAuth();
   return <UserContext.Provider value={data} {...props} />;
 };
 
-const useUser = () => {
+const useUser = (): UserContextInterface => {
   const context = React.useContext(UserContext);
   if (context === undefined) {
     throw new Error('useUser must be used within a UserProvider');
