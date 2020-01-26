@@ -7,22 +7,37 @@ import { useSearch } from 'contexts/searchContext';
 import RootStateInterface from 'interfaces/RootState';
 import PageContainer from 'components/pageContainer';
 import PageSection from 'components/pageSection';
+import { CurrentToDos } from 'reducers/ToDoDux';
 import TodoList from './TodoList';
 import TodoContainer from './TodoContainer';
 
 import './List.scss';
 
-const List = () => {
+const List: React.SFC = () => {
   const { loadTodos } = useTodo();
   const { getFilteredTodos } = useSearch();
-  const selectTodos = (state: RootStateInterface) => state.todos;
+  const selectTodos = (state: RootStateInterface): CurrentToDos => state.todos;
   const { todos } = useSelector(selectTodos);
   const filteredTodos = getFilteredTodos(todos);
-  const [state, setState] = useReducer((s, a) => ({ ...s, ...a }), {
-    isLoading: true,
-    isError: false,
-    taskInFocus: null
-  });
+  const [state, setState] = useReducer(
+    (
+      s: {
+        isLoading: boolean;
+        isError: boolean;
+        taskInFocus: number | null;
+      },
+      a: {
+        isLoading?: boolean;
+        isError?: boolean;
+        taskInFocus?: number | null;
+      }
+    ) => ({ ...s, ...a }),
+    {
+      isLoading: true,
+      isError: false,
+      taskInFocus: null
+    }
+  );
 
   const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
 
@@ -43,7 +58,7 @@ const List = () => {
       }
     }
 
-    return () => {
+    return (): void => {
       didCancel = true;
     };
   }, [loadTodos]);
@@ -54,7 +69,9 @@ const List = () => {
         <div className="is-very-transparent list-view__mobile">
           <TodoContainer
             id={state.taskInFocus}
-            setFocus={id => setState({ taskInFocus: id })}
+            setFocus={(id: number | null): void =>
+              setState({ taskInFocus: id })
+            }
             todos={filteredTodos}
             isMobile={isMobile}
           />
@@ -69,7 +86,9 @@ const List = () => {
                   todos={filteredTodos}
                   isLoading={state.isLoading}
                   isError={state.isError}
-                  setFocus={id => setState({ taskInFocus: id })}
+                  setFocus={(id: number | null): void =>
+                    setState({ taskInFocus: id })
+                  }
                   focus={state.taskInFocus}
                   isMobile={isMobile}
                 />
@@ -79,7 +98,9 @@ const List = () => {
           <div className="column is-half is-marginless is-paddingless is-very-transparent list-view__column list-view__focused-task">
             <TodoContainer
               id={state.taskInFocus}
-              setFocus={id => setState({ taskInFocus: id })}
+              setFocus={(id: number | null): void =>
+                setState({ taskInFocus: id })
+              }
               todos={filteredTodos}
             />
           </div>
