@@ -1,7 +1,15 @@
 import React from 'react';
 import { CSSTransition } from 'react-transition-group';
 
-const SlideTransition = ({ children, ...props }) => (
+interface SlideTransitionProps {
+  children: React.ReactNode;
+  props?: { [x: string]: any };
+}
+
+const SlideTransition: React.SFC<SlideTransitionProps> = ({
+  children,
+  ...props
+}) => (
   <CSSTransition
     {...props}
     classNames="slide"
