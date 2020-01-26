@@ -1,6 +1,10 @@
 import React from 'react';
 
-const BrandLogo = props => (
+interface BrandLogoProps {
+  props?: { [x: string]: any };
+}
+
+const BrandLogo = (props): React.ReactElement<BrandLogoProps> => (
   <svg
     id="_1"
     data-name="1"
