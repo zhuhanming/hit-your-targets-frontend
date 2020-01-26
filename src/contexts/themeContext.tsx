@@ -3,30 +3,30 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import ThemeContextInterface from 'interfaces/ThemeContext';
 import RootStateInterface from 'interfaces/RootState';
-import { updateTheme } from 'reducers/MiscDux';
+import { updateTheme, CurrentMisc } from 'reducers/MiscDux';
 
 const defaultContextData = {
   theme: '',
-  toggle: () => null
+  toggle: (): null => null
 };
 
 const ThemeContext = React.createContext<ThemeContextInterface>(
   defaultContextData
 );
 
-const ThemeProvider = props => {
+const ThemeProvider: React.SFC = props => {
   const dispatch = useDispatch();
-  const selectMisc = (state: RootStateInterface) => state.misc;
+  const selectMisc = (state: RootStateInterface): CurrentMisc => state.misc;
   const { theme } = useSelector(selectMisc);
 
-  const toggle = () => {
+  const toggle = (): void => {
     dispatch(updateTheme(theme === '' ? 'dark' : ''));
   };
 
   return <ThemeContext.Provider value={{ theme, toggle }} {...props} />;
 };
 
-const useTheme = () => {
+const useTheme = (): ThemeContextInterface => {
   const context = React.useContext(ThemeContext);
   if (context === undefined) {
     throw new Error(`useTheme must be used within a ThemeProvider`);
