@@ -25,16 +25,16 @@ const misc = createSlice({
   name: 'misc',
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<CurrentUser>) => {
+    setUser: (state, action: PayloadAction<CurrentUser>): void => {
       state.user = { ...action.payload };
     },
-    setView: (state, action: PayloadAction<View>) => {
+    setView: (state, action: PayloadAction<View>): void => {
       state.view = action.payload;
     },
-    updateTheme: (state, action: PayloadAction<string>) => {
+    updateTheme: (state, action: PayloadAction<string>): void => {
       state.theme = action.payload;
     },
-    clearUser: state => {
+    clearUser: (state): void => {
       state.user = {
         name: null,
         email: null,
