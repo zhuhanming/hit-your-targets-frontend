@@ -3,24 +3,25 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import ViewContextInterface, { View } from 'interfaces/ViewContext';
 import RootStateInterface from 'interfaces/RootState';
-import { setView } from 'reducers/MiscDux';
+import { setView, CurrentMisc } from 'reducers/MiscDux';
 
 const defaultContextData = {
   viewSelected: View.TODAY,
-  updateView: (newView: View) => null
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  updateView: (newView: View): void => {}
 };
 
 const ViewContext = React.createContext<ViewContextInterface>(
   defaultContextData
 );
 
-const ViewProvider = props => {
+const ViewProvider: React.SFC = props => {
   const dispatch = useDispatch();
-  const selectMisc = (state: RootStateInterface) => state.misc;
+  const selectMisc = (state: RootStateInterface): CurrentMisc => state.misc;
   const { view } = useSelector(selectMisc);
   const viewSelected = view;
 
-  const updateView = (newView: View) => {
+  const updateView = (newView: View): void => {
     dispatch(setView(newView));
   };
 
@@ -29,7 +30,7 @@ const ViewProvider = props => {
   );
 };
 
-const useView = () => {
+const useView = (): ViewContextInterface => {
   const context = React.useContext(ViewContext);
   if (context === undefined) {
     throw new Error(`useView must be used within a ViewProvider`);
