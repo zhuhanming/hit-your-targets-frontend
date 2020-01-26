@@ -3,7 +3,7 @@ import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
 import './ProgressOverviewItemGhost.scss';
 
-const ProgressOverviewItem = () => {
+const ProgressOverviewItem: React.SFC = () => {
   return (
     <li className="progress-item">
       <SkeletonTheme>
