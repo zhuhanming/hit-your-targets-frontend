@@ -8,10 +8,21 @@ import { LIST } from 'constants/routes';
 import ErrorMessage from 'components/errorMessage';
 import SlideTransition from 'components/slideTransition';
 import FadeTransition from 'components/fadeTransition';
+import ToDo from 'interfaces/ToDo';
 
 import './TasksForToday.scss';
 
-const TasksForToday = ({ todos, isLoading, isError }) => {
+interface TasksForToday {
+  todos: ToDo[];
+  isLoading: boolean;
+  isError: boolean;
+}
+
+const TasksForToday: React.SFC<TasksForToday> = ({
+  todos,
+  isLoading,
+  isError
+}) => {
   if (isLoading)
     return (
       <div className="tasks">
