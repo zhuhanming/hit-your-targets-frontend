@@ -8,18 +8,19 @@ import { capitalize, randomGreeting } from 'utils';
 import RootStateInterface from 'interfaces/RootState';
 import PageContainer from 'components/pageContainer';
 import PageSection from 'components/pageSection';
+import { CurrentToDos } from 'reducers/ToDoDux';
 import MainCard from './MainCard';
 import CalendarCard from './CalendarCard';
 import TasksForToday from './TasksForToday';
 import FunFact from './FunFact';
-
-import './Main.scss';
 import ProgressOverview from './ProgressOverview';
 
-const Main = () => {
+import './Main.scss';
+
+const Main: React.SFC = () => {
   const { name } = useUser();
   const { loadTodos } = useTodo();
-  const selectTodos = (state: RootStateInterface) => state.todos;
+  const selectTodos = (state: RootStateInterface): CurrentToDos => state.todos;
   const { todos } = useSelector(selectTodos);
   const [state, setState] = useReducer((s, a) => ({ ...s, ...a }), {
     isLoading: true,
@@ -44,7 +45,7 @@ const Main = () => {
       }
     }
 
-    return () => {
+    return (): void => {
       didCancel = true;
     };
   }, [loadTodos]);
