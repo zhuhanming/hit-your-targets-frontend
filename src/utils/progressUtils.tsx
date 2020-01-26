@@ -1,4 +1,6 @@
-const getProgress = (subtodos): number => {
+import SubToDo from 'interfaces/SubToDo';
+
+const getProgress = (subtodos: SubToDo[]): number => {
   if (!Array.isArray(subtodos) || subtodos.length === 0) return 0;
   const totalSubtodos = subtodos.length;
   const completedSubtodos = subtodos.filter(subtodo => subtodo.completed)
