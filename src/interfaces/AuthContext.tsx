@@ -14,7 +14,7 @@ type LoginCode = {
 
 export default interface AuthContextInterface {
   data: UserContextInterface;
-  signup(code: SignupCode): Promise<any>;
-  login(code: LoginCode): Promise<any>;
+  signup(code: SignupCode): Promise<void>;
+  login(code: LoginCode): Promise<void>;
   logout(): Promise<void>;
 }
