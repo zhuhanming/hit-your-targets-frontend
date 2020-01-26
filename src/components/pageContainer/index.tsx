@@ -6,7 +6,6 @@ import PageSection from 'components/pageSection';
 import './PageContainer.scss';
 
 interface PageContainerProps {
-  children: React.ReactNode;
   titleText: string;
   className?: string;
 }
