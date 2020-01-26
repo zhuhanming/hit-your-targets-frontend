@@ -1,10 +1,10 @@
 export const TOKEN_KEY = 'authToken';
 
-const getToken = () => {
+const getToken = (): string | null => {
   return localStorage.getItem(TOKEN_KEY);
 };
 
-const storeToken = response => {
+const storeToken = (response): Promise<null> => {
   if (response.status === 200 || response.status === 201) {
     localStorage.setItem(TOKEN_KEY, response.data[TOKEN_KEY]);
     return Promise.resolve(null);
@@ -12,7 +12,7 @@ const storeToken = response => {
   return Promise.reject(new Error(response.statusText));
 };
 
-const removeToken = () => {
+const removeToken = (): void => {
   localStorage.removeItem(TOKEN_KEY);
 };
 
