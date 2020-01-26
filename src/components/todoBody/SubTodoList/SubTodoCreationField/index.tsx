@@ -8,7 +8,14 @@ import { useTodo } from 'contexts/todoContext';
 
 import './SubTodoCreationField.scss';
 
-const SubTodoCreationField = ({
+interface SubTodoCreationFieldProps {
+  id: number;
+  todoStartTime: string;
+  todoEndTime: string;
+  isFullyCompleted: boolean;
+}
+
+const SubTodoCreationField: React.SFC<SubTodoCreationFieldProps> = ({
   id,
   todoStartTime,
   todoEndTime,
@@ -16,11 +23,15 @@ const SubTodoCreationField = ({
 }) => {
   const { createSubTodo, updateTodo } = useTodo();
   const { theme } = useTheme();
-  const { register, handleSubmit } = useForm({
+
+  type FormData = {
+    title: string;
+  };
+  const { register, handleSubmit } = useForm<FormData>({
     reValidateMode: 'onSubmit'
   });
 
-  const onSubmit = async (data, e) => {
+  const onSubmit = (data, e): void => {
     if (data.title.length === 0) {
       toast.info(
         'Type your subtask into the field above and press enter to create it!'
@@ -35,9 +46,9 @@ const SubTodoCreationField = ({
         completed: false
       };
       try {
-        await createSubTodo(id, code);
+        createSubTodo(id, code);
         if (isFullyCompleted) {
-          await updateTodo(id, {
+          updateTodo(id, {
             completed: false
           });
         }
@@ -48,6 +59,7 @@ const SubTodoCreationField = ({
       }
     }
   };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="subtodo-field">
       <div className="control">
