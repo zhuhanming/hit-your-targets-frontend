@@ -5,7 +5,17 @@ import PageSection from 'components/pageSection';
 
 import './PageContainer.scss';
 
-const PageContainer = ({ children, titleText, className = '' }) => {
+interface PageContainerProps {
+  children: React.ReactNode;
+  titleText: string;
+  className?: string;
+}
+
+const PageContainer: React.SFC<PageContainerProps> = ({
+  children,
+  titleText,
+  className = ''
+}) => {
   // children should be wrapped up in column
   return (
     <div className={`page-container ${className}`}>
