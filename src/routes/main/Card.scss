@@ -1,6 +1,7 @@
 .main-card {
   display: flex;
   flex-direction: column;
+  height: 100%;
 
   &__title {
     font-weight: bold;
@@ -9,6 +10,7 @@
   }
 
   &__body {
-    height: 100%;
+    flex: 1;
+    overflow: hidden;
   }
 }

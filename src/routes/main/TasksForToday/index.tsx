@@ -67,7 +67,7 @@ const TasksForToday: React.SFC<TasksForToday> = ({
 
   return (
     <div className="tasks">
-      <ul className="todo-list">
+      <ul className="main-todo-list">
         <TransitionGroup>{items}</TransitionGroup>
       </ul>
       <button type="button" className="is-size-7 tasks__cta as-non-button">

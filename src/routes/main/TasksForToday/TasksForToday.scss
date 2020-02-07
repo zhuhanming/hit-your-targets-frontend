@@ -5,10 +5,10 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  overflow: visible;
 
-  .todo-list {
-    overflow: visible;
+  .main-todo-list {
+    overflow: hidden;
+    flex: 1;
   }
 
   &__cta {
