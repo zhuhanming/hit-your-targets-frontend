@@ -28,6 +28,15 @@
     &::-webkit-scrollbar {
       display: none;
     }
+
+    &--kanban {
+      width: 100%;
+      padding: 0.5rem 2rem;
+
+      @media only screen and (max-width: $tablet) {
+        padding: 1rem;
+      }
+    }
   }
 
   &__top-bar {

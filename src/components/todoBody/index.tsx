@@ -19,12 +19,14 @@ interface TodoBodyProps {
   todo: ToDo;
   setFocus: (id: number | null) => void;
   isMobile?: boolean;
+  isKanban?: boolean;
 }
 
 const TodoBody: React.SFC<TodoBodyProps> = ({
   todo,
   setFocus,
-  isMobile = false
+  isMobile = false,
+  isKanban = false
 }) => {
   const { updateTodo } = useTodo();
   const { theme } = useTheme();
@@ -42,37 +44,41 @@ const TodoBody: React.SFC<TodoBodyProps> = ({
 
   useEffect(() => {
     autosize(document.querySelectorAll('textarea'));
-  }, []);
+  }, [todo]);
 
-  const handleTodoBlur = (): void => {
+  const handleTodoBlur = async (): Promise<void> => {
     try {
       const newState = getValues();
       if (newState.title.length === 0) {
         toast.error('Your task title cannot be empty!');
         setValue('title', title, true);
-        autosize.update(document.querySelectorAll('textarea'));
       } else if (newState.title.length > 80) {
         toast.error('Your task name is too long! Remember, short and sweet!');
         setValue('title', title, true);
-        autosize.update(document.querySelectorAll('textarea'));
       } else if (!_.isEqual(newState, initialState)) {
-        updateTodo(id, newState);
+        await updateTodo(id, newState);
         toast.success(`Nice! ${newState.title} updated!`);
       }
+      autosize.update(document.querySelectorAll('textarea'));
     } catch (error) {
       Sentry.captureException(error);
     }
   };
 
   return (
-    <div className="todo-body__container" key={`todo-body-${id}`}>
+    <div
+      className={`todo-body__container ${
+        isKanban && !isMobile ? 'todo-body__container--kanban' : ''
+      }`}
+      key={`todo-body-${id}`}
+    >
       {isMobile && (
         <button
           type="button"
           className="as-non-button todo-body__back"
           onClick={(): void => setFocus(null)}
         >
-          &larr;&nbsp;&nbsp;&nbsp;Back to List
+          &larr;&nbsp;&nbsp;&nbsp;Back to {isKanban ? 'Kanban' : 'List'}
         </button>
       )}
       <form className="todo-body" key={`form-${id}`}>
