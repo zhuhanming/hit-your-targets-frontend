@@ -34,6 +34,15 @@
     @media only screen and (min-width: $tablet) {
       width: 50rem;
     }
+
+    overflow: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    position: relative;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
   &__overlay {
     display: flex;
