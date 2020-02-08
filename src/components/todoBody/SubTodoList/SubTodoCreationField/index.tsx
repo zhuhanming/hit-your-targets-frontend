@@ -32,7 +32,7 @@ const SubTodoCreationField: React.SFC<SubTodoCreationFieldProps> = ({
     reValidateMode: 'onSubmit'
   });
 
-  const onSubmit = (data, e): void => {
+  const onSubmit = async (data, e): Promise<void> => {
     if (data.title.length === 0) {
       toast.info(
         'Type your subtask into the field above and press enter to create it!'
@@ -47,9 +47,9 @@ const SubTodoCreationField: React.SFC<SubTodoCreationFieldProps> = ({
         completed: false
       };
       try {
-        createSubTodo(id, code);
+        await createSubTodo(id, code);
         if (isFullyCompleted) {
-          updateTodo(id, {
+          await updateTodo(id, {
             completed: false
           });
         }

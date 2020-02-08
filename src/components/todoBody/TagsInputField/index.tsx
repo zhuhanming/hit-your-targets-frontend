@@ -21,7 +21,7 @@ const TagsInputField: React.SFC<TagsInputFieldProps> = ({ todo }) => {
   const { id, tags } = todo;
   const { length } = tags;
 
-  const handleChange = (updatedTags: string[]): void => {
+  const handleChange = async (updatedTags: string[]): Promise<void> => {
     if (length >= 5 && updatedTags.length >= length) {
       toast.info('You can only have up to 5 tags for every task!');
     } else {
@@ -31,7 +31,7 @@ const TagsInputField: React.SFC<TagsInputFieldProps> = ({ todo }) => {
       } else {
         const code = { tags: newTags };
         try {
-          updateTodo(id, code);
+          await updateTodo(id, code);
           toast.success('Tags updated!');
         } catch (error) {
           Sentry.captureException(error);

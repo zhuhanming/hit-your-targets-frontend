@@ -29,10 +29,10 @@ const TodoBodyHeader: React.SFC<TodoBodyHeaderProps> = ({
   const { title, id, subtodos, completed, updatedAt } = todo;
   const hasSubtodos = subtodos.length > 0;
 
-  const handleComplete = (): void => {
+  const handleComplete = async (): Promise<void> => {
     if (Array.isArray(subtodos) && subtodos.length === 0) {
       try {
-        updateTodo(id, {
+        await updateTodo(id, {
           completed: !completed,
           completeTime: moment().format()
         });
@@ -48,9 +48,9 @@ const TodoBodyHeader: React.SFC<TodoBodyHeaderProps> = ({
     }
   };
 
-  const deleteItem = (): void => {
+  const deleteItem = async (): Promise<void> => {
     try {
-      deleteTodo(id);
+      await deleteTodo(id);
       toast.success(`${title} has been deleted!`);
       setFocus(null);
     } catch (error) {

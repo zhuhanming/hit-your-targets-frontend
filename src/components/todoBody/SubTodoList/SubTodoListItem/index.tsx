@@ -55,7 +55,7 @@ const SubTodoListItem: React.FC<SubTodoListItemProps> = ({
   const todoStartTimeDate = new Date(Date.parse(todoStartTime));
   const todoEndTimeDate = new Date(Date.parse(todoEndTime));
 
-  const handleSubTodoBlur = (): void => {
+  const handleSubTodoBlur = async (): Promise<void> => {
     try {
       const newState = getValues();
       if (newState.title.length === 0) {
@@ -67,21 +67,22 @@ const SubTodoListItem: React.FC<SubTodoListItemProps> = ({
           'Your subtask name is too long! Remember, short and sweet!'
         );
       } else if (newState.title !== title) {
-        updateSubTodo(todoId, id, newState);
+        await updateSubTodo(todoId, id, newState);
         toast.success(`Nice! ${newState.title} updated!`);
+        autosize.update(document.querySelectorAll('textarea'));
       }
     } catch (error) {
       Sentry.captureException(error);
     }
   };
 
-  const handleCheck = (): void => {
+  const handleCheck = async (): Promise<void> => {
     try {
-      updateSubTodo(todoId, id, {
+      await updateSubTodo(todoId, id, {
         completed: !completed
       });
       if (isOneAwayFromCompletion || isFullyCompleted) {
-        updateTodo(todoId, {
+        await updateTodo(todoId, {
           completed: !completed
         });
       }
@@ -110,23 +111,23 @@ const SubTodoListItem: React.FC<SubTodoListItemProps> = ({
     }
   };
 
-  const handleStartTimeChange = (date: string): void => {
+  const handleStartTimeChange = async (date: string): Promise<void> => {
     if (Date.parse(date) === Date.parse(startTime)) return;
     try {
       if (new Date(Date.parse(date)) < startTimeDate) {
-        updateSubTodo(todoId, id, { startTime: moment(date).format() });
+        await updateSubTodo(todoId, id, { startTime: moment(date).format() });
         toast.success(`Nice! ${title} updated!`);
       } else {
         const newEndTime =
           Date.parse(endTime) + (Date.parse(date) - Date.parse(startTime));
         if (newEndTime < Date.parse(todoEndTime)) {
-          updateSubTodo(todoId, id, {
+          await updateSubTodo(todoId, id, {
             startTime: moment(date).format(),
             endTime: moment(newEndTime).format()
           });
           toast.success(`Nice! ${title} updated!`);
         } else {
-          updateSubTodo(todoId, id, {
+          await updateSubTodo(todoId, id, {
             startTime: moment(date).format(),
             endTime: moment(todoEndTime).format()
           });
@@ -138,11 +139,11 @@ const SubTodoListItem: React.FC<SubTodoListItemProps> = ({
     }
   };
 
-  const handleEndTimeChange = (date: string): void => {
+  const handleEndTimeChange = async (date: string): Promise<void> => {
     const newDate = new Date(Date.parse(date));
     if (newDate > startTimeDate && newDate <= todoEndTimeDate)
       try {
-        updateSubTodo(todoId, id, { endTime: moment(date).format() });
+        await updateSubTodo(todoId, id, { endTime: moment(date).format() });
         toast.success(`Nice! ${title} updated!`);
       } catch (error) {
         Sentry.captureException(error);
@@ -153,9 +154,9 @@ const SubTodoListItem: React.FC<SubTodoListItemProps> = ({
       );
   };
 
-  const handleDelete = (): void => {
+  const handleDelete = async (): Promise<void> => {
     try {
-      deleteSubTodo(todoId, id);
+      await deleteSubTodo(todoId, id);
       setIsModalOpen(false);
       toast.success(`${title} has been deleted!`);
     } catch (error) {
@@ -232,7 +233,7 @@ const SubTodoListItem: React.FC<SubTodoListItemProps> = ({
                     timeIntervals={15}
                     timeCaption="Time"
                     dateFormat="d MMM yy, HH:mm aa"
-                    onChange={(date: string): void =>
+                    onChange={(date: string): Promise<void> =>
                       handleStartTimeChange(date)
                     }
                   />
@@ -251,7 +252,9 @@ const SubTodoListItem: React.FC<SubTodoListItemProps> = ({
                     timeIntervals={15}
                     timeCaption="Time"
                     dateFormat="d MMM yy, HH:mm aa"
-                    onChange={(date: string): void => handleEndTimeChange(date)}
+                    onChange={(date: string): Promise<void> =>
+                      handleEndTimeChange(date)
+                    }
                   />
                 </div>
               </div>

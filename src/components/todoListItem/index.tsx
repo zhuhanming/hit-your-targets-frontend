@@ -36,12 +36,12 @@ const TodoListItem: React.SFC<TodoListItemProps> = ({
   const hasSubtodos = subtodos.length > 0;
   const warning = isWarning(endTime);
 
-  const handleCheck = (): void => {
+  const handleCheck = async (): Promise<void> => {
     if (!isExpanded || isInFocus) {
       if (!hasSubtodos) {
         try {
           setIsChecked(true);
-          updateTodo(id, {
+          await updateTodo(id, {
             completed: !completed,
             completeTime: moment().format()
           });
