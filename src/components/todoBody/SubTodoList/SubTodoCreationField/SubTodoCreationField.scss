@@ -7,24 +7,26 @@
     padding: 0;
     box-shadow: none;
     color: $dark;
+    font-weight: lighter;
+
+    &::-webkit-input-placeholder {
+      color: $dark;
+    }
+    &:-moz-placeholder {
+      color: $dark;
+    }
+    &::-moz-placeholder {
+      color: $dark;
+    }
+    &:-ms-input-placeholder {
+      color: $dark;
+    }
+    &::placeholder {
+      color: $dark;
+    }
 
     &.dark {
       color: $black;
-      &::-webkit-input-placeholder {
-        color: $dark;
-      }
-      &:-moz-placeholder {
-        color: $dark;
-      }
-      &::-moz-placeholder {
-        color: $dark;
-      }
-      &:-ms-input-placeholder {
-        color: $dark;
-      }
-      &::placeholder {
-        color: $dark;
-      }
     }
 
     &:focus {
