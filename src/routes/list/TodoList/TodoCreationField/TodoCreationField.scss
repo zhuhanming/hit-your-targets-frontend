@@ -3,6 +3,7 @@
 .todo-field {
   padding-top: 0.5rem;
   padding-bottom: 0.6rem;
+  width: 100%;
 
   &__input {
     background: $grey-light;
@@ -12,5 +13,34 @@
 
   &__validation {
     display: none;
+  }
+
+  &__buttons {
+    margin-top: 0.7rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    button {
+      flex-grow: 1;
+    }
+
+    .is-submit {
+      margin-right: 0.3rem;
+      background: $orange-dark;
+      transition: background-color $change-theme-duration;
+      color: $white;
+      font-weight: bold;
+
+      &.dark {
+        background: $purple-light;
+        transition: background-color $change-theme-duration;
+      }
+    }
+
+    .is-cancel {
+      margin-left: 0.3rem;
+    }
   }
 }

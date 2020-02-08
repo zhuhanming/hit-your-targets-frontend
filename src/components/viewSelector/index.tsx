@@ -11,9 +11,13 @@ import './ViewSelector.scss';
 
 interface ViewSelectorProps {
   isMobile?: boolean;
+  isKanban?: boolean;
 }
 
-const ViewSelector: React.SFC<ViewSelectorProps> = ({ isMobile = false }) => {
+const ViewSelector: React.SFC<ViewSelectorProps> = ({
+  isMobile = false,
+  isKanban = false
+}) => {
   const { viewSelected, updateView } = useView();
   const { searchType } = useSearch();
   const dispatch = useDispatch();
@@ -33,50 +37,77 @@ const ViewSelector: React.SFC<ViewSelectorProps> = ({ isMobile = false }) => {
     }
   };
 
+  const options = isKanban ? (
+    <>
+      <button
+        type="button"
+        className={`as-non-button ${theme} ${
+          viewSelected === View.ALL ? 'is-active' : ''
+        }`}
+        onClick={(): void => handleViewClick(View.ALL)}
+      >
+        In Progress
+      </button>{' '}
+      |{' '}
+      <button
+        type="button"
+        className={`as-non-button ${theme} ${
+          viewSelected === View.COMPLETED ? 'is-active' : ''
+        }`}
+        onClick={(): void => handleViewClick(View.COMPLETED)}
+      >
+        Completed
+      </button>
+    </>
+  ) : (
+    <>
+      <button
+        type="button"
+        className={`as-non-button ${theme} ${
+          viewSelected === View.TODAY ? 'is-active' : ''
+        }`}
+        onClick={(): void => handleViewClick(View.TODAY)}
+      >
+        Today
+      </button>{' '}
+      |{' '}
+      <button
+        type="button"
+        className={`as-non-button ${theme} ${
+          viewSelected === View.NEXT_SEVEN_DAYS ? 'is-active' : ''
+        }`}
+        onClick={(): void => handleViewClick(View.NEXT_SEVEN_DAYS)}
+      >
+        Next 7 Days
+      </button>{' '}
+      |{' '}
+      <button
+        type="button"
+        className={`as-non-button ${theme} ${
+          viewSelected === View.ALL ? 'is-active' : ''
+        }`}
+        onClick={(): void => handleViewClick(View.ALL)}
+      >
+        All
+      </button>{' '}
+      |{' '}
+      <button
+        type="button"
+        className={`as-non-button ${theme} ${
+          viewSelected === View.COMPLETED ? 'is-active' : ''
+        }`}
+        onClick={(): void => handleViewClick(View.COMPLETED)}
+      >
+        Completed
+      </button>
+    </>
+  );
+
   return (
     <div className="selector">
       <div className="selector__view">
         <p className="">
-          <span>View:</span>{' '}
-          <button
-            type="button"
-            className={`as-non-button ${theme} ${
-              viewSelected === View.TODAY ? 'is-active' : ''
-            }`}
-            onClick={(): void => handleViewClick(View.TODAY)}
-          >
-            Today
-          </button>{' '}
-          |{' '}
-          <button
-            type="button"
-            className={`as-non-button ${theme} ${
-              viewSelected === View.NEXT_SEVEN_DAYS ? 'is-active' : ''
-            }`}
-            onClick={(): void => handleViewClick(View.NEXT_SEVEN_DAYS)}
-          >
-            Next 7 Days
-          </button>{' '}
-          |{' '}
-          <button
-            type="button"
-            className={`as-non-button ${theme} ${
-              viewSelected === View.ALL ? 'is-active' : ''
-            }`}
-            onClick={(): void => handleViewClick(View.ALL)}
-          >
-            All
-          </button>{' '}
-          |{' '}
-          <button
-            type="button"
-            className={`as-non-button ${theme} ${
-              viewSelected === View.COMPLETED ? 'is-active' : ''
-            }`}
-            onClick={(): void => handleViewClick(View.COMPLETED)}
-          >
-            Completed
-          </button>
+          <span>View:</span> {options}
         </p>
       </div>
       <div className="selector__tag">

@@ -12,13 +12,15 @@ interface TodoContainerProps {
   setFocus: (id: number | null) => void;
   todos: ToDo[];
   isMobile?: boolean;
+  isKanban?: boolean;
 }
 
 const TodoContainer: React.SFC<TodoContainerProps> = ({
   id,
   setFocus,
   todos,
-  isMobile = false
+  isMobile = false,
+  isKanban = false
 }) => {
   const { searchType } = useSearch();
   if (id === null) return <></>;
@@ -38,7 +40,12 @@ const TodoContainer: React.SFC<TodoContainerProps> = ({
     <div className="todo-container">
       <div className="columns is-marginless is-multiline todo-container__columns">
         <div className="column is-full todo-container__column">
-          <TodoBody todo={todo} setFocus={setFocus} isMobile={isMobile} />
+          <TodoBody
+            todo={todo}
+            setFocus={setFocus}
+            isMobile={isMobile}
+            isKanban={isKanban}
+          />
         </div>
       </div>
     </div>

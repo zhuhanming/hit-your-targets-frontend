@@ -5,18 +5,32 @@ import * as Sentry from '@sentry/browser';
 
 import { useTodo } from 'contexts/todoContext';
 import { useView } from 'contexts/viewContext';
+import { useTheme } from 'contexts/themeContext';
 import { useForm } from 'react-hook-form';
 import { View } from 'interfaces/ViewContext';
 import { toast } from 'react-toastify';
 
 import './TodoCreationField.scss';
 
-const TodoCreationField: React.SFC = () => {
+interface TodoCreationField {
+  isKanban?: boolean;
+  cancelCallback?: () => void;
+}
+
+const TodoCreationField: React.SFC<TodoCreationField> = ({
+  isKanban = false,
+  cancelCallback = () => {
+    Sentry.captureMessage(
+      'Missing cancelCallback function in TodoCreationField!'
+    );
+  }
+}) => {
   const { viewSelected, updateView } = useView();
   const { createTodo } = useTodo();
   const { register, handleSubmit } = useForm({
     reValidateMode: 'onSubmit'
   });
+  const { theme } = useTheme();
   const onSubmit = async (data, e): Promise<void> => {
     if (data.title.length === 0) {
       toast.info(
@@ -48,16 +62,21 @@ const TodoCreationField: React.SFC = () => {
         if (viewSelected === View.COMPLETED) {
           updateView(View.TODAY);
         }
+        if (isKanban) {
+          cancelCallback();
+        }
       } catch (error) {
         Sentry.captureException(error);
       }
     }
   };
 
-  const placeholderText =
-    viewSelected === View.NEXT_SEVEN_DAYS
-      ? 'Press enter to create a task due this week.'
-      : 'Press enter to create a task due today.';
+  // eslint-disable-next-line no-nested-ternary
+  const placeholderText = isKanban
+    ? 'Create a task due today.'
+    : viewSelected === View.NEXT_SEVEN_DAYS
+    ? 'Press enter to create a task due this week.'
+    : 'Press enter to create a task due today.';
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="todo-field">
@@ -69,8 +88,24 @@ const TodoCreationField: React.SFC = () => {
           autoComplete="off"
           placeholder={placeholderText}
           ref={register}
+          // eslint-disable-next-line jsx-a11y/no-autofocus
+          autoFocus={isKanban}
         />
       </div>
+      {isKanban && (
+        <div className="field todo-field__buttons">
+          <button type="submit" className={`button is-submit ${theme}`}>
+            Submit
+          </button>
+          <button
+            type="button"
+            className="button is-cancel is-light has-text-dark"
+            onClick={cancelCallback}
+          >
+            Cancel
+          </button>
+        </div>
+      )}
     </form>
   );
 };
