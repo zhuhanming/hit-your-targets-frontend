@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 
 import TodoContextInterface from 'interfaces/TodoContext';
-// import RootStateInterface from 'interfaces/RootState';
 import {
   setToDos,
   setToDoError,
@@ -20,8 +19,6 @@ const TodoContext = React.createContext<TodoContextInterface | undefined>(
 
 const TodoProvider: React.SFC = props => {
   const dispatch = useDispatch();
-  // const selectTodos = (state: RootStateInterface) => state.todos;
-  // const { todos } = useSelector(selectTodos);
 
   const loadTodos = (): void => {
     const fetchData = async (): Promise<void> => {

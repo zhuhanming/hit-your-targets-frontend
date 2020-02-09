@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import * as Sentry from '@sentry/browser';
 
 import ViewContextInterface, { View } from 'interfaces/ViewContext';
 import RootStateInterface from 'interfaces/RootState';
@@ -7,8 +8,11 @@ import { setView, CurrentMisc } from 'reducers/MiscDux';
 
 const defaultContextData = {
   viewSelected: View.TODAY,
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  updateView: (newView: View): void => {}
+  updateView: (newView: View): void => {
+    Sentry.captureMessage(
+      `updateView was not initalised properly - newView: ${newView}`
+    );
+  }
 };
 
 const ViewContext = React.createContext<ViewContextInterface>(
