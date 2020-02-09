@@ -16,6 +16,7 @@ interface SubTodoCreationFieldProps {
   isFullyCompleted: boolean;
 }
 
+// Input field to create subtodo
 const SubTodoCreationField: React.SFC<SubTodoCreationFieldProps> = ({
   id,
   todoStartTime,
@@ -25,6 +26,7 @@ const SubTodoCreationField: React.SFC<SubTodoCreationFieldProps> = ({
   const { createSubTodo, updateTodo } = useTodo();
   const { theme } = useTheme();
 
+  // Create input form
   type FormData = {
     title: string;
   };
@@ -32,12 +34,15 @@ const SubTodoCreationField: React.SFC<SubTodoCreationFieldProps> = ({
     reValidateMode: 'onSubmit'
   });
 
+  // Handle creation logic
   const onSubmit = async (data, e): Promise<void> => {
     if (data.title.length === 0) {
+      // Empty subtodo - return
       toast.info(
         'Type your subtask into the field above and press enter to create it!'
       );
     } else if (data.title.length > 60) {
+      // Subtodo too long - return
       toast.error('Your subtask name is too long! Remember, short and sweet!');
     } else {
       const code = {

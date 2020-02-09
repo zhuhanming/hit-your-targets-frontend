@@ -15,24 +15,27 @@ import SearchBar from 'components/searchBar';
 
 import './KanbanSearch.scss';
 
+// The content in the dropdown window of Search in Kanban View
 const KanbanSearch: React.SFC = () => {
   const dispatch = useDispatch();
   const { searchType, searchLogic, tags } = useSearch();
 
+  // Change between searching by Title and by Tags
   const handleChangeSearch = (newSearchType: SearchType): void => {
     if (newSearchType !== searchType) {
       dispatch(setSearch(newSearchType));
     }
   };
 
+  // Change between searching for tasks with ALL tags and tasks with ANY tags
   const handleChangeSearchLogic = (newSearchLogic: SearchLogic): void => {
     if (newSearchLogic !== searchLogic) {
       dispatch(setSearchLogic(newSearchLogic));
     }
   };
 
+  // Delete tag - used as tags are displayed outside of input
   const handleDeleteTag = (tagToRemove: string): void => {
-    console.log(tagToRemove);
     let newTags = tags.slice();
     newTags = newTags.filter(t => t !== tagToRemove);
     dispatch(setTags(newTags));
@@ -67,7 +70,7 @@ const KanbanSearch: React.SFC = () => {
               searchLogic === SearchLogic.ALL ? 'is-active' : ''
             }`}
             type="button"
-            onClick={() => handleChangeSearchLogic(SearchLogic.ALL)}
+            onClick={(): void => handleChangeSearchLogic(SearchLogic.ALL)}
           >
             All
           </button>{' '}
@@ -77,7 +80,7 @@ const KanbanSearch: React.SFC = () => {
               searchLogic === SearchLogic.ANY ? 'is-active' : ''
             }`}
             type="button"
-            onClick={() => handleChangeSearchLogic(SearchLogic.ANY)}
+            onClick={(): void => handleChangeSearchLogic(SearchLogic.ANY)}
           >
             Any
           </button>

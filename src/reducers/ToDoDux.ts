@@ -7,8 +7,8 @@ import ToDo from 'interfaces/ToDo';
 export interface CurrentToDos {
   todos: ToDo[];
   isTodoError: boolean;
-  incompleteOrder: number[];
-  completeOrder: number[];
+  incompleteOrder: number[]; // Order for Kanban View to map with
+  completeOrder: number[]; // Order for Kanban View to map with
 }
 
 const initialState: CurrentToDos = {
@@ -22,6 +22,8 @@ const todos = createSlice({
   name: 'todos',
   initialState,
   reducers: {
+    // When setting todos, check if the current orders are updated
+    // If not updated, manually update. Risks overwriting data but unlikely to occur
     setToDos: (state, action: PayloadAction<ToDo[]>): void => {
       state.todos = action.payload;
       state.isTodoError = false;
@@ -44,6 +46,8 @@ const todos = createSlice({
         state.incompleteOrder = incompleteTodoIds;
       }
     },
+    // Updates the todo
+    // Updates the orders if there's a change in completed status of the todo
     updateToDo: (state, action: PayloadAction<ToDo>): void => {
       const foundIndex = state.todos.findIndex(x => x.id === action.payload.id);
       const initialCompleted = state.todos[foundIndex].completed;
@@ -74,12 +78,14 @@ const todos = createSlice({
         }
       }
     },
+    // Add todo and update incompleteOrder
     addToDo: (state, action: PayloadAction<ToDo>): void => {
       state.todos.push(action.payload);
       state.incompleteOrder.push(action.payload.id);
       state.todos.sort((a, b) => Date.parse(a.endTime) - Date.parse(b.endTime));
       state.isTodoError = false;
     },
+    // Delete todo and remove todo id from the order it was in
     deleteToDo: (state, action: PayloadAction<number>): void => {
       state.todos = state.todos.filter(x => x.id !== action.payload);
       state.completeOrder = state.completeOrder.filter(
@@ -96,6 +102,7 @@ const todos = createSlice({
     setIncompleteOrder: (state, action: PayloadAction<number[]>): void => {
       state.incompleteOrder = action.payload;
     },
+    // Just in case - not utilised in app
     setToDoError: (state): void => {
       state.isTodoError = true;
     }

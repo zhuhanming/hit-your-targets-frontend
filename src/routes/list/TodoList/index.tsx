@@ -27,6 +27,7 @@ interface TodoListProps {
   isMobile?: boolean;
 }
 
+// Left side of screen - list of tasks in List View
 const TodoList: React.SFC<TodoListProps> = ({
   todos,
   isLoading,

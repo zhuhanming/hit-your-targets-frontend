@@ -3,6 +3,7 @@ import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
 import './FunFact.scss';
 
+// Fun Fact in Loading State
 const FunFactGhost: React.SFC = () => {
   return (
     <div className="fun-fact">

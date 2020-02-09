@@ -20,6 +20,7 @@ interface LoadingProps {
   className?: string;
 }
 
+// The default loading screen
 const Loading: React.SFC<LoadingProps> = ({ className = '' }) => {
   const { theme } = useTheme();
   return (

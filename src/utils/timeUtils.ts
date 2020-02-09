@@ -16,6 +16,7 @@ const isThisWeek = (date: moment.Moment): boolean => {
   );
 };
 
+// Returns a meaningful display date
 const getDisplayDate = (endTime: string): string => {
   const endTimeDate = moment(endTime);
   if (isToday(endTimeDate)) {
@@ -36,11 +37,14 @@ const getDisplayDate = (endTime: string): string => {
   return endTimeDate.format('D MMM');
 };
 
-const isWarning = (endTime: string) => {
+// Checks if the display date should be red
+// Condition is that the deadline being today or before
+const isWarning = (endTime: string): boolean => {
   const endTimeDate = moment(endTime);
   return endTimeDate.isSameOrBefore(moment(), 'day');
 };
 
+// Used for Progress Overview
 const getDaysRemaining = (endTime: string, completed: boolean): string => {
   const endTimeDate = moment(endTime);
   if (isToday(endTimeDate)) {
@@ -63,6 +67,7 @@ const getDaysRemaining = (endTime: string, completed: boolean): string => {
   return `${numberOfDays} ${numberOfDays === 1 ? 'DAY' : 'DAYS'} REMAINING`;
 };
 
+// Used when changing todo deadline
 const getLatestDeadline = (subtodos: SubToDo[]): Date => {
   return new Date(
     subtodos.reduce((a, b) => {

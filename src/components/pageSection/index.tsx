@@ -6,6 +6,7 @@ interface PageSectionProps {
   className?: string;
 }
 
+// Standardised PageSection for routes to utilise
 const PageSection: React.SFC<PageSectionProps> = ({
   children,
   className = ''

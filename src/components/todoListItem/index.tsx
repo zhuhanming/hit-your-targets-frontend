@@ -20,13 +20,15 @@ interface TodoListItemProps {
   focus?: null | number;
 }
 
+// Individual list item in a todo list - used in Main and List View
 const TodoListItem: React.SFC<TodoListItemProps> = ({
   todo,
-  isExpanded = false,
+  isExpanded = false, // isExpanded is true for List View
   currentKey,
   keyLimit,
   focus = null,
   setFocus = (id: number | null): void => {
+    // Initial declaration
     Sentry.captureMessage(
       `setFocus function has not been passed in correctly - todo id: ${id}`
     );
@@ -40,8 +42,11 @@ const TodoListItem: React.SFC<TodoListItemProps> = ({
   const hasSubtodos = subtodos.length > 0;
   const warning = isWarning(endTime);
 
+  // Handle change in completion status of task
   const handleCheck = async (): Promise<void> => {
+    // If the click happened in Main OR in List View but the task is already in focus
     if (!isExpanded || isInFocus) {
+      // Tasks cannot be completed directly when they have subtasks
       if (!hasSubtodos) {
         try {
           setIsChecked(true);
@@ -61,10 +66,12 @@ const TodoListItem: React.SFC<TodoListItemProps> = ({
         }
       }
     } else {
+      // Set List View focus to this task
       setFocus(id);
     }
   };
 
+  // Uses tooltips fervently to indicate to users what can or cannot be done
   return (
     <li
       className={`list-item ${
@@ -91,6 +98,7 @@ const TodoListItem: React.SFC<TodoListItemProps> = ({
         name={id.toString()}
         checked={isChecked}
         onChange={handleCheck}
+        // Shows interminate state if subtasks are found
         // eslint-disable-next-line no-param-reassign
         ref={(el: HTMLInputElement): boolean =>
           // eslint-disable-next-line no-param-reassign

@@ -21,7 +21,7 @@ const ProgressOverviewItem: React.SFC<ProgressOverviewItemProps> = ({
   const { theme } = useTheme();
   const { title, endTime, completed, subtodos } = todo;
   const displayDate = getDisplayDate(endTime);
-  const warning = isWarning(endTime);
+  const warning = isWarning(endTime); // check if display date needs to be red
   const daysRemaining = getDaysRemaining(endTime, completed);
   const progressAmount = completed ? 100 : getProgress(subtodos);
 

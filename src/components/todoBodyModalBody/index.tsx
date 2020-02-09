@@ -13,6 +13,7 @@ interface TodoBodyModalBodyProps {
   setFocus: (id: number | null) => void;
 }
 
+// Container for holding todo in modal
 const TodoBodyModalBody: React.SFC<TodoBodyModalBodyProps> = ({
   id,
   todos,

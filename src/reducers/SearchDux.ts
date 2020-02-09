@@ -25,6 +25,7 @@ const initialState: CurrentSearch = {
   searchLogic: SearchLogic.ALL
 };
 
+// Contains current SearchType, title being searched, tags being searched, and the logic for tag searching
 const search = createSlice({
   name: 'search',
   initialState,
@@ -32,6 +33,7 @@ const search = createSlice({
     startSearch: (state): void => {
       if (!state.searchType) state.searchType = SearchType.TITLE;
     },
+    // Clears all info for search
     cancelSearch: (state): void => {
       if (state.searchType) {
         state.searchType = null;

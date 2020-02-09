@@ -9,19 +9,18 @@ const persistConfig = {
   storage
 };
 
+// To support the persisting of redux across sessions
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const customizedMiddleware = getDefaultMiddleware({
-  serializableCheck: false
-});
-
+// Creation of redux store
 const store = configureStore({
   reducer: persistedReducer,
-  middleware: customizedMiddleware
+  middleware: getDefaultMiddleware()
 });
 
 export const persistor = persistStore(store);
 
+// Settings to aid development
 if (process.env.NODE_ENV === 'development' && module.hot) {
   module.hot.accept('reducers/rootReducer', () => {
     // eslint-disable-next-line global-require

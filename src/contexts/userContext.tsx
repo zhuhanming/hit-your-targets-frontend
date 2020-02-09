@@ -6,6 +6,7 @@ const UserContext = React.createContext<UserContextInterface | undefined>(
   undefined
 );
 
+// Allows user data to be accessible from everywhere
 const UserProvider: React.SFC = props => {
   const { data } = useAuth();
   return <UserContext.Provider value={data} {...props} />;

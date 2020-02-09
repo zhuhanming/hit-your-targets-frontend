@@ -15,6 +15,7 @@ interface TodoContainerProps {
   isKanban?: boolean;
 }
 
+// Container for Todo on right half of screen
 const TodoContainer: React.SFC<TodoContainerProps> = ({
   id,
   setFocus,

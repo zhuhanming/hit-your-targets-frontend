@@ -10,6 +10,7 @@ interface PageContainerProps {
   className?: string;
 }
 
+// Standardised PageContainer for routes to utilise
 const PageContainer: React.SFC<PageContainerProps> = ({
   children,
   titleText,

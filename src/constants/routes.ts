@@ -2,11 +2,7 @@ export const ROOT = '/';
 
 // Unauthed routes
 export const LOGIN = '/login';
-// export const FACEBOOK_CALLBACK = '/auth/callback';
-export const UNAUTHED_ROUTES = [
-  LOGIN
-  // FACEBOOK_CALLBACK
-];
+export const UNAUTHED_ROUTES = [LOGIN];
 
 // Authed routes
 export const HOME = '/home';

@@ -16,14 +16,13 @@ interface TodoBodyHeaderProps {
   todo: ToDo;
   setFocus: (id: number | null) => void;
   isMobile: boolean;
-  isKanban: boolean;
 }
 
+// Contains the checkbox, time since last update, and delete button
 const TodoBodyHeader: React.SFC<TodoBodyHeaderProps> = ({
   todo,
   setFocus,
-  isMobile,
-  isKanban
+  isMobile
 }) => {
   const { updateTodo, deleteTodo } = useTodo();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -31,8 +30,11 @@ const TodoBodyHeader: React.SFC<TodoBodyHeaderProps> = ({
   const { title, id, subtodos, completed, updatedAt } = todo;
   const hasSubtodos = subtodos.length > 0;
 
+  // Handle completion of task
   const handleComplete = async (): Promise<void> => {
+    // Task cannot be completed if it holds subtasks - it will become a container only
     if (Array.isArray(subtodos) && subtodos.length === 0) {
+      // No subtasks - change in completion allowed
       try {
         await updateTodo(id, {
           completed: !completed,
@@ -50,6 +52,7 @@ const TodoBodyHeader: React.SFC<TodoBodyHeaderProps> = ({
     }
   };
 
+  // Handle deletion of task
   const deleteItem = async (): Promise<void> => {
     try {
       await deleteTodo(id);

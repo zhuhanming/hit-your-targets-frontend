@@ -6,6 +6,7 @@ interface MainCardProps {
   title: string;
 }
 
+// Reusable Main Card Container
 const MainCard: React.SFC<MainCardProps> = ({ children, title }) => {
   return (
     <div className="main-card column is-one-third is-full-mobile ">

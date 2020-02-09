@@ -15,6 +15,7 @@ interface KanbanPanelHeaderProps {
   setTodoInFocus: (todo: number | null) => void;
 }
 
+// Contains checkbox, display date, title and vertical ellipsis
 const KanbanPanelHeader: React.SFC<KanbanPanelHeaderProps> = ({
   todo,
   setTodoInFocus
@@ -25,7 +26,9 @@ const KanbanPanelHeader: React.SFC<KanbanPanelHeaderProps> = ({
   const displayDate = getDisplayDate(endTime);
   const warning = isWarning(endTime);
 
+  // Check if change in completion is valid, then doing so
   const handleComplete = async (): Promise<void> => {
+    // Check iftasks have no subtodos
     if (Array.isArray(subtodos) && subtodos.length === 0) {
       try {
         await updateTodo(id, {
@@ -43,7 +46,8 @@ const KanbanPanelHeader: React.SFC<KanbanPanelHeaderProps> = ({
     }
   };
 
-  const handleModalOpen = () => {
+  // Passes the id upwards
+  const handleModalOpen = (): void => {
     setTodoInFocus(id);
   };
 

@@ -1,3 +1,4 @@
+// https://dev.to/goenning/how-to-retry-when-react-lazy-fails-mb5
 const retryPromise = (
   promise,
   retriesLeft = 5,
@@ -22,12 +23,14 @@ const retryPromise = (
   });
 };
 
+// Capitalises the word
 const capitalize = (word: string): string => {
   return word.replace(/(?:^|\s)\S/g, a => {
     return a.toUpperCase();
   });
 };
 
+// Get a random greeting for Main view
 const randomGreeting = (name: string): string => {
   const greetings = [
     `Welcome back, ${name}`,

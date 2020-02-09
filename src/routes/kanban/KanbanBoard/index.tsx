@@ -112,6 +112,7 @@ const KanbanBoard: React.SFC<KanbanBoardProps> = ({
               return <></>;
             })}
             <KanbanCreationPanel index={todoOrder.length} />
+            {/* Creates the gap at the end when scrolling - hacky fix due to CSS ignoring margin */}
             <div className="buffer">&nbsp;</div>
           </div>
         )}

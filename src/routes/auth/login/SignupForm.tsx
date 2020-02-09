@@ -51,6 +51,7 @@ const SignupForm: React.SFC<SignupFormProps> = ({
     });
   };
 
+  // Pass the email on to the login form
   const onChangeForm = (): void => {
     const value = getValues().email;
     handleChangeForm(value);

@@ -43,6 +43,7 @@ const login = async (code): Promise<null> => {
   return TokenUtils.storeToken(response);
 };
 
+// Unused since social media login was not implemented.
 const facebookLogin = async (code): Promise<null> => {
   const requestBody = {
     redirectUri: `${SITE_URL}/auth/callback`,
@@ -56,6 +57,7 @@ const facebookLogin = async (code): Promise<null> => {
   return TokenUtils.storeToken(response);
 };
 
+// Unused since social media login was not implemented.
 const getFacebookRedirect = (): Promise<any> => {
   return ApiService.get(`/auth/facebook`, {
     params: {

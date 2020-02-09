@@ -27,6 +27,7 @@ const initialState: CurrentMisc = {
   }
 };
 
+// Contains user information, theme, view selected and fun fact of the day
 const misc = createSlice({
   name: 'misc',
   initialState,

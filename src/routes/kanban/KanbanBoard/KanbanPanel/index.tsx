@@ -15,6 +15,7 @@ interface KanbanPanelProps {
   setTodoInFocus: (todo: number | null) => void;
 }
 
+// Each individual todo is a panel on the Kanban Board
 const KanbanPanel: React.SFC<KanbanPanelProps> = ({
   todo,
   index,

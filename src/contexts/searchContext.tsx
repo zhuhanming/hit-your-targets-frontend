@@ -13,10 +13,13 @@ const SearchContext = React.createContext<SearchContextInterface | undefined>(
 const SearchProvider: React.SFC = props => {
   const selectSearch = (state: RootStateInterface): CurrentSearch =>
     state.search;
+
+  // Values to pass down retrieved from redux store
   const { searchType, titleString, tags, searchLogic } = useSelector(
     selectSearch
   );
 
+  // Helper function to return todos to display based on current search terms
   const getFilteredTodos = (todos: ToDo[]): ToDo[] => {
     if (searchType === SearchType.TITLE) {
       if (titleString === '') return todos;

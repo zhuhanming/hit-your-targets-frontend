@@ -15,6 +15,7 @@ interface ViewSelectorProps {
   isKanban?: boolean;
 }
 
+// Bar containing view selections and search button
 const ViewSelector: React.SFC<ViewSelectorProps> = ({
   isMobile = false,
   isKanban = false
@@ -23,12 +24,15 @@ const ViewSelector: React.SFC<ViewSelectorProps> = ({
   const { searchType } = useSearch();
   const dispatch = useDispatch();
   const { theme } = useTheme();
+
+  // Change view selected
   const handleViewClick = (newView: View): void => {
     if (viewSelected !== newView) {
       updateView(newView);
     }
   };
 
+  // Toggle between search mode and normal mode
   const handleSearchClick = (): void => {
     if (searchType) {
       dispatch(cancelSearch());
@@ -40,6 +44,7 @@ const ViewSelector: React.SFC<ViewSelectorProps> = ({
     }
   };
 
+  // View options differs based on list view or kanban view - kanban will only have ALL and COMPLETED
   const options = isKanban ? (
     <>
       <button

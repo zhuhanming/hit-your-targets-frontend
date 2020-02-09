@@ -30,6 +30,8 @@ interface SubTodoListItemProps {
   isMobile: boolean;
 }
 
+// Subtodo List Item for TodoBody view
+// Concept is to allow direct editing from this item
 const SubTodoListItem: React.FC<SubTodoListItemProps> = ({
   subTodo,
   currentKey,
@@ -47,22 +49,29 @@ const SubTodoListItem: React.FC<SubTodoListItemProps> = ({
   const [isChecked, setIsChecked] = useState(completed);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { updateSubTodo, deleteSubTodo, updateTodo } = useTodo();
+
+  // Initialise input form
   const { register, getValues, setValue } = useForm({
     mode: 'onBlur'
   });
+
+  // Preprocessing of variables to help logic later
   const startTimeDate = new Date(Date.parse(startTime));
   const endTimeDate = new Date(Date.parse(endTime));
   const todoStartTimeDate = new Date(Date.parse(todoStartTime));
   const todoEndTimeDate = new Date(Date.parse(todoEndTime));
 
+  // Save changes to subtodo title when clicked away
   const handleSubTodoBlur = async (): Promise<void> => {
     try {
       const newState = getValues();
       if (newState.title.length === 0) {
+        // Missing title - return
         toast.error('You need to have a title for this subtask!');
         setValue('title', title);
         autosize.update(document.querySelectorAll('textarea'));
       } else if (newState.title.length > 60) {
+        // Title too long - return
         toast.error(
           'Your subtask name is too long! Remember, short and sweet!'
         );
@@ -76,12 +85,17 @@ const SubTodoListItem: React.FC<SubTodoListItemProps> = ({
     }
   };
 
+  // Handle changing of subtodo completion status
   const handleCheck = async (): Promise<void> => {
     try {
       await updateSubTodo(todoId, id, {
         completed: !completed
       });
+      // If the subtodo is the last one left OR todo was originally completed
       if (isOneAwayFromCompletion || isFullyCompleted) {
+        // Todo will have to change its status
+        // If last subtodo left is completed, then todo is now completed
+        // If todo was originally complete, the subtodo now incomplete makes it incomplete as well
         await updateTodo(todoId, {
           completed: !completed
         });
@@ -93,6 +107,7 @@ const SubTodoListItem: React.FC<SubTodoListItemProps> = ({
           }!`
         );
       } else if (isFullyCompleted) {
+        // If the todo is now incomplete
         toast.warn(`Oh dear! What happened? Task is now incomplete.`);
       } else {
         toast.warn('😅 No rush there!');
@@ -103,6 +118,7 @@ const SubTodoListItem: React.FC<SubTodoListItemProps> = ({
           (isFullyCompleted && completed)) &&
         !isMobile
       ) {
+        // Dismiss the active TodoBody once todo completion status changes
         setFocus(null);
       }
     } catch (error) {
@@ -111,22 +127,32 @@ const SubTodoListItem: React.FC<SubTodoListItemProps> = ({
     }
   };
 
+  // Check if changes to start time are valid before changing
   const handleStartTimeChange = async (date: string): Promise<void> => {
+    // No change - return
     if (Date.parse(date) === Date.parse(startTime)) return;
     try {
       if (new Date(Date.parse(date)) < startTimeDate) {
+        // Shifting start time earlier - no issues
         await updateSubTodo(todoId, id, { startTime: moment(date).format() });
         toast.success(`Nice! ${title} updated!`);
+      } else if (Date.parse(date) > Date.parse(todoEndTime)) {
+        // Shifting start time later than main task end time
+        // Should not be possible due to DatePicker configurations
+        toast.error('Your subtask cannot start after the main task ends!');
       } else {
+        // Shifting start time later - need to shift end time back by same amount
         const newEndTime =
           Date.parse(endTime) + (Date.parse(date) - Date.parse(startTime));
         if (newEndTime < Date.parse(todoEndTime)) {
+          // If end time is within main todo's endtime - safely set end time to new end time
           await updateSubTodo(todoId, id, {
             startTime: moment(date).format(),
             endTime: moment(newEndTime).format()
           });
           toast.success(`Nice! ${title} updated!`);
         } else {
+          // Else set the task end time as the subtodo end time
           await updateSubTodo(todoId, id, {
             startTime: moment(date).format(),
             endTime: moment(todoEndTime).format()
@@ -139,8 +165,12 @@ const SubTodoListItem: React.FC<SubTodoListItemProps> = ({
     }
   };
 
+  // Check if changes to end time are valid before changing
   const handleEndTimeChange = async (date: string): Promise<void> => {
+    // No change - return
+    if (Date.parse(date) === Date.parse(endTime)) return;
     const newDate = new Date(Date.parse(date));
+    // Check if new end time is before its start tiem and before parent task end time
     if (newDate > startTimeDate && newDate <= todoEndTimeDate)
       try {
         await updateSubTodo(todoId, id, { endTime: moment(date).format() });
@@ -154,6 +184,7 @@ const SubTodoListItem: React.FC<SubTodoListItemProps> = ({
       );
   };
 
+  // Handle deletion of subtask
   const handleDelete = async (): Promise<void> => {
     try {
       await deleteSubTodo(todoId, id);

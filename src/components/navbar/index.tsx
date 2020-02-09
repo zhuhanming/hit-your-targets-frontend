@@ -8,6 +8,7 @@ interface NavbarProps {
   isAuthenticated: boolean;
 }
 
+// Vertical navbar on the left of screen on laptop and tablet, horizontal on mobile
 const Navbar: React.SFC<NavbarProps> = ({ isAuthenticated }) => {
   const [isNavbarExpanded, setIsNavbarExpanded] = useState(false);
 
@@ -32,7 +33,7 @@ const Navbar: React.SFC<NavbarProps> = ({ isAuthenticated }) => {
           aria-expanded={isNavbarExpanded}
           data-target="navbar"
         >
-          {/* Hamburger logo */}
+          {/* Hamburger logo - for mobile view */}
           <span aria-hidden="true" />
           <span aria-hidden="true" />
           <span aria-hidden="true" />

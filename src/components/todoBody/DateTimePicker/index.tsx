@@ -15,6 +15,7 @@ interface DateTimePickerProps {
   todo: ToDo;
 }
 
+// Date Time options for Todos - shown in TodoBody view
 const DateTimePicker: React.SFC<DateTimePickerProps> = ({ todo }) => {
   const { updateTodo } = useTodo();
   const { id, title, startTime, endTime, subtodos } = todo;
@@ -23,12 +24,16 @@ const DateTimePicker: React.SFC<DateTimePickerProps> = ({ todo }) => {
   const latestEndTimeDate =
     subtodos.length > 0 ? getLatestDeadline(subtodos) : startTimeDate;
 
+  // Check if change to start time is valid before changing
   const handleStartTimeChange = async (date: string): Promise<void> => {
+    // No change - return
     if (Date.parse(date) === Date.parse(startTime)) return;
     try {
+      // If shifting start time earlier - no issues
       if (new Date(Date.parse(date)) < startTimeDate) {
         await updateTodo(id, { startTime: moment(date).format() });
       } else {
+        // If shifting start time later - shift end time by same amount
         const newEndTime =
           Date.parse(endTime) + (Date.parse(date) - Date.parse(startTime));
         await updateTodo(id, {
@@ -42,9 +47,14 @@ const DateTimePicker: React.SFC<DateTimePickerProps> = ({ todo }) => {
     }
   };
 
+  // Check if change to end time is valid before changing
   const handleEndTimeChange = async (date: string): Promise<void> => {
+    // No change - return
+    if (Date.parse(date) === Date.parse(endTime)) return;
     const newDate = new Date(Date.parse(date));
+    // Check if new end time is still before the start time
     if (newDate > startTimeDate) {
+      // Check if new end time is not after latest subtask end time
       if (newDate > latestEndTimeDate) {
         try {
           await updateTodo(id, { endTime: moment(date).format() });

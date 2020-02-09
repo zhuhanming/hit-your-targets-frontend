@@ -29,11 +29,15 @@ const KanbanPanelSubtodoItem: React.SFC<KanbanPanelSubtodoItem> = ({
   const displayDate = getDisplayDate(endTime);
   const warning = isWarning(endTime);
 
+  // Check if change in completion is valid, then make the changes
   const handleComplete = async (): Promise<void> => {
     try {
       await updateSubTodo(todoId, id, {
         completed: !completed
       });
+      // Todo will have to change its status
+      // If last subtodo left is completed, then todo is now completed
+      // If todo was originally complete, the subtodo now incomplete makes it incomplete as well
       if (isOneAwayFromCompletion || isFullyCompleted) {
         await updateTodo(todoId, {
           completed: !completed

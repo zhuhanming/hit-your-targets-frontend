@@ -17,9 +17,10 @@ interface TodoCreationField {
   cancelCallback?: () => void;
 }
 
+// Input field to instantly creat a todo
 const TodoCreationField: React.SFC<TodoCreationField> = ({
   isKanban = false,
-  cancelCallback = () => {
+  cancelCallback = (): void => {
     Sentry.captureMessage(
       'Missing cancelCallback function in TodoCreationField!'
     );
@@ -33,12 +34,15 @@ const TodoCreationField: React.SFC<TodoCreationField> = ({
   const { theme } = useTheme();
   const onSubmit = async (data, e): Promise<void> => {
     if (data.title.length === 0) {
+      // No title entered - return
       toast.info(
         'Type your task into the field above and press enter to create it!'
       );
     } else if (data.title.length > 80) {
+      // Title too long - return
       toast.error('Your task name is too long! Remember, short and sweet!');
     } else {
+      // Valid input
       const code = {
         ...data,
         description: '',

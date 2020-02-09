@@ -14,7 +14,9 @@ const KanbanCreationPanel: React.SFC<KanbanCreationPanelProps> = ({
 }) => {
   const [isForm, setIsForm] = useState(false);
   if (!isForm) {
+    // Returns the button to start todo creation
     return (
+      // Non-draggable Draggable wrapper - needed to prevent overlapping when dropping
       <Draggable draggableId="kanban-creation" index={index} isDragDisabled>
         {(provided): React.ReactNode => (
           <div
@@ -34,12 +36,22 @@ const KanbanCreationPanel: React.SFC<KanbanCreationPanelProps> = ({
     );
   }
   return (
-    <div className="box kanban-creation is-very-transparent">
-      <TodoCreationField
-        isKanban
-        cancelCallback={(): void => setIsForm(false)}
-      />
-    </div>
+    // Non-draggable Draggable wrapper - needed to prevent overlapping when dropping
+    <Draggable draggableId="kanban-creation" index={index} isDragDisabled>
+      {(provided): React.ReactNode => (
+        <div
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          className="box kanban-creation is-very-transparent"
+        >
+          <TodoCreationField
+            isKanban
+            cancelCallback={(): void => setIsForm(false)}
+          />
+        </div>
+      )}
+    </Draggable>
   );
 };
 

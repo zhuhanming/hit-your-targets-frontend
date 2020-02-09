@@ -20,8 +20,15 @@ const SubTodoList: React.SFC<SubTodoListProps> = ({
   const { id, startTime, endTime, subtodos, title } = todo;
   const { length } = subtodos;
   const numberCompleted = subtodos.filter(subtodo => subtodo.completed).length;
+
+  // Check if todo is one subtodo away from completion
+  // If the last subtodo is completed, the todo should complete as well
   const isOneFromCompletion = length - numberCompleted === 1;
+
+  // Check if todo is fully completed
+  // If any subtodo is marked as incomplete, the todo should become incomplete as well
   const isFullyCompleted = length === numberCompleted;
+
   const newSubtodos = subtodos.slice().sort((a, b) => a.id - b.id);
   return (
     <>

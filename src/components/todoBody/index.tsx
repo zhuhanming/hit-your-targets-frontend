@@ -22,6 +22,9 @@ interface TodoBodyProps {
   isKanban?: boolean;
 }
 
+// The default view of a todo
+// It contains the inputs for title and description
+// Concept is to make the inputs easily editable
 const TodoBody: React.SFC<TodoBodyProps> = ({
   todo,
   setFocus,
@@ -33,6 +36,7 @@ const TodoBody: React.SFC<TodoBodyProps> = ({
   // const [isError, setIsError] = useState(false);
   const { id, title, description } = todo;
 
+  // Create input forms
   type FormData = {
     title: string;
     description: string;
@@ -42,20 +46,27 @@ const TodoBody: React.SFC<TodoBodyProps> = ({
     mode: 'onBlur'
   });
 
+  // To resize the fields containing the title and description
   useEffect(() => {
     autosize(document.querySelectorAll('textarea'));
   }, [todo]);
 
+  // Handle change in title or description
+  // Occurs when clicking away from title or description
   const handleTodoBlur = async (): Promise<void> => {
     try {
       const newState = getValues();
       if (newState.title.length === 0) {
+        // If title is empty - return
+        // Description is allowed to be empty
         toast.error('Your task title cannot be empty!');
         setValue('title', title, true);
       } else if (newState.title.length > 80) {
+        // Title is too long - return
         toast.error('Your task name is too long! Remember, short and sweet!');
         setValue('title', title, true);
       } else if (!_.isEqual(newState, initialState)) {
+        // Changes have been made to the values - update
         await updateTodo(id, newState);
         toast.success(`Nice! ${newState.title} updated!`);
       }
@@ -82,12 +93,7 @@ const TodoBody: React.SFC<TodoBodyProps> = ({
         </button>
       )}
       <form className="todo-body" key={`form-${id}`}>
-        <TodoBodyHeader
-          todo={todo}
-          setFocus={setFocus}
-          isMobile={isMobile}
-          isKanban={isKanban}
-        />
+        <TodoBodyHeader todo={todo} setFocus={setFocus} isMobile={isMobile} />
         <Controller
           as="textarea"
           control={control}
@@ -102,7 +108,6 @@ const TodoBody: React.SFC<TodoBodyProps> = ({
         <DateTimePicker todo={todo} />
         <div className="todo-body__tag">
           <p className="todo-body__tag__label">Tags</p>
-          {/* <p className="tag is-primary">Work in Progress!</p> */}
           <TagsInputField todo={todo} />
         </div>
         <Controller

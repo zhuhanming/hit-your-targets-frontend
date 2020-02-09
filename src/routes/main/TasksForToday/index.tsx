@@ -33,6 +33,7 @@ const TasksForToday: React.SFC<TasksForToday> = ({
         </ul>
       </div>
     );
+
   if (isError)
     return (
       <div className="tasks">
@@ -42,10 +43,12 @@ const TasksForToday: React.SFC<TasksForToday> = ({
         </button>
       </div>
     );
+
   // eslint-disable-next-line no-param-reassign
   if (todos.length > 5) todos = todos.slice(0, 5);
   const { length } = todos;
 
+  // The todos to display wrapped in transition wrappers
   const items =
     length > 0 ? (
       todos.map((ele, key) => {

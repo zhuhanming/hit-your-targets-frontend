@@ -1,10 +1,7 @@
 import React from 'react';
 
-interface BrandLogoProps {
-  props?: { [x: string]: any };
-}
-
-const BrandLogo = (props): React.ReactElement<BrandLogoProps> => (
+// HYT Logo
+const BrandLogo = (props): React.ReactElement => (
   <svg
     id="_1"
     data-name="1"

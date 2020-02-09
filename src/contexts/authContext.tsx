@@ -23,6 +23,7 @@ const AuthProvider: React.SFC = props => {
     promiseFn: AuthService.getUser
   });
 
+  // Uses useLayoutEffect as auth status directly affects the view
   React.useLayoutEffect(() => {
     if (isSettled) {
       setFirstAttemptFinished(true);

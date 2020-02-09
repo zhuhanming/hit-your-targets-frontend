@@ -27,7 +27,6 @@ const redirectToRoot = (): React.ReactNode => <Redirect to={ROOT} />;
 const redirectToHome = (): React.ReactNode => <Redirect to={HOME} />;
 
 const AuthenticatedApp: React.SFC = () => {
-  // const user = useUser();
   const { theme } = useTheme();
   return (
     <Router>

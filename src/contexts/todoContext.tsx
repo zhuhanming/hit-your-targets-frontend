@@ -17,9 +17,12 @@ const TodoContext = React.createContext<TodoContextInterface | undefined>(
   undefined
 );
 
+// Interacts with backend and redux store to manage tasks
+// Any errors encountered are all thrown upwards
 const TodoProvider: React.SFC = props => {
   const dispatch = useDispatch();
 
+  // Fetches tasks and load them into redux store
   const loadTodos = (): void => {
     const fetchData = async (): Promise<void> => {
       try {
@@ -40,6 +43,7 @@ const TodoProvider: React.SFC = props => {
     fetchData();
   };
 
+  // Create task and add it to redux store
   const createTodo = async (code: {
     title: string;
     description: string;
@@ -60,6 +64,7 @@ const TodoProvider: React.SFC = props => {
     }
   };
 
+  // Create subtask on backend and update task in redux store
   const createSubTodo = async (
     id: number,
     code: {
@@ -81,6 +86,7 @@ const TodoProvider: React.SFC = props => {
     }
   };
 
+  // Update task on backend and load the result into redux store
   const updateTodo = async (
     id: number,
     code: {
@@ -105,6 +111,7 @@ const TodoProvider: React.SFC = props => {
     }
   };
 
+  // Update subtask on backend and update task in redux store
   const updateSubTodo = async (
     todoId: number,
     subtodoId: number,
@@ -130,6 +137,7 @@ const TodoProvider: React.SFC = props => {
     }
   };
 
+  // Delete task on backend and in store
   const deleteTodo = async (id: number): Promise<void> => {
     try {
       const responses = await ApiService.delete(`todos/${id}`);
@@ -143,6 +151,7 @@ const TodoProvider: React.SFC = props => {
     }
   };
 
+  // Delete subtask on backend and update task in store
   const deleteSubTodo = async (
     todoId: number,
     subtodoId: number
