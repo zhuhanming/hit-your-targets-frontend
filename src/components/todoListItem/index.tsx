@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import moment from 'moment';
+import * as Sentry from '@sentry/browser';
 
 import { getDisplayDate, isWarning } from 'utils/timeUtils';
 import { useTodo } from 'contexts/todoContext';
@@ -25,8 +26,11 @@ const TodoListItem: React.SFC<TodoListItemProps> = ({
   currentKey,
   keyLimit,
   focus = null,
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  setFocus = (id: number | null): void => {}
+  setFocus = (id: number | null): void => {
+    Sentry.captureMessage(
+      `setFocus function has not been passed in correctly - todo id: ${id}`
+    );
+  }
 }) => {
   const { title, completed, endTime, id, subtodos } = todo;
   const [isChecked, setIsChecked] = useState(completed);
