@@ -71,7 +71,7 @@ const Main: React.SFC = () => {
                 />
               </MainCard>
               <MainCard title="Fun Fact of the Day">
-                <FunFact />
+                <FunFact todos={todos} />
               </MainCard>
             </div>
           </div>

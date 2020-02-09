@@ -71,4 +71,10 @@ const getLatestDeadline = (subtodos: SubToDo[]): Date => {
   );
 };
 
-export { getDisplayDate, isWarning, getDaysRemaining, getLatestDeadline };
+export {
+  isToday,
+  getDisplayDate,
+  isWarning,
+  getDaysRemaining,
+  getLatestDeadline
+};
