@@ -114,7 +114,7 @@ const FunFact: React.SFC<FunFactProps> = ({ todos }) => {
           );
         finalStat.sort();
         [finalStat] = finalStat;
-        finalStat = `${Math.round(finalStat * 100)}%`;
+        finalStat = `${Math.ceil(finalStat * 100)}%`;
         if (finalStat === 0) {
           finalStat = '0%';
           end += ' You need to work harder!';
