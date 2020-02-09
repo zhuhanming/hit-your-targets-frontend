@@ -1,0 +1,72 @@
+.kanban-search {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  &__type {
+    display: flex;
+    width: 100%;
+    justify-content: stretch;
+
+    &--option {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &.as-non-button {
+        padding: 0.75rem 0;
+        color: inherit;
+      }
+
+      &.is-inactive {
+        background-color: rgba(226, 226, 226, 0.38);
+        font-weight: normal;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  &__logic {
+    width: 100%;
+    text-align: center;
+    font-weight: lighter;
+    .as-non-button {
+      color: inherit;
+      &.is-active {
+        font-weight: bold;
+        color: inherit;
+      }
+    }
+    padding-top: 0.5rem;
+  }
+
+  &__entry {
+    padding: 0rem 0.5rem 0 0.5rem;
+  }
+
+  &__tags {
+    padding: 0.2rem 0.5rem 0 0.5rem;
+
+    &.react-tagsinput {
+      &-tag {
+        margin-right: 0.15rem;
+        margin-bottom: 0.15rem;
+        margin-top: 0.15rem;
+        margin-left: 0.3rem;
+        a::before {
+          content: ' ×';
+        }
+      }
+
+      &-remove {
+        padding-left: 0.3rem;
+        cursor: pointer;
+        font-weight: bold;
+      }
+    }
+  }
+}

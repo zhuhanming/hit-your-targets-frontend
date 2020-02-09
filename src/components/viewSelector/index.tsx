@@ -6,6 +6,7 @@ import { useTheme } from 'contexts/themeContext';
 import { useSearch } from 'contexts/searchContext';
 import { View } from 'interfaces/ViewContext';
 import { startSearch, cancelSearch } from 'reducers/SearchDux';
+import KanbanSearch from './KanbanSearch';
 
 import './ViewSelector.scss';
 
@@ -33,7 +34,9 @@ const ViewSelector: React.SFC<ViewSelectorProps> = ({
       dispatch(cancelSearch());
     } else {
       dispatch(startSearch());
-      updateView(View.ALL);
+      if (viewSelected !== View.COMPLETED) {
+        updateView(View.ALL);
+      }
     }
   };
 
@@ -111,16 +114,49 @@ const ViewSelector: React.SFC<ViewSelectorProps> = ({
         </p>
       </div>
       <div className="selector__tag">
-        <button
-          type="button"
-          className={`as-non-button ${theme} ${
-            searchType ? 'has-text-danger' : ''
-          }`}
-          onClick={handleSearchClick}
-        >
-          {/* eslint-disable-next-line no-nested-ternary */}
-          {searchType ? (isMobile ? 'Cancel' : 'Cancel Search') : 'Search'}
-        </button>
+        {!isKanban && (
+          <button
+            type="button"
+            className={`as-non-button ${theme} ${
+              searchType ? 'has-text-danger' : ''
+            }`}
+            onClick={handleSearchClick}
+          >
+            {/* eslint-disable-next-line no-nested-ternary */}
+            {searchType ? (isMobile ? 'Cancel' : 'Cancel Search') : 'Search'}
+          </button>
+        )}
+        {isKanban && (
+          <div className={`dropdown is-right ${searchType ? 'is-active' : ''}`}>
+            <div className="dropdown-trigger">
+              <button
+                className={`as-non-button ${theme} ${
+                  searchType ? 'has-text-danger' : ''
+                }`}
+                aria-haspopup="true"
+                aria-controls="dropdown-menu"
+                type="button"
+                onClick={handleSearchClick}
+              >
+                {/* eslint-disable-next-line no-nested-ternary */}
+                {searchType
+                  ? isMobile
+                    ? 'Cancel'
+                    : 'Cancel Search'
+                  : 'Search'}
+              </button>
+            </div>
+            <div
+              className="dropdown-menu selector__dropdown"
+              id="dropdown-menu"
+              role="menu"
+            >
+              <div className="dropdown-content is-slightly-transparent selector__dropdown--content">
+                <KanbanSearch />
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -50,4 +50,12 @@
       font-weight: inherit;
     }
   }
+
+  &__dropdown {
+    padding-top: 0.75rem;
+
+    &--content {
+      padding-top: 0;
+    }
+  }
 }
