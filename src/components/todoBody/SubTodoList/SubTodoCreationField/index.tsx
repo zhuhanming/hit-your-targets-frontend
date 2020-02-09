@@ -52,6 +52,7 @@ const SubTodoCreationField: React.SFC<SubTodoCreationFieldProps> = ({
         completed: false
       };
       try {
+        e.target.reset();
         await createSubTodo(id, code);
         if (isFullyCompleted) {
           await updateTodo(id, {
@@ -59,7 +60,6 @@ const SubTodoCreationField: React.SFC<SubTodoCreationFieldProps> = ({
           });
         }
         toast.success(`${data.title} created!`);
-        e.target.reset();
       } catch (error) {
         Sentry.captureException(error);
       }

@@ -60,9 +60,9 @@ const TodoCreationField: React.SFC<TodoCreationField> = ({
         tags: []
       };
       try {
+        e.target.reset();
         await createTodo(code);
         toast.success(`${data.title} created!`);
-        e.target.reset();
         if (viewSelected === View.COMPLETED) {
           updateView(View.TODAY);
         }
