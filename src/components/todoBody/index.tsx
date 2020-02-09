@@ -82,7 +82,12 @@ const TodoBody: React.SFC<TodoBodyProps> = ({
         </button>
       )}
       <form className="todo-body" key={`form-${id}`}>
-        <TodoBodyHeader todo={todo} setFocus={setFocus} isMobile={isMobile} />
+        <TodoBodyHeader
+          todo={todo}
+          setFocus={setFocus}
+          isMobile={isMobile}
+          isKanban={isKanban}
+        />
         <Controller
           as="textarea"
           control={control}

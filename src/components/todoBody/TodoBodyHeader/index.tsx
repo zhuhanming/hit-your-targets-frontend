@@ -16,12 +16,14 @@ interface TodoBodyHeaderProps {
   todo: ToDo;
   setFocus: (id: number | null) => void;
   isMobile: boolean;
+  isKanban: boolean;
 }
 
 const TodoBodyHeader: React.SFC<TodoBodyHeaderProps> = ({
   todo,
   setFocus,
-  isMobile
+  isMobile,
+  isKanban
 }) => {
   const { updateTodo, deleteTodo } = useTodo();
   const [isModalOpen, setIsModalOpen] = useState(false);
