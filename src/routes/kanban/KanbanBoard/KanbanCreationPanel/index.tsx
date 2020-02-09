@@ -16,7 +16,7 @@ const KanbanCreationPanel: React.SFC<KanbanCreationPanelProps> = ({
   if (!isForm) {
     return (
       <Draggable draggableId="kanban-creation" index={index} isDragDisabled>
-        {provided => (
+        {(provided): React.ReactNode => (
           <div
             ref={provided.innerRef}
             {...provided.draggableProps}

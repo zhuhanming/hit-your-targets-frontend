@@ -34,7 +34,7 @@ const KanbanPanel: React.SFC<KanbanPanelProps> = ({
       index={index}
       isDragDisabled={searchType !== null}
     >
-      {provided => (
+      {(provided): React.ReactNode => (
         <div
           className="box kanban-panel is-very-transparent"
           {...provided.draggableProps}

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import TodoBody from 'components/todoBody';
 import ToDo from 'interfaces/ToDo';

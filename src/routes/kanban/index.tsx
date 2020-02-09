@@ -5,25 +5,21 @@ import { useMediaQuery } from 'react-responsive';
 import { useTodo } from 'contexts/todoContext';
 import { useView } from 'contexts/viewContext';
 import { useSearch } from 'contexts/searchContext';
-import { useUser } from 'contexts/userContext';
 import RootStateInterface from 'interfaces/RootState';
 import PageSection from 'components/pageSection';
 import PageTitle from 'components/pageContainer/pageTitle';
 import ViewSelector from 'components/viewSelector';
 import { View } from 'interfaces/ViewContext';
 import { CurrentToDos } from 'reducers/ToDoDux';
-import { setUser } from 'reducers/MiscDux';
 import Modal from 'components/modal';
 import TodoBodyModalBody from 'components/todoBodyModalBody';
 import TodoContainer from 'routes/list/TodoContainer';
-import ApiService from 'services/apiService';
 import KanbanBoard from './KanbanBoard';
 
 import './Kanban.scss';
 
 const Kanban: React.SFC = () => {
   const { loadTodos } = useTodo();
-  const user = useUser();
   const { viewSelected, updateView } = useView();
   const { getFilteredTodos } = useSearch();
   const selectTodos = (state: RootStateInterface): CurrentToDos => state.todos;

@@ -5,7 +5,7 @@ import KanbanPanelHeaderGhost from './KanbanPanelHeader/KanbanPanelHeaderGhost';
 
 import './KanbanPanel.scss';
 
-const KanbanPanelGhost = () => {
+const KanbanPanelGhost: React.SFC = () => {
   return (
     <div className="box kanban-panel is-very-transparent">
       <KanbanPanelHeaderGhost />

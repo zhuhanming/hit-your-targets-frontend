@@ -58,7 +58,7 @@ const KanbanBoard: React.SFC<KanbanBoardProps> = ({
 
   let todoOrder = viewSelected === View.ALL ? incompleteOrder : completeOrder;
 
-  const onDragEnd = async result => {
+  const onDragEnd = async (result): Promise<void> => {
     const { draggableId, source, destination } = result;
 
     const originalOrder = todoOrder;
