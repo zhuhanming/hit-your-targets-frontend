@@ -3,7 +3,11 @@ import store from 'app/store';
 import SITE_URL from 'constants/urls';
 import TokenUtils from 'utils/tokenUtils';
 import { setUser, clearUser } from 'reducers/MiscDux';
-import { setToDos } from 'reducers/ToDoDux';
+import {
+  setToDos,
+  setCompleteOrder,
+  setIncompleteOrder
+} from 'reducers/ToDoDux';
 import { cancelSearch } from 'reducers/SearchDux';
 import ApiService from 'services/apiService';
 
@@ -69,8 +73,10 @@ const getUser = async () => {
   try {
     const response = await ApiService.get('auth/me');
     if (response.status === 200) {
-      const userData = response.data;
+      const { completeOrder, incompleteOrder, ...userData } = response.data;
       store.dispatch(setUser({ ...userData, lastRetrieved: Date.now() }));
+      store.dispatch(setCompleteOrder(completeOrder));
+      store.dispatch(setIncompleteOrder(incompleteOrder));
       return userData;
     }
     throw new Error(response.statusText);
