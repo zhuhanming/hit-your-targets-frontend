@@ -97,7 +97,8 @@ const SubTodoListItem: React.FC<SubTodoListItemProps> = ({
         // If last subtodo left is completed, then todo is now completed
         // If todo was originally complete, the subtodo now incomplete makes it incomplete as well
         await updateTodo(todoId, {
-          completed: !completed
+          completed: !completed,
+          completeTime: moment().format()
         });
       }
       if (!completed) {

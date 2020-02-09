@@ -56,7 +56,8 @@ const SubTodoCreationField: React.SFC<SubTodoCreationFieldProps> = ({
         await createSubTodo(id, code);
         if (isFullyCompleted) {
           await updateTodo(id, {
-            completed: false
+            completed: false,
+            completeTime: moment().format()
           });
         }
         toast.success(`${data.title} created!`);

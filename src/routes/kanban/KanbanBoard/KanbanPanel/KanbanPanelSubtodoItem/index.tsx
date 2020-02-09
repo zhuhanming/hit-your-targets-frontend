@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import * as Sentry from '@sentry/browser';
+import moment from 'moment';
 
 import SubToDo from 'interfaces/SubToDo';
 import { getDisplayDate, isWarning } from 'utils/timeUtils';
@@ -40,7 +41,8 @@ const KanbanPanelSubtodoItem: React.SFC<KanbanPanelSubtodoItem> = ({
       // If todo was originally complete, the subtodo now incomplete makes it incomplete as well
       if (isOneAwayFromCompletion || isFullyCompleted) {
         await updateTodo(todoId, {
-          completed: !completed
+          completed: !completed,
+          completeTime: moment().format()
         });
       }
       if (!completed) {
