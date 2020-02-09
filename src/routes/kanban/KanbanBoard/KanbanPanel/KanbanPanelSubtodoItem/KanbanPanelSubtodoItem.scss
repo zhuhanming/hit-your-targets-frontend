@@ -1,0 +1,38 @@
+.kanban-panel-subtodo {
+  margin-bottom: 0.4rem;
+  background: white;
+  border-radius: 10px;
+  padding: 0.75rem;
+  display: flex;
+
+  &__details {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  &__completed {
+    display: flex;
+
+    label {
+      margin-top: 0 !important;
+      padding-right: 0 !important;
+      padding-left: 1.5rem !important;
+      margin-bottom: 1rem !important;
+    }
+  }
+
+  &__title {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.8rem;
+  }
+
+  &__date {
+    font-size: 0.65rem;
+    margin-left: 0.3rem;
+  }
+}

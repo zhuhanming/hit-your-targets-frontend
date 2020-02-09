@@ -1,0 +1,26 @@
+@import '../../../../assets/scss/variables.scss';
+
+.kanban-creation {
+  max-height: 75%;
+  min-width: 20rem;
+  max-width: 20rem;
+  margin-right: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &.inactive {
+    background-color: rgba(118, 118, 118, 0.5);
+    color: $white;
+    font-weight: bold;
+    border-radius: 10px;
+
+    &:hover {
+      cursor: pointer;
+      background-color: rgba(118, 118, 118, 0.7);
+    }
+  }
+
+  @media only screen and (min-width: $mobile) {
+    margin-right: 1rem;
+  }
+}

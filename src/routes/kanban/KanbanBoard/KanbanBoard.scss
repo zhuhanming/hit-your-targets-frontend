@@ -1,0 +1,28 @@
+@import '../../../assets/scss/variables.scss';
+
+.kanban-board {
+  min-width: 100%;
+  height: 100%;
+  max-height: 100%;
+  display: flex;
+  align-items: flex-start;
+  overflow-x: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  padding-left: 0.75rem;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  @media only screen and (min-width: $mobile) {
+    padding-left: 2.75rem;
+  }
+  .buffer {
+    content: '';
+    min-width: 0.25rem;
+
+    @media only screen and (min-width: $mobile) {
+      min-width: 1.75rem;
+    }
+  }
+}
