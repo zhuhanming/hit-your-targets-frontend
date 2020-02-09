@@ -11,6 +11,15 @@
   scrollbar-width: none;
   padding-left: 0.75rem;
 
+  &.is-error {
+    padding-top: 1rem;
+    justify-content: center;
+    padding-right: 0.75rem;
+    @media only screen and (min-width: $mobile) {
+      padding-right: 2.75rem;
+    }
+  }
+
   &::-webkit-scrollbar {
     display: none;
   }
