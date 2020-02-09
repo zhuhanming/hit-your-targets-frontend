@@ -10,6 +10,8 @@ import Navbar from 'components/navbar';
 import Main from 'routes/main';
 import Settings from 'routes/settings';
 import List from 'routes/list';
+import Kanban from 'routes/kanban';
+import Calendar from 'routes/calendar';
 import {
   UNAUTHED_ROUTES,
   ROOT,
@@ -21,10 +23,10 @@ import {
 } from 'constants/routes';
 import { useTheme } from 'contexts/themeContext';
 
-const redirectToRoot = () => <Redirect to={ROOT} />;
-const redirectToHome = () => <Redirect to={HOME} />;
+const redirectToRoot = (): React.ReactNode => <Redirect to={ROOT} />;
+const redirectToHome = (): React.ReactNode => <Redirect to={HOME} />;
 
-const AuthenticatedApp = () => {
+const AuthenticatedApp: React.SFC = () => {
   // const user = useUser();
   const { theme } = useTheme();
   return (
@@ -36,8 +38,8 @@ const AuthenticatedApp = () => {
           <Route exact path={HOME} component={Main} />
           <Route exact path={SETTINGS} component={Settings} />
           <Route exact path={LIST} component={List} />
-          {/* <Route exact path={KANBAN} component={Kanban} />
-          <Route exact path={CALENDAR} component={Calendar} /> */}
+          <Route exact path={KANBAN} component={Kanban} />
+          <Route exact path={CALENDAR} component={Calendar} />
           <Route exact path="/" render={redirectToHome} />
         </Switch>
       </div>
