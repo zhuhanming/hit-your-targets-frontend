@@ -1,0 +1,11 @@
+@import '../../assets/scss/variables.scss';
+
+.todo-body-modal-body {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+}
