@@ -2,11 +2,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import CurrentUser from 'interfaces/CurrentUser';
 import { View } from 'interfaces/ViewContext';
+import CurrentFunFact from 'interfaces/CurrentFunFact';
 
 export interface CurrentMisc {
   user: CurrentUser;
   theme: string;
   view: View;
+  funFact: CurrentFunFact;
 }
 
 const initialState: CurrentMisc = {
@@ -18,7 +20,11 @@ const initialState: CurrentMisc = {
     preferences: null
   },
   theme: '',
-  view: View.TODAY
+  view: View.TODAY,
+  funFact: {
+    fact: null,
+    lastUpdated: null
+  }
 };
 
 const misc = createSlice({
@@ -34,6 +40,9 @@ const misc = createSlice({
     updateTheme: (state, action: PayloadAction<string>): void => {
       state.theme = action.payload;
     },
+    setFunFact: (state, action: PayloadAction<CurrentFunFact>): void => {
+      state.funFact = action.payload;
+    },
     clearUser: (state): void => {
       state.user = {
         name: null,
@@ -42,10 +51,21 @@ const misc = createSlice({
         lastRetrieved: null,
         preferences: null
       };
+
+      state.funFact = {
+        fact: null,
+        lastUpdated: null
+      };
     }
   }
 });
 
-export const { setUser, updateTheme, setView, clearUser } = misc.actions;
+export const {
+  setUser,
+  updateTheme,
+  setView,
+  setFunFact,
+  clearUser
+} = misc.actions;
 
 export default misc.reducer;
