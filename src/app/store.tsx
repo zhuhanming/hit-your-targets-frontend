@@ -12,10 +12,15 @@ const persistConfig = {
 // To support the persisting of redux across sessions
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
+// Creation of custom middleware, needed for redux persist
+const customizedMiddleware = getDefaultMiddleware({
+  serializableCheck: false
+});
+
 // Creation of redux store
 const store = configureStore({
   reducer: persistedReducer,
-  middleware: getDefaultMiddleware()
+  middleware: customizedMiddleware
 });
 
 export const persistor = persistStore(store);
