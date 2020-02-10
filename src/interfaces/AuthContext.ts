@@ -1,13 +1,13 @@
 import UserContextInterface from 'interfaces/UserContext';
 
-type SignupCode = {
+export type SignupCode = {
   name: string;
   email: string;
   password: string;
   passwordConfirmation: string;
 };
 
-type LoginCode = {
+export type LoginCode = {
   email: string;
   password: string;
 };

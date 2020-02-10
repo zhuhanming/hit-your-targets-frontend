@@ -4,6 +4,7 @@ import { useForm, FieldError, DeepPartial } from 'react-hook-form';
 import { useAuth } from 'contexts/authContext';
 import { useTheme } from 'contexts/themeContext';
 import { emailRegex } from 'constants/regex';
+import { LoginCode } from 'interfaces/AuthContext';
 
 import '../Auth.scss';
 
@@ -22,10 +23,7 @@ const LoginForm: React.SFC<LoginFormProps> = ({
   const { theme } = useTheme();
   const [isLoading, setIsLoading] = useState(false);
 
-  const getDefaultValues = (): DeepPartial<{
-    email?: string;
-    password?: string;
-  }> => {
+  const getDefaultValues = (): DeepPartial<LoginCode> => {
     if (email) return { email, password: '' };
     return {};
   };
@@ -36,8 +34,10 @@ const LoginForm: React.SFC<LoginFormProps> = ({
     }
   );
 
-  const handleLogin = async (data): Promise<void> => {
+  const handleLogin = async (data: LoginCode): Promise<void> => {
     setIsLoading(true);
+    // eslint-disable-next-line no-param-reassign
+    data = { ...data, email: data.email.toLowerCase() };
     await login(data).catch(e => {
       handleError(e);
       setIsLoading(false);

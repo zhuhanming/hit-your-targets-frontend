@@ -4,6 +4,8 @@ import { useForm, DeepPartial, FieldError } from 'react-hook-form';
 import { useAuth } from 'contexts/authContext';
 import { useTheme } from 'contexts/themeContext';
 import { emailRegex } from 'constants/regex';
+import { SignupCode } from 'interfaces/AuthContext';
+import { capitalize } from 'utils';
 
 import '../Auth.scss';
 
@@ -22,12 +24,7 @@ const SignupForm: React.SFC<SignupFormProps> = ({
   const { theme } = useTheme();
   const [isLoading, setIsLoading] = useState(false);
 
-  const getDefaultValues = (): DeepPartial<{
-    email?: string;
-    password?: string;
-    name?: string;
-    passwordConfirmation?: string;
-  }> => {
+  const getDefaultValues = (): DeepPartial<SignupCode> => {
     if (email)
       return { email, name: '', password: '', passwordConfirmation: '' };
     return {};
@@ -43,8 +40,14 @@ const SignupForm: React.SFC<SignupFormProps> = ({
     defaultValues: getDefaultValues()
   });
 
-  const handleSignup = async (data): Promise<void> => {
+  const handleSignup = async (data: SignupCode): Promise<void> => {
     setIsLoading(true);
+    // eslint-disable-next-line no-param-reassign
+    data = {
+      ...data,
+      email: data.email.toLowerCase(),
+      name: capitalize(data.name)
+    };
     await signup(data).catch(e => {
       handleError(e);
       setIsLoading(false);
