@@ -60,11 +60,11 @@ const TodoBody: React.SFC<TodoBodyProps> = ({
         // If title is empty - return
         // Description is allowed to be empty
         toast.error('Your task title cannot be empty!');
-        setValue('title', title, true);
+        setValue('title', title, { shouldValidate: true });
       } else if (newState.title.length > 80) {
         // Title is too long - return
         toast.error('Your task name is too long! Remember, short and sweet!');
-        setValue('title', title, true);
+        setValue('title', title, { shouldValidate: true });
       } else if (!_.isEqual(newState, initialState)) {
         // Changes have been made to the values - update
         await updateTodo(id, newState);

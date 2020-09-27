@@ -35,9 +35,8 @@ module.exports = {
   },
   plugins: ['@typescript-eslint', 'react', 'import', 'prettier'],
   rules: {
-    // note you must disable the base rule as it can report incorrect errors
     'no-use-before-define': 'off',
-    '@typescript-eslint/no-use-before-define': ['error'],
+    '@typescript-eslint/no-use-before-define': 'off',
     'import/no-unresolved': 'off',
     'react/jsx-filename-extension': [
       1,
