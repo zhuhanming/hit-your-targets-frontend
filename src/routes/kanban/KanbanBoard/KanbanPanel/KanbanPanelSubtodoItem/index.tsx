@@ -9,7 +9,7 @@ import { useTodo } from 'contexts/todoContext';
 
 import './KanbanPanelSubtodoItem.scss';
 
-interface KanbanPanelSubtodoItem {
+interface KanbanPanelSubtodoItemProps {
   subtodo: SubToDo;
   todoId: number;
   todoTitle: string;
@@ -17,7 +17,7 @@ interface KanbanPanelSubtodoItem {
   isFullyCompleted: boolean;
 }
 
-const KanbanPanelSubtodoItem: React.FunctionComponent<KanbanPanelSubtodoItem> = ({
+const KanbanPanelSubtodoItem: React.FunctionComponent<KanbanPanelSubtodoItemProps> = ({
   todoId,
   todoTitle,
   subtodo,
