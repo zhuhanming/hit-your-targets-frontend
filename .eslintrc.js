@@ -35,8 +35,8 @@ module.exports = {
   },
   plugins: ['@typescript-eslint', 'react', 'import', 'prettier'],
   rules: {
-    'no-use-before-define': 'off',
-    '@typescript-eslint/no-use-before-define': 'off',
+    'no-use-before-define': [0],
+    '@typescript-eslint/no-use-before-define': [1],
     'import/no-unresolved': 'off',
     'react/jsx-filename-extension': [
       1,
