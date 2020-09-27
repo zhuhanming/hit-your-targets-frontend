@@ -5,7 +5,7 @@ interface ErrorMessageProps {
   className?: string;
 }
 
-const ErrorMessage: React.SFC<ErrorMessageProps> = ({
+const ErrorMessage: React.FunctionComponent<ErrorMessageProps> = ({
   message = 'Failed to fetch some data. Please refresh the page to try again.',
   className = '',
 }) => {

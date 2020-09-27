@@ -14,7 +14,7 @@ interface TodoBodyModalBodyProps {
 }
 
 // Container for holding todo in modal
-const TodoBodyModalBody: React.SFC<TodoBodyModalBodyProps> = ({
+const TodoBodyModalBody: React.FunctionComponent<TodoBodyModalBodyProps> = ({
   id,
   todos,
   isKanban = false,

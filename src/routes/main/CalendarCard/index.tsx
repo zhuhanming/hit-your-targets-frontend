@@ -7,7 +7,10 @@ interface CalendarCardProps {
   title: string;
 }
 
-const CalendarCard: React.SFC<CalendarCardProps> = ({ children, title }) => {
+const CalendarCard: React.FunctionComponent<CalendarCardProps> = ({
+  children,
+  title,
+}) => {
   return (
     <div className="main-card column is-full ">
       <h2 className="subtitle main-card__title">{title}</h2>

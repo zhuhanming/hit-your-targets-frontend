@@ -21,7 +21,7 @@ interface TodoListItemProps {
 }
 
 // Individual list item in a todo list - used in Main and List View
-const TodoListItem: React.SFC<TodoListItemProps> = ({
+const TodoListItem: React.FunctionComponent<TodoListItemProps> = ({
   todo,
   isExpanded = false, // isExpanded is true for List View
   currentKey,

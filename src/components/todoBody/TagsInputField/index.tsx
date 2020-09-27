@@ -16,7 +16,9 @@ interface TagsInputFieldProps {
 }
 
 // Custom tags input field to show entered tags on left
-const TagsInputField: React.SFC<TagsInputFieldProps> = ({ todo }) => {
+const TagsInputField: React.FunctionComponent<TagsInputFieldProps> = ({
+  todo,
+}) => {
   const { updateTodo } = useTodo();
   const { theme } = useTheme();
   const { id, tags } = todo;

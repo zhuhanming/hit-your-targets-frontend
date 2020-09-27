@@ -7,7 +7,7 @@ import SignupForm from './SignupForm';
 
 import '../Auth.scss';
 
-const Login: React.SFC = () => {
+const Login: React.FunctionComponent = () => {
   const [state, setState] = useReducer(
     (
       s: {

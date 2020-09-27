@@ -16,7 +16,7 @@ interface KanbanPanelHeaderProps {
 }
 
 // Contains checkbox, display date, title and vertical ellipsis
-const KanbanPanelHeader: React.SFC<KanbanPanelHeaderProps> = ({
+const KanbanPanelHeader: React.FunctionComponent<KanbanPanelHeaderProps> = ({
   todo,
   setTodoInFocus,
 }) => {

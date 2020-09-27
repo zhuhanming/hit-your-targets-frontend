@@ -26,7 +26,9 @@ interface SearchBarProps {
 // SearchBar is only shown when search is active
 // Replaces the TodoCreationField in List View
 // Is in dropdown from ViewSelector/KanbanSearch in Kanban View
-const SearchBar: React.SFC<SearchBarProps> = ({ isKanban = false }) => {
+const SearchBar: React.FunctionComponent<SearchBarProps> = ({
+  isKanban = false,
+}) => {
   const { viewSelected } = useView();
   const { searchType, titleString, tags, searchLogic } = useSearch();
   const dispatch = useDispatch();

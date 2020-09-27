@@ -4,7 +4,7 @@ import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import './ProgressOverviewItemGhost.scss';
 
 // Progress Overview Item in Loading State
-const ProgressOverviewItem: React.SFC = () => {
+const ProgressOverviewItem: React.FunctionComponent = () => {
   return (
     <li className="progress-item">
       <SkeletonTheme>

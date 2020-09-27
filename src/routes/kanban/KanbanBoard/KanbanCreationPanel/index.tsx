@@ -9,7 +9,7 @@ interface KanbanCreationPanelProps {
   index: number;
 }
 
-const KanbanCreationPanel: React.SFC<KanbanCreationPanelProps> = ({
+const KanbanCreationPanel: React.FunctionComponent<KanbanCreationPanelProps> = ({
   index,
 }) => {
   const [isForm, setIsForm] = useState(false);

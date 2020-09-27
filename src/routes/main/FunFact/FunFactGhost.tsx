@@ -4,7 +4,7 @@ import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import './FunFact.scss';
 
 // Fun Fact in Loading State
-const FunFactGhost: React.SFC = () => {
+const FunFactGhost: React.FunctionComponent = () => {
   return (
     <div className="fun-fact">
       <div className="fun-fact__intro ">

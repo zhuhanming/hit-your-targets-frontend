@@ -8,7 +8,11 @@ interface ModalProps {
   handleClose: VoidFunction;
 }
 
-const Modal: React.SFC<ModalProps> = ({ children, isOpen, handleClose }) => {
+const Modal: React.FunctionComponent<ModalProps> = ({
+  children,
+  isOpen,
+  handleClose,
+}) => {
   return (
     <ReactModal
       isOpen={isOpen}

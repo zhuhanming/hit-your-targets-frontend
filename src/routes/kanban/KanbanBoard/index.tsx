@@ -25,7 +25,7 @@ interface KanbanBoardProps {
   incompleteOrder: number[];
 }
 
-const KanbanBoard: React.SFC<KanbanBoardProps> = ({
+const KanbanBoard: React.FunctionComponent<KanbanBoardProps> = ({
   isLoading,
   isError,
   todos,

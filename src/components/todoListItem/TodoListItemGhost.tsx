@@ -6,7 +6,7 @@ import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import './TodoListItemGhost.scss';
 
 // TodoListItem in loading state
-const TodoListItemGhost: React.SFC = () => {
+const TodoListItemGhost: React.FunctionComponent = () => {
   return (
     <li className="list-item">
       <input

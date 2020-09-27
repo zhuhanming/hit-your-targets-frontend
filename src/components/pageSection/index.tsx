@@ -7,7 +7,7 @@ interface PageSectionProps {
 }
 
 // Standardised PageSection for routes to utilise
-const PageSection: React.SFC<PageSectionProps> = ({
+const PageSection: React.FunctionComponent<PageSectionProps> = ({
   children,
   className = '',
 }) => {

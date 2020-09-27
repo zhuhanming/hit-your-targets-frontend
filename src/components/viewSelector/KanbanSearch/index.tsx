@@ -16,7 +16,7 @@ import SearchBar from 'components/searchBar';
 import './KanbanSearch.scss';
 
 // The content in the dropdown window of Search in Kanban View
-const KanbanSearch: React.SFC = () => {
+const KanbanSearch: React.FunctionComponent = () => {
   const dispatch = useDispatch();
   const { searchType, searchLogic, tags } = useSearch();
 

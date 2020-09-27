@@ -26,7 +26,7 @@ import { useTheme } from 'contexts/themeContext';
 const redirectToRoot = (): React.ReactNode => <Redirect to={ROOT} />;
 const redirectToHome = (): React.ReactNode => <Redirect to={HOME} />;
 
-const AuthenticatedApp: React.SFC = () => {
+const AuthenticatedApp: React.FunctionComponent = () => {
   const { theme } = useTheme();
   return (
     <Router>

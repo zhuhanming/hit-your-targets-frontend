@@ -17,7 +17,7 @@ interface KanbanPanelSubtodoItem {
   isFullyCompleted: boolean;
 }
 
-const KanbanPanelSubtodoItem: React.SFC<KanbanPanelSubtodoItem> = ({
+const KanbanPanelSubtodoItem: React.FunctionComponent<KanbanPanelSubtodoItem> = ({
   todoId,
   todoTitle,
   subtodo,

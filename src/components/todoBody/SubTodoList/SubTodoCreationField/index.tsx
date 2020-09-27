@@ -17,7 +17,7 @@ interface SubTodoCreationFieldProps {
 }
 
 // Input field to create subtodo
-const SubTodoCreationField: React.SFC<SubTodoCreationFieldProps> = ({
+const SubTodoCreationField: React.FunctionComponent<SubTodoCreationFieldProps> = ({
   id,
   todoStartTime,
   todoEndTime,

@@ -19,7 +19,7 @@ const TodoContext = React.createContext<TodoContextInterface | undefined>(
 
 // Interacts with backend and redux store to manage tasks
 // Any errors encountered are all thrown upwards
-const TodoProvider: React.SFC = (props) => {
+const TodoProvider: React.FunctionComponent = (props) => {
   const dispatch = useDispatch();
 
   // Fetches tasks and load them into redux store

@@ -18,7 +18,7 @@ import KanbanBoard from './KanbanBoard';
 
 import './Kanban.scss';
 
-const Kanban: React.SFC = () => {
+const Kanban: React.FunctionComponent = () => {
   const { loadTodos } = useTodo();
   const { viewSelected, updateView } = useView();
   const { getFilteredTodos } = useSearch();

@@ -13,7 +13,7 @@ interface ProgressOverviewItemProps {
   keyLimit: number;
 }
 
-const ProgressOverviewItem: React.SFC<ProgressOverviewItemProps> = ({
+const ProgressOverviewItem: React.FunctionComponent<ProgressOverviewItemProps> = ({
   todo,
   currentKey,
   keyLimit,

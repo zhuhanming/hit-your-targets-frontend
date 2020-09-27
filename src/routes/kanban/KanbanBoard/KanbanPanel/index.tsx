@@ -16,7 +16,7 @@ interface KanbanPanelProps {
 }
 
 // Each individual todo is a panel on the Kanban Board
-const KanbanPanel: React.SFC<KanbanPanelProps> = ({
+const KanbanPanel: React.FunctionComponent<KanbanPanelProps> = ({
   todo,
   index,
   setTodoInFocus,

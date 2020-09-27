@@ -17,7 +17,7 @@ interface FunFactProps {
   todos: ToDo[];
 }
 
-const FunFact: React.SFC<FunFactProps> = ({ todos }) => {
+const FunFact: React.FunctionComponent<FunFactProps> = ({ todos }) => {
   const dispatch = useDispatch();
   const selectMisc = (state: RootStateInterface): CurrentMisc => state.misc;
   const { funFact } = useSelector(selectMisc);

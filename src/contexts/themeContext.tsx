@@ -15,7 +15,7 @@ const ThemeContext = React.createContext<ThemeContextInterface>(
 );
 
 // Manages light and dark theme of app - interacts with redux
-const ThemeProvider: React.SFC = (props) => {
+const ThemeProvider: React.FunctionComponent = (props) => {
   const dispatch = useDispatch();
   const selectMisc = (state: RootStateInterface): CurrentMisc => state.misc;
   const { theme } = useSelector(selectMisc);

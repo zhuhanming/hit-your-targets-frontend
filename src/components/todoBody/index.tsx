@@ -25,7 +25,7 @@ interface TodoBodyProps {
 // The default view of a todo
 // It contains the inputs for title and description
 // Concept is to make the inputs easily editable
-const TodoBody: React.SFC<TodoBodyProps> = ({
+const TodoBody: React.FunctionComponent<TodoBodyProps> = ({
   todo,
   setFocus,
   isMobile = false,

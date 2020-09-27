@@ -28,7 +28,7 @@ interface TodoListProps {
 }
 
 // Left side of screen - list of tasks in List View
-const TodoList: React.SFC<TodoListProps> = ({
+const TodoList: React.FunctionComponent<TodoListProps> = ({
   todos,
   isLoading,
   isError,

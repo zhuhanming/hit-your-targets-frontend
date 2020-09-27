@@ -5,7 +5,7 @@ import PageSection from 'components/pageSection';
 
 import './Calendar.scss';
 
-const Calendar: React.SFC = () => {
+const Calendar: React.FunctionComponent = () => {
   return (
     <PageContainer titleText="Calendar View">
       <PageSection>

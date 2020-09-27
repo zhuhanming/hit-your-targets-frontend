@@ -21,7 +21,7 @@ interface LoadingProps {
 }
 
 // The default loading screen
-const Loading: React.SFC<LoadingProps> = ({ className = '' }) => {
+const Loading: React.FunctionComponent<LoadingProps> = ({ className = '' }) => {
   const { theme } = useTheme();
   return (
     <div className={`loading ${className} ${theme}`}>

@@ -12,13 +12,13 @@ import { toast } from 'react-toastify';
 
 import './TodoCreationField.scss';
 
-interface TodoCreationField {
+interface TodoCreationFieldProps {
   isKanban?: boolean;
   cancelCallback?: () => void;
 }
 
 // Input field to instantly creat a todo
-const TodoCreationField: React.SFC<TodoCreationField> = ({
+const TodoCreationField: React.FunctionComponent<TodoCreationFieldProps> = ({
   isKanban = false,
   cancelCallback = (): void => {
     Sentry.captureMessage(

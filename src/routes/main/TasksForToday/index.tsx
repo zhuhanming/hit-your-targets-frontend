@@ -12,13 +12,13 @@ import ToDo from 'interfaces/ToDo';
 
 import './TasksForToday.scss';
 
-interface TasksForToday {
+interface TasksForTodayProps {
   todos: ToDo[];
   isLoading: boolean;
   isError: boolean;
 }
 
-const TasksForToday: React.SFC<TasksForToday> = ({
+const TasksForToday: React.FunctionComponent<TasksForTodayProps> = ({
   todos,
   isLoading,
   isError,

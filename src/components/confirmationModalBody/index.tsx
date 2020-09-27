@@ -12,7 +12,7 @@ interface ConfirmationModalBodyProps {
   cancelButtonClassName?: string;
 }
 
-const ConfirmationModalBody: React.SFC<ConfirmationModalBodyProps> = ({
+const ConfirmationModalBody: React.FunctionComponent<ConfirmationModalBodyProps> = ({
   message,
   confirmButtonText = 'Confirm',
   cancelButtonText = 'Cancel',

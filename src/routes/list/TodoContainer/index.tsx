@@ -16,7 +16,7 @@ interface TodoContainerProps {
 }
 
 // Container for Todo on right half of screen
-const TodoContainer: React.SFC<TodoContainerProps> = ({
+const TodoContainer: React.FunctionComponent<TodoContainerProps> = ({
   id,
   setFocus,
   todos,

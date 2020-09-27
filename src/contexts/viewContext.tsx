@@ -20,7 +20,7 @@ const ViewContext = React.createContext<ViewContextInterface>(
 );
 
 // Manages the view of the app - interacts with redux store
-const ViewProvider: React.SFC = (props) => {
+const ViewProvider: React.FunctionComponent = (props) => {
   const dispatch = useDispatch();
   const selectMisc = (state: RootStateInterface): CurrentMisc => state.misc;
   const { view } = useSelector(selectMisc);

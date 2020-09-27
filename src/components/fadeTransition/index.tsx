@@ -2,7 +2,7 @@ import React from 'react';
 import { CSSTransition } from 'react-transition-group';
 
 // Fades todo list items in and out
-const FadeTransition: React.SFC = ({ children, ...props }) => (
+const FadeTransition: React.FunctionComponent = ({ children, ...props }) => (
   <CSSTransition
     {...props}
     classNames="fade"

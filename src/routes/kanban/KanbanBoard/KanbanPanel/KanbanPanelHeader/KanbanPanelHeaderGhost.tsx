@@ -5,7 +5,7 @@ import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import './KanbanPanelHeader.scss';
 
 // Kanban Panel Header in Loading State
-const KanbanPanelHeaderGhost: React.SFC = () => {
+const KanbanPanelHeaderGhost: React.FunctionComponent = () => {
   return (
     <div className="kanban-panel-header">
       <div className="kanban-panel-header__details">

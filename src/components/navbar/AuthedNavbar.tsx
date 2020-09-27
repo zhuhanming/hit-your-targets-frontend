@@ -11,7 +11,7 @@ interface AuthTabsProps {
 }
 
 // Main 4 tabs on the top of the navbar
-const AuthTabs: React.SFC<AuthTabsProps> = ({ pathname }) => {
+const AuthTabs: React.FunctionComponent<AuthTabsProps> = ({ pathname }) => {
   return (
     <>
       <li className={`${pathname.match(`${HOME}`) ? 'is-active' : ''}`}>
@@ -63,7 +63,9 @@ interface AuthedNavbarProps {
 }
 
 // Adds the user settings tab below the AuthTabs
-const AuthedNavbar: React.SFC<AuthedNavbarProps> = ({ isNavbarExpanded }) => {
+const AuthedNavbar: React.FunctionComponent<AuthedNavbarProps> = ({
+  isNavbarExpanded,
+}) => {
   const { pathname } = useLocation();
   const { theme } = useTheme();
 

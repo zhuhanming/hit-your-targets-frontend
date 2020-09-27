@@ -13,7 +13,7 @@ import TodoContainer from './TodoContainer';
 
 import './List.scss';
 
-const List: React.SFC = () => {
+const List: React.FunctionComponent = () => {
   const { loadTodos } = useTodo();
   const { getFilteredTodos } = useSearch();
   const selectTodos = (state: RootStateInterface): CurrentToDos => state.todos;

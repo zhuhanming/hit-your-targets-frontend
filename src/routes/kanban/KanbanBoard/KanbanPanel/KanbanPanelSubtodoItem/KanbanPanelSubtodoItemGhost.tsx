@@ -4,7 +4,7 @@ import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import './KanbanPanelSubtodoItem.scss';
 
 // Kanban Panel Subtodo Item in Loading State
-const KanbanPanelSubtodoItemGhost: React.SFC = () => {
+const KanbanPanelSubtodoItemGhost: React.FunctionComponent = () => {
   return (
     <li className="kanban-panel-subtodo">
       <div className="kanban-panel-subtodo__completed">

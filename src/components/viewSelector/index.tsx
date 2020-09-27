@@ -16,7 +16,7 @@ interface ViewSelectorProps {
 }
 
 // Bar containing view selections and search button
-const ViewSelector: React.SFC<ViewSelectorProps> = ({
+const ViewSelector: React.FunctionComponent<ViewSelectorProps> = ({
   isMobile = false,
   isKanban = false,
 }) => {

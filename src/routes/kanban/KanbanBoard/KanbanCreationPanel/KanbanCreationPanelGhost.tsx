@@ -4,7 +4,7 @@ import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import './KanbanCreationPanel.scss';
 
 // Kanban Creation Panel in Loading State
-const KanbanCreationPanelGhost: React.SFC = () => {
+const KanbanCreationPanelGhost: React.FunctionComponent = () => {
   return (
     <div className="box kanban-creation inactive">
       <SkeletonTheme>

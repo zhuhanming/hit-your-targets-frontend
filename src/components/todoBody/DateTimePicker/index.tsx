@@ -16,7 +16,9 @@ interface DateTimePickerProps {
 }
 
 // Date Time options for Todos - shown in TodoBody view
-const DateTimePicker: React.SFC<DateTimePickerProps> = ({ todo }) => {
+const DateTimePicker: React.FunctionComponent<DateTimePickerProps> = ({
+  todo,
+}) => {
   const { updateTodo } = useTodo();
   const { id, title, startTime, endTime, subtodos } = todo;
   const startTimeDate = new Date(Date.parse(startTime));

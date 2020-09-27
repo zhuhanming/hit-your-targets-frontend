@@ -4,7 +4,7 @@ import { useTheme } from 'contexts/themeContext';
 
 import './ThemeToggle.scss';
 
-const ThemeToggle: React.SFC = () => {
+const ThemeToggle: React.FunctionComponent = () => {
   const { theme, toggle } = useTheme();
   return (
     <div>

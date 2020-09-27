@@ -17,7 +17,7 @@ import ProgressOverview from './ProgressOverview';
 
 import './Main.scss';
 
-const Main: React.SFC = () => {
+const Main: React.FunctionComponent = () => {
   const { name } = useUser();
   const { loadTodos } = useTodo();
   const selectTodos = (state: RootStateInterface): CurrentToDos => state.todos;

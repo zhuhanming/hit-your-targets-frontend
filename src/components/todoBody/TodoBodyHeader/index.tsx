@@ -19,7 +19,7 @@ interface TodoBodyHeaderProps {
 }
 
 // Contains the checkbox, time since last update, and delete button
-const TodoBodyHeader: React.SFC<TodoBodyHeaderProps> = ({
+const TodoBodyHeader: React.FunctionComponent<TodoBodyHeaderProps> = ({
   todo,
   setFocus,
   isMobile,

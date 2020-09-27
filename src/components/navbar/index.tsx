@@ -9,7 +9,7 @@ interface NavbarProps {
 }
 
 // Vertical navbar on the left of screen on laptop and tablet, horizontal on mobile
-const Navbar: React.SFC<NavbarProps> = ({ isAuthenticated }) => {
+const Navbar: React.FunctionComponent<NavbarProps> = ({ isAuthenticated }) => {
   const [isNavbarExpanded, setIsNavbarExpanded] = useState(false);
 
   const handleNavbarBurgerClick = (): void => {

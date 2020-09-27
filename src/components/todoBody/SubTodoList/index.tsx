@@ -12,7 +12,7 @@ interface SubTodoListProps {
   isMobile: boolean;
 }
 
-const SubTodoList: React.SFC<SubTodoListProps> = ({
+const SubTodoList: React.FunctionComponent<SubTodoListProps> = ({
   todo,
   setFocus,
   isMobile,

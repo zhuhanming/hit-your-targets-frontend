@@ -13,7 +13,7 @@ import { useTheme } from 'contexts/themeContext';
 
 const redirectToLogin = (): React.ReactNode => <Redirect to={LOGIN} />;
 
-const UnauthenticatedApp: React.SFC = () => {
+const UnauthenticatedApp: React.FunctionComponent = () => {
   const { theme } = useTheme();
   return (
     <Router>

@@ -16,7 +16,7 @@ interface ProgressOverviewProps {
   isError: boolean;
 }
 
-const ProgressOverview: React.SFC<ProgressOverviewProps> = ({
+const ProgressOverview: React.FunctionComponent<ProgressOverviewProps> = ({
   todos,
   isLoading,
   isError,

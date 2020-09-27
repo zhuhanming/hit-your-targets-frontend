@@ -14,7 +14,7 @@ type LoginFormProps = {
   handleChangeForm: (value: string) => void;
 };
 
-const LoginForm: React.SFC<LoginFormProps> = ({
+const LoginForm: React.FunctionComponent<LoginFormProps> = ({
   email,
   handleError,
   handleChangeForm,

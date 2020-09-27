@@ -10,7 +10,7 @@ const SearchContext = React.createContext<SearchContextInterface | undefined>(
   undefined
 );
 
-const SearchProvider: React.SFC = (props) => {
+const SearchProvider: React.FunctionComponent = (props) => {
   const selectSearch = (state: RootStateInterface): CurrentSearch =>
     state.search;
 
