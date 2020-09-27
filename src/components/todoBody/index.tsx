@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { useForm, Controller } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import autosize from 'autosize';
-import * as Sentry from '@sentry/browser';
+import * as Sentry from '@sentry/react';
 
 import { useTodo } from 'contexts/todoContext';
 import { useTheme } from 'contexts/themeContext';
@@ -29,7 +29,7 @@ const TodoBody: React.SFC<TodoBodyProps> = ({
   todo,
   setFocus,
   isMobile = false,
-  isKanban = false
+  isKanban = false,
 }) => {
   const { updateTodo } = useTodo();
   const { theme } = useTheme();
@@ -43,7 +43,7 @@ const TodoBody: React.SFC<TodoBodyProps> = ({
   };
   const initialState: FormData = { title, description };
   const { getValues, setValue, control } = useForm<FormData>({
-    mode: 'onBlur'
+    mode: 'onBlur',
   });
 
   // To resize the fields containing the title and description

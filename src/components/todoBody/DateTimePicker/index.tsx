@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import { toast } from 'react-toastify';
 import DatePicker from 'react-datepicker';
-import * as Sentry from '@sentry/browser';
+import * as Sentry from '@sentry/react';
 
 import { useTodo } from 'contexts/todoContext';
 import { getLatestDeadline } from 'utils/timeUtils';
@@ -38,7 +38,7 @@ const DateTimePicker: React.SFC<DateTimePickerProps> = ({ todo }) => {
           Date.parse(endTime) + (Date.parse(date) - Date.parse(startTime));
         await updateTodo(id, {
           startTime: moment(date).format(),
-          endTime: moment(newEndTime).format()
+          endTime: moment(newEndTime).format(),
         });
       }
       toast.success(`Nice! ${title} updated!`);

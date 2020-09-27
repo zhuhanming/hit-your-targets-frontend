@@ -2,7 +2,7 @@
 import React from 'react';
 import moment from 'moment';
 import { toast } from 'react-toastify';
-import * as Sentry from '@sentry/browser';
+import * as Sentry from '@sentry/react';
 import { getDisplayDate, isWarning } from 'utils/timeUtils';
 
 import ToDo from 'interfaces/ToDo';
@@ -18,7 +18,7 @@ interface KanbanPanelHeaderProps {
 // Contains checkbox, display date, title and vertical ellipsis
 const KanbanPanelHeader: React.SFC<KanbanPanelHeaderProps> = ({
   todo,
-  setTodoInFocus
+  setTodoInFocus,
 }) => {
   const { updateTodo } = useTodo();
   const { id, title, completed, subtodos, endTime } = todo;
@@ -33,7 +33,7 @@ const KanbanPanelHeader: React.SFC<KanbanPanelHeaderProps> = ({
       try {
         await updateTodo(id, {
           completed: !completed,
-          completeTime: moment().format()
+          completeTime: moment().format(),
         });
         if (!completed) {
           toast.success(`👍 Great job! ${title} completed!`);

@@ -31,7 +31,7 @@ const KanbanBoard: React.SFC<KanbanBoardProps> = ({
   todos,
   setTaskInFocus,
   completeOrder,
-  incompleteOrder
+  incompleteOrder,
 }) => {
   const { viewSelected } = useView();
   const dispatch = useDispatch();
@@ -69,12 +69,12 @@ const KanbanBoard: React.SFC<KanbanBoardProps> = ({
     try {
       if (viewSelected === View.ALL) {
         const responses = await ApiService.patch('update_user', {
-          incompleteOrder: newTodoOrder
+          incompleteOrder: newTodoOrder,
         });
         dispatch(setIncompleteOrder(responses.data.incompleteOrder));
       } else {
         const responses = await ApiService.patch('update_user', {
-          completeOrder: newTodoOrder
+          completeOrder: newTodoOrder,
         });
         dispatch(setCompleteOrder(responses.data.completeOrder));
       }
@@ -98,7 +98,7 @@ const KanbanBoard: React.SFC<KanbanBoardProps> = ({
             }`}
           >
             {todoOrder.map((id, index) => {
-              const todo = todos.find(t => t.id === id);
+              const todo = todos.find((t) => t.id === id);
               if (todo) {
                 return (
                   <KanbanPanel

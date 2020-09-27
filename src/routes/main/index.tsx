@@ -25,7 +25,7 @@ const Main: React.SFC = () => {
   const [state, setState] = useReducer((s, a) => ({ ...s, ...a }), {
     isLoading: true,
     isError: false,
-    title: randomGreeting(capitalize(name))
+    title: randomGreeting(capitalize(name)),
   });
 
   useEffect(() => {
@@ -35,12 +35,12 @@ const Main: React.SFC = () => {
       try {
         loadTodos();
         setState({
-          isLoading: false
+          isLoading: false,
         });
       } catch (error) {
         setState({
           isError: true,
-          isLoading: false
+          isLoading: false,
         });
       }
     }
@@ -58,7 +58,7 @@ const Main: React.SFC = () => {
             <div className="columns is-marginless">
               <MainCard title="Tasks for Today">
                 <TasksForToday
-                  todos={todos.filter(todo => !todo.completed)}
+                  todos={todos.filter((todo) => !todo.completed)}
                   isLoading={state.isLoading}
                   isError={state.isError}
                 />

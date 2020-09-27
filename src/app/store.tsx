@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
@@ -6,7 +7,7 @@ import rootReducer from 'reducers/rootReducer';
 
 const persistConfig = {
   key: 'hit-your-targets',
-  storage
+  storage,
 };
 
 // To support the persisting of redux across sessions
@@ -14,13 +15,13 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 // Creation of custom middleware, needed for redux persist
 const customizedMiddleware = getDefaultMiddleware({
-  serializableCheck: false
+  serializableCheck: false,
 });
 
 // Creation of redux store
 const store = configureStore({
   reducer: persistedReducer,
-  middleware: customizedMiddleware
+  middleware: customizedMiddleware,
 });
 
 export const persistor = persistStore(store);
@@ -28,7 +29,7 @@ export const persistor = persistStore(store);
 // Settings to aid development
 if (process.env.NODE_ENV === 'development' && module.hot) {
   module.hot.accept('reducers/rootReducer', () => {
-    // eslint-disable-next-line global-require
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const newRootReducer = require('reducers/rootReducer').default;
     store.replaceReducer(newRootReducer);
   });

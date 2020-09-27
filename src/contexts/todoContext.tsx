@@ -8,7 +8,7 @@ import {
   setToDoError,
   updateToDo,
   addToDo,
-  deleteToDo
+  deleteToDo,
 } from 'reducers/ToDoDux';
 import ApiService from 'services/apiService';
 import ToDo from 'interfaces/ToDo';
@@ -19,7 +19,7 @@ const TodoContext = React.createContext<TodoContextInterface | undefined>(
 
 // Interacts with backend and redux store to manage tasks
 // Any errors encountered are all thrown upwards
-const TodoProvider: React.SFC = props => {
+const TodoProvider: React.SFC = (props) => {
   const dispatch = useDispatch();
 
   // Fetches tasks and load them into redux store
@@ -179,7 +179,7 @@ const TodoProvider: React.SFC = props => {
         updateTodo,
         updateSubTodo,
         deleteTodo,
-        deleteSubTodo
+        deleteSubTodo,
       }}
       {...props}
     />

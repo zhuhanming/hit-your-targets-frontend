@@ -18,10 +18,10 @@ const TodoBodyModalBody: React.SFC<TodoBodyModalBodyProps> = ({
   id,
   todos,
   isKanban = false,
-  setFocus
+  setFocus,
 }) => {
   if (id === null) return <></>;
-  const todo = todos.find(ele => ele.id === id);
+  const todo = todos.find((ele) => ele.id === id);
   if (typeof todo === 'undefined') {
     return <ErrorMessage />;
   }

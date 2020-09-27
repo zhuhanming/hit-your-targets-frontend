@@ -10,7 +10,7 @@ const SearchContext = React.createContext<SearchContextInterface | undefined>(
   undefined
 );
 
-const SearchProvider: React.SFC = props => {
+const SearchProvider: React.SFC = (props) => {
   const selectSearch = (state: RootStateInterface): CurrentSearch =>
     state.search;
 
@@ -24,20 +24,20 @@ const SearchProvider: React.SFC = props => {
     if (searchType === SearchType.TITLE) {
       if (titleString === '') return todos;
       return todos.filter(
-        todo =>
+        (todo) =>
           todo.title.toLowerCase().indexOf(titleString.toLowerCase()) !== -1
       );
     }
     if (searchType === SearchType.TAG) {
       if (tags.length === 0) return todos;
       if (searchLogic === SearchLogic.ALL) {
-        return todos.filter(todo =>
-          tags.every(tag => todo.tags.indexOf(tag) >= 0)
+        return todos.filter((todo) =>
+          tags.every((tag) => todo.tags.indexOf(tag) >= 0)
         );
       }
       if (searchLogic === SearchLogic.ANY) {
-        return todos.filter(todo =>
-          todo.tags.some(tag => tags.indexOf(tag) >= 0)
+        return todos.filter((todo) =>
+          todo.tags.some((tag) => tags.indexOf(tag) >= 0)
         );
       }
     }

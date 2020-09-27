@@ -21,7 +21,7 @@ interface TasksForToday {
 const TasksForToday: React.SFC<TasksForToday> = ({
   todos,
   isLoading,
-  isError
+  isError,
 }) => {
   if (isLoading)
     return (

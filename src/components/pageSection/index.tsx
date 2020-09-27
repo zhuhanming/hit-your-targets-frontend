@@ -9,7 +9,7 @@ interface PageSectionProps {
 // Standardised PageSection for routes to utilise
 const PageSection: React.SFC<PageSectionProps> = ({
   children,
-  className = ''
+  className = '',
 }) => {
   return <div className={`column is-full ${className}`}>{children}</div>;
 };

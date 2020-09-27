@@ -17,14 +17,14 @@ const initialState: CurrentMisc = {
     email: null,
     displayImageUrl: null,
     lastRetrieved: null,
-    preferences: null
+    preferences: null,
   },
   theme: '',
   view: View.TODAY,
   funFact: {
     fact: null,
-    lastUpdated: null
-  }
+    lastUpdated: null,
+  },
 };
 
 // Contains user information, theme, view selected and fun fact of the day
@@ -50,15 +50,15 @@ const misc = createSlice({
         email: null,
         displayImageUrl: null,
         lastRetrieved: null,
-        preferences: null
+        preferences: null,
       };
 
       state.funFact = {
         fact: null,
-        lastUpdated: null
+        lastUpdated: null,
       };
-    }
-  }
+    },
+  },
 });
 
 export const {
@@ -66,7 +66,7 @@ export const {
   updateTheme,
   setView,
   setFunFact,
-  clearUser
+  clearUser,
 } = misc.actions;
 
 export default misc.reducer;

@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect
+  Redirect,
 } from 'react-router-dom';
 
 import Navbar from 'components/navbar';
@@ -19,7 +19,7 @@ import {
   LIST,
   KANBAN,
   CALENDAR,
-  SETTINGS
+  SETTINGS,
 } from 'constants/routes';
 import { useTheme } from 'contexts/themeContext';
 

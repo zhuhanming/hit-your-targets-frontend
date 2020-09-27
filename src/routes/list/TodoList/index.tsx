@@ -34,7 +34,7 @@ const TodoList: React.SFC<TodoListProps> = ({
   isError,
   setFocus,
   focus,
-  isMobile = false
+  isMobile = false,
 }) => {
   const { viewSelected } = useView();
   const { searchType } = useSearch();
@@ -66,23 +66,23 @@ const TodoList: React.SFC<TodoListProps> = ({
   switch (viewSelected) {
     case View.TODAY:
       todos = todos.filter(
-        todo =>
+        (todo) =>
           !todo.completed &&
           moment(todo.endTime).isSameOrBefore(moment(), 'day')
       );
       break;
     case View.NEXT_SEVEN_DAYS:
       todos = todos.filter(
-        todo =>
+        (todo) =>
           !todo.completed &&
           moment(todo.endTime).isSameOrBefore(moment().add(7, 'days'), 'day')
       );
       break;
     case View.ALL:
-      todos = todos.filter(todo => !todo.completed);
+      todos = todos.filter((todo) => !todo.completed);
       break;
     case View.COMPLETED:
-      todos = todos.filter(todo => todo.completed);
+      todos = todos.filter((todo) => todo.completed);
       todos.sort(
         (a, b) => Date.parse(b.completeTime) - Date.parse(a.completeTime)
       );

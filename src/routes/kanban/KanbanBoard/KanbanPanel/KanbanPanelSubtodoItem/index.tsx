@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
-import * as Sentry from '@sentry/browser';
+import * as Sentry from '@sentry/react';
 import moment from 'moment';
 
 import SubToDo from 'interfaces/SubToDo';
@@ -22,7 +22,7 @@ const KanbanPanelSubtodoItem: React.SFC<KanbanPanelSubtodoItem> = ({
   todoTitle,
   subtodo,
   isOneAwayFromCompletion,
-  isFullyCompleted
+  isFullyCompleted,
 }) => {
   const { updateSubTodo, updateTodo } = useTodo();
   const { id, title, endTime, completed } = subtodo;
@@ -34,7 +34,7 @@ const KanbanPanelSubtodoItem: React.SFC<KanbanPanelSubtodoItem> = ({
   const handleComplete = async (): Promise<void> => {
     try {
       await updateSubTodo(todoId, id, {
-        completed: !completed
+        completed: !completed,
       });
       // Todo will have to change its status
       // If last subtodo left is completed, then todo is now completed
@@ -42,7 +42,7 @@ const KanbanPanelSubtodoItem: React.SFC<KanbanPanelSubtodoItem> = ({
       if (isOneAwayFromCompletion || isFullyCompleted) {
         await updateTodo(todoId, {
           completed: !completed,
-          completeTime: moment().format()
+          completeTime: moment().format(),
         });
       }
       if (!completed) {

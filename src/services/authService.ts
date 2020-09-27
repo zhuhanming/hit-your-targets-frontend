@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import store from 'app/store';
 
 import SITE_URL from 'constants/urls';
@@ -6,7 +8,7 @@ import { setUser, clearUser } from 'reducers/MiscDux';
 import {
   setToDos,
   setCompleteOrder,
-  setIncompleteOrder
+  setIncompleteOrder,
 } from 'reducers/ToDoDux';
 import { cancelSearch } from 'reducers/SearchDux';
 import ApiService from 'services/apiService';
@@ -19,8 +21,8 @@ const logout = (): Promise<void> => {
   return Promise.resolve();
 };
 
-const signup = async (code): Promise<null> => {
-  const response = await ApiService.post('/signup', code).catch(error => {
+const signup = async (code: any): Promise<null> => {
+  const response = await ApiService.post('/signup', code).catch((error) => {
     return Promise.reject(new Error(error));
   });
   if (response.data.message === 'Account already exists') {
@@ -31,8 +33,8 @@ const signup = async (code): Promise<null> => {
   return TokenUtils.storeToken(response);
 };
 
-const login = async (code): Promise<null> => {
-  const response = await ApiService.post('/auth/login', code).catch(error => {
+const login = async (code: any): Promise<null> => {
+  const response = await ApiService.post('/auth/login', code).catch((error) => {
     if (error.message === 'Request failed with status code 401') {
       return Promise.reject(
         new Error('Invalid login credentials, please try again.')
@@ -44,13 +46,13 @@ const login = async (code): Promise<null> => {
 };
 
 // Unused since social media login was not implemented.
-const facebookLogin = async (code): Promise<null> => {
+const facebookLogin = async (code: any): Promise<null> => {
   const requestBody = {
     redirectUri: `${SITE_URL}/auth/callback`,
-    code
+    code,
   };
   const response = await ApiService.post(`/auth/facebook`, requestBody).catch(
-    error => {
+    (error) => {
       return Promise.reject(new Error(error));
     }
   );
@@ -61,8 +63,8 @@ const facebookLogin = async (code): Promise<null> => {
 const getFacebookRedirect = (): Promise<any> => {
   return ApiService.get(`/auth/facebook`, {
     params: {
-      redirectUri: `${SITE_URL}/auth/callback`
-    }
+      redirectUri: `${SITE_URL}/auth/callback`,
+    },
   });
 };
 
@@ -94,5 +96,5 @@ export default {
   logout,
   getUser,
   facebookLogin,
-  getFacebookRedirect
+  getFacebookRedirect,
 };

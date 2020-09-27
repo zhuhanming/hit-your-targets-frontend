@@ -7,7 +7,7 @@ import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import { useForm } from 'react-hook-form';
 import autosize from 'autosize';
-import * as Sentry from '@sentry/browser';
+import * as Sentry from '@sentry/react';
 
 import { useTodo } from 'contexts/todoContext';
 import Modal from 'components/modal';
@@ -43,7 +43,7 @@ const SubTodoListItem: React.FC<SubTodoListItemProps> = ({
   isFullyCompleted,
   isOneAwayFromCompletion,
   setFocus,
-  isMobile
+  isMobile,
 }) => {
   const { title, completed, endTime, id, startTime } = subTodo;
   const [isChecked, setIsChecked] = useState(completed);
@@ -52,7 +52,7 @@ const SubTodoListItem: React.FC<SubTodoListItemProps> = ({
 
   // Initialise input form
   const { register, getValues, setValue } = useForm({
-    mode: 'onBlur'
+    mode: 'onBlur',
   });
 
   // Preprocessing of variables to help logic later
@@ -89,7 +89,7 @@ const SubTodoListItem: React.FC<SubTodoListItemProps> = ({
   const handleCheck = async (): Promise<void> => {
     try {
       await updateSubTodo(todoId, id, {
-        completed: !completed
+        completed: !completed,
       });
       // If the subtodo is the last one left OR todo was originally completed
       if (isOneAwayFromCompletion || isFullyCompleted) {
@@ -98,7 +98,7 @@ const SubTodoListItem: React.FC<SubTodoListItemProps> = ({
         // If todo was originally complete, the subtodo now incomplete makes it incomplete as well
         await updateTodo(todoId, {
           completed: !completed,
-          completeTime: moment().format()
+          completeTime: moment().format(),
         });
       }
       if (!completed) {
@@ -149,14 +149,14 @@ const SubTodoListItem: React.FC<SubTodoListItemProps> = ({
           // If end time is within main todo's endtime - safely set end time to new end time
           await updateSubTodo(todoId, id, {
             startTime: moment(date).format(),
-            endTime: moment(newEndTime).format()
+            endTime: moment(newEndTime).format(),
           });
           toast.success(`Nice! ${title} updated!`);
         } else {
           // Else set the task end time as the subtodo end time
           await updateSubTodo(todoId, id, {
             startTime: moment(date).format(),
-            endTime: moment(todoEndTime).format()
+            endTime: moment(todoEndTime).format(),
           });
           toast.success(`Nice! ${title} updated!`);
         }

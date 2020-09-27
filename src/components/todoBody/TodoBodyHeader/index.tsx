@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import moment from 'moment';
 import { toast } from 'react-toastify';
-import * as Sentry from '@sentry/browser';
+import * as Sentry from '@sentry/react';
 
 import { useTodo } from 'contexts/todoContext';
 import Modal from 'components/modal';
@@ -22,7 +22,7 @@ interface TodoBodyHeaderProps {
 const TodoBodyHeader: React.SFC<TodoBodyHeaderProps> = ({
   todo,
   setFocus,
-  isMobile
+  isMobile,
 }) => {
   const { updateTodo, deleteTodo } = useTodo();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -38,7 +38,7 @@ const TodoBodyHeader: React.SFC<TodoBodyHeaderProps> = ({
       try {
         await updateTodo(id, {
           completed: !completed,
-          completeTime: moment().format()
+          completeTime: moment().format(),
         });
         if (!completed) {
           toast.success(`👍 Great job! ${title} completed!`);

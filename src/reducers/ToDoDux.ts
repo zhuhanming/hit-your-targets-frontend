@@ -15,7 +15,7 @@ const initialState: CurrentToDos = {
   todos: [],
   isTodoError: false,
   incompleteOrder: [],
-  completeOrder: []
+  completeOrder: [],
 };
 
 const todos = createSlice({
@@ -27,19 +27,19 @@ const todos = createSlice({
     setToDos: (state, action: PayloadAction<ToDo[]>): void => {
       state.todos = action.payload;
       state.isTodoError = false;
-      const completeTodos = state.todos.filter(t => t.completed);
+      const completeTodos = state.todos.filter((t) => t.completed);
       completeTodos.sort(
         (a, b) => Date.parse(b.completeTime) - Date.parse(a.completeTime)
       );
-      const completeTodoIds = completeTodos.map(t => t.id);
+      const completeTodoIds = completeTodos.map((t) => t.id);
       if (
         !_.isEqual(_.sortBy(completeTodoIds), _.sortBy(state.completeOrder))
       ) {
         state.completeOrder = completeTodoIds;
       }
       const incompleteTodoIds = state.todos
-        .filter(t => !t.completed)
-        .map(t => t.id);
+        .filter((t) => !t.completed)
+        .map((t) => t.id);
       if (
         !_.isEqual(_.sortBy(incompleteTodoIds), _.sortBy(state.incompleteOrder))
       ) {
@@ -49,31 +49,33 @@ const todos = createSlice({
     // Updates the todo
     // Updates the orders if there's a change in completed status of the todo
     updateToDo: (state, action: PayloadAction<ToDo>): void => {
-      const foundIndex = state.todos.findIndex(x => x.id === action.payload.id);
+      const foundIndex = state.todos.findIndex(
+        (x) => x.id === action.payload.id
+      );
       const initialCompleted = state.todos[foundIndex].completed;
       state.todos[foundIndex] = action.payload;
       state.isTodoError = false;
       if (initialCompleted !== action.payload.completed) {
         if (initialCompleted) {
           state.completeOrder = state.completeOrder.filter(
-            t => t !== action.payload.id
+            (t) => t !== action.payload.id
           );
           state.incompleteOrder = state.todos
             .filter(
-              t =>
+              (t) =>
                 t.id === action.payload.id ||
                 state.incompleteOrder.includes(t.id)
             )
-            .map(t => t.id);
+            .map((t) => t.id);
         } else {
           state.incompleteOrder = state.incompleteOrder.filter(
-            t => t !== action.payload.id
+            (t) => t !== action.payload.id
           );
-          const completeTodos = state.todos.filter(t => t.completed);
+          const completeTodos = state.todos.filter((t) => t.completed);
           completeTodos.sort(
             (a, b) => Date.parse(b.completeTime) - Date.parse(a.completeTime)
           );
-          const completeTodoIds = completeTodos.map(t => t.id);
+          const completeTodoIds = completeTodos.map((t) => t.id);
           state.completeOrder = completeTodoIds;
         }
       }
@@ -87,12 +89,12 @@ const todos = createSlice({
     },
     // Delete todo and remove todo id from the order it was in
     deleteToDo: (state, action: PayloadAction<number>): void => {
-      state.todos = state.todos.filter(x => x.id !== action.payload);
+      state.todos = state.todos.filter((x) => x.id !== action.payload);
       state.completeOrder = state.completeOrder.filter(
-        x => x !== action.payload
+        (x) => x !== action.payload
       );
       state.incompleteOrder = state.incompleteOrder.filter(
-        x => x !== action.payload
+        (x) => x !== action.payload
       );
       state.isTodoError = false;
     },
@@ -105,8 +107,8 @@ const todos = createSlice({
     // Just in case - not utilised in app
     setToDoError: (state): void => {
       state.isTodoError = true;
-    }
-  }
+    },
+  },
 });
 
 export const {
@@ -116,7 +118,7 @@ export const {
   setToDoError,
   deleteToDo,
   setCompleteOrder,
-  setIncompleteOrder
+  setIncompleteOrder,
 } = todos.actions;
 
 export default todos.reducer;

@@ -16,7 +16,7 @@ interface ProgressOverviewItemProps {
 const ProgressOverviewItem: React.SFC<ProgressOverviewItemProps> = ({
   todo,
   currentKey,
-  keyLimit
+  keyLimit,
 }) => {
   const { theme } = useTheme();
   const { title, endTime, completed, subtodos } = todo;

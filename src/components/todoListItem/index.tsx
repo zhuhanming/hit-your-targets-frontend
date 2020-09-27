@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import moment from 'moment';
-import * as Sentry from '@sentry/browser';
+import * as Sentry from '@sentry/react';
 
 import { getDisplayDate, isWarning } from 'utils/timeUtils';
 import { useTodo } from 'contexts/todoContext';
@@ -32,7 +32,7 @@ const TodoListItem: React.SFC<TodoListItemProps> = ({
     Sentry.captureMessage(
       `setFocus function has not been passed in correctly - todo id: ${id}`
     );
-  }
+  },
 }) => {
   const { title, completed, endTime, id, subtodos } = todo;
   const [isChecked, setIsChecked] = useState(completed);
@@ -52,7 +52,7 @@ const TodoListItem: React.SFC<TodoListItemProps> = ({
           setIsChecked(true);
           await updateTodo(id, {
             completed: !completed,
-            completeTime: moment().format()
+            completeTime: moment().format(),
           });
           if (!completed) {
             setFocus(null);

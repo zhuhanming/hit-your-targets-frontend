@@ -7,7 +7,7 @@ interface ErrorMessageProps {
 
 const ErrorMessage: React.SFC<ErrorMessageProps> = ({
   message = 'Failed to fetch some data. Please refresh the page to try again.',
-  className = ''
+  className = '',
 }) => {
   return (
     <article className={`${className} errorMessage message is-danger`}>

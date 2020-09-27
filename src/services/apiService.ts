@@ -8,22 +8,22 @@ const ApiService = axios.create({
   headers: { 'Content-Type': 'application/json' },
   transformResponse: [
     ...axios.defaults.transformResponse,
-    data => humps.camelizeKeys(data) // takes care of case issues
+    (data) => humps.camelizeKeys(data), // takes care of case issues
   ],
   transformRequest: [
-    data => humps.decamelizeKeys(data), // takes care of case issues
-    ...axios.defaults.transformRequest
-  ]
+    (data) => humps.decamelizeKeys(data), // takes care of case issues
+    ...axios.defaults.transformRequest,
+  ],
 });
 
 ApiService.interceptors.request.use(
-  config => {
+  (config) => {
     const token = tokenUtils.getToken();
     // eslint-disable-next-line no-param-reassign
     if (token) config.headers.Authorization = `Bearer ${token}`;
     return config;
   },
-  error => {
+  (error) => {
     return Promise.reject(new Error(error));
   }
 );

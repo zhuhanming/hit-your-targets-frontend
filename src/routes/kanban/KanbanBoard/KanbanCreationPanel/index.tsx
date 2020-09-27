@@ -10,7 +10,7 @@ interface KanbanCreationPanelProps {
 }
 
 const KanbanCreationPanel: React.SFC<KanbanCreationPanelProps> = ({
-  index
+  index,
 }) => {
   const [isForm, setIsForm] = useState(false);
   if (!isForm) {

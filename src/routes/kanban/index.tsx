@@ -29,7 +29,7 @@ const Kanban: React.SFC = () => {
     isLoading: true,
     isError: false,
     taskInFocus: null,
-    isModalOpen: false
+    isModalOpen: false,
   });
   const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
 
@@ -44,12 +44,12 @@ const Kanban: React.SFC = () => {
       try {
         loadTodos();
         setState({
-          isLoading: false
+          isLoading: false,
         });
       } catch (error) {
         setState({
           isLoading: false,
-          isError: true
+          isError: true,
         });
       }
     }
@@ -114,7 +114,7 @@ const Kanban: React.SFC = () => {
                 setTaskInFocus={(todo): void =>
                   setState({
                     taskInFocus: todo,
-                    isModalOpen: !isMobile
+                    isModalOpen: !isMobile,
                   })
                 }
                 completeOrder={completeOrder}

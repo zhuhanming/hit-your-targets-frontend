@@ -81,5 +81,5 @@ export {
   getDisplayDate,
   isWarning,
   getDaysRemaining,
-  getLatestDeadline
+  getLatestDeadline,
 };

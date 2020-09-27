@@ -18,7 +18,7 @@ interface ViewSelectorProps {
 // Bar containing view selections and search button
 const ViewSelector: React.SFC<ViewSelectorProps> = ({
   isMobile = false,
-  isKanban = false
+  isKanban = false,
 }) => {
   const { viewSelected, updateView } = useView();
   const { searchType } = useSearch();

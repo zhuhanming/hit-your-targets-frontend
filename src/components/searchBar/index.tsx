@@ -14,7 +14,7 @@ import {
   setTags,
   setSearchLogic,
   setSearch,
-  SearchLogic
+  SearchLogic,
 } from 'reducers/SearchDux';
 
 import './SearchBar.scss';
@@ -149,7 +149,7 @@ const SearchBar: React.SFC<SearchBarProps> = ({ isKanban = false }) => {
                 className: `tag is-primary react-tagsinput-tag ${
                   isKanban ? 'is-kanban' : ''
                 }`,
-                classNameRemove: 'react-tagsinput-remove'
+                classNameRemove: 'react-tagsinput-remove',
               }}
               inputProps={{
                 className: 'react-tagsinput-input input tags-field',
@@ -164,7 +164,7 @@ const SearchBar: React.SFC<SearchBarProps> = ({ isKanban = false }) => {
                           ? 'completed'
                           : 'current'
                       } tasks by their tags.`
-                }`
+                }`,
               }}
             />
             {/* Toggle for SearchLogic - only in List View */}

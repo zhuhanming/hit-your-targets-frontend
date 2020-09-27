@@ -9,7 +9,7 @@ import {
   setSearch,
   SearchLogic,
   setSearchLogic,
-  setTags
+  setTags,
 } from 'reducers/SearchDux';
 import SearchBar from 'components/searchBar';
 
@@ -37,7 +37,7 @@ const KanbanSearch: React.SFC = () => {
   // Delete tag - used as tags are displayed outside of input
   const handleDeleteTag = (tagToRemove: string): void => {
     let newTags = tags.slice();
-    newTags = newTags.filter(t => t !== tagToRemove);
+    newTags = newTags.filter((t) => t !== tagToRemove);
     dispatch(setTags(newTags));
   };
 
@@ -87,7 +87,7 @@ const KanbanSearch: React.SFC = () => {
         </p>
       )}
       <div className="kanban-search__tags">
-        {tags.map(t => (
+        {tags.map((t) => (
           <div className="tag is-primary react-tagsinput-tag" key={`tag-${t}`}>
             {t}
             {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}

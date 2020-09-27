@@ -7,7 +7,7 @@ import search from 'reducers/SearchDux';
 const rootReducer = combineReducers({
   todos,
   misc,
-  search
+  search,
 });
 
 export default rootReducer;

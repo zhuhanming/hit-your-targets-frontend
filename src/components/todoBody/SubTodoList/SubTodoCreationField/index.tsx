@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import * as Sentry from '@sentry/browser';
+import * as Sentry from '@sentry/react';
 
 import { useTheme } from 'contexts/themeContext';
 import { useTodo } from 'contexts/todoContext';
@@ -21,7 +21,7 @@ const SubTodoCreationField: React.SFC<SubTodoCreationFieldProps> = ({
   id,
   todoStartTime,
   todoEndTime,
-  isFullyCompleted
+  isFullyCompleted,
 }) => {
   const { createSubTodo, updateTodo } = useTodo();
   const { theme } = useTheme();
@@ -31,7 +31,7 @@ const SubTodoCreationField: React.SFC<SubTodoCreationFieldProps> = ({
     title: string;
   };
   const { register, handleSubmit } = useForm<FormData>({
-    reValidateMode: 'onSubmit'
+    reValidateMode: 'onSubmit',
   });
 
   // Handle creation logic
@@ -49,7 +49,7 @@ const SubTodoCreationField: React.SFC<SubTodoCreationFieldProps> = ({
         ...data,
         startTime: moment(todoStartTime).format(),
         endTime: moment(todoEndTime).format(),
-        completed: false
+        completed: false,
       };
       try {
         e.target.reset();
@@ -57,7 +57,7 @@ const SubTodoCreationField: React.SFC<SubTodoCreationFieldProps> = ({
         if (isFullyCompleted) {
           await updateTodo(id, {
             completed: false,
-            completeTime: moment().format()
+            completeTime: moment().format(),
           });
         }
         toast.success(`${data.title} created!`);

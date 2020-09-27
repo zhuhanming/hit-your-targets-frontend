@@ -12,7 +12,7 @@ interface PageTitleProps {
 // Standardised PageTitle that comes with the ThemeToggle
 const PageTitle: React.SFC<PageTitleProps> = ({
   titleText,
-  className = ''
+  className = '',
 }) => {
   return (
     <div className={`title-container ${className}`}>

@@ -27,7 +27,7 @@ const Login: React.SFC = () => {
       email: null,
       isSignedUp: true,
       isError: false,
-      errorMessage: null
+      errorMessage: null,
     }
   );
 
@@ -65,7 +65,7 @@ const Login: React.SFC = () => {
                         email: data,
                         isSignedUp: false,
                         isError: false,
-                        errorMessage: null
+                        errorMessage: null,
                       });
                     }}
                   />
@@ -81,7 +81,7 @@ const Login: React.SFC = () => {
                         email: data,
                         isSignedUp: true,
                         isError: false,
-                        errorMessage: null
+                        errorMessage: null,
                       });
                     }}
                   />

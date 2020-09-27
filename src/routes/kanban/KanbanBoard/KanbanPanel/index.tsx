@@ -19,13 +19,14 @@ interface KanbanPanelProps {
 const KanbanPanel: React.SFC<KanbanPanelProps> = ({
   todo,
   index,
-  setTodoInFocus
+  setTodoInFocus,
 }) => {
   const { searchType } = useSearch();
   const { id, subtodos, startTime, endTime, title } = todo;
   const { length } = subtodos;
   const hasSubtodos = length > 0;
-  const numberCompleted = subtodos.filter(subtodo => subtodo.completed).length;
+  const numberCompleted = subtodos.filter((subtodo) => subtodo.completed)
+    .length;
   const isFullyCompleted = length === numberCompleted;
   const isOneFromCompletion = length - numberCompleted === 1;
 
@@ -45,7 +46,7 @@ const KanbanPanel: React.SFC<KanbanPanelProps> = ({
           <KanbanPanelHeader todo={todo} setTodoInFocus={setTodoInFocus} />
           <ul className="kanban-panel__subtodos">
             {hasSubtodos &&
-              subtodos.map(s => (
+              subtodos.map((s) => (
                 <KanbanPanelSubtodoItem
                   todoId={id}
                   todoTitle={title}

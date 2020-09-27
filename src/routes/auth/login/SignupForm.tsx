@@ -11,14 +11,14 @@ import '../Auth.scss';
 
 type SignupFormProps = {
   email: string | null;
-  handleError: Function;
-  handleChangeForm: Function;
+  handleError: (e: Error) => void;
+  handleChangeForm: (value: string) => void;
 };
 
 const SignupForm: React.SFC<SignupFormProps> = ({
   email,
   handleError,
-  handleChangeForm
+  handleChangeForm,
 }) => {
   const { signup } = useAuth();
   const { theme } = useTheme();
@@ -35,9 +35,9 @@ const SignupForm: React.SFC<SignupFormProps> = ({
     handleSubmit: validateInputs,
     getValues,
     errors,
-    watch
+    watch,
   } = useForm({
-    defaultValues: getDefaultValues()
+    defaultValues: getDefaultValues(),
   });
 
   const handleSignup = async (data: SignupCode): Promise<void> => {
@@ -46,9 +46,9 @@ const SignupForm: React.SFC<SignupFormProps> = ({
     data = {
       ...data,
       email: data.email.toLowerCase(),
-      name: capitalize(data.name)
+      name: capitalize(data.name),
     };
-    await signup(data).catch(e => {
+    await signup(data).catch((e) => {
       handleError(e);
       setIsLoading(false);
     });
@@ -83,7 +83,7 @@ const SignupForm: React.SFC<SignupFormProps> = ({
                   }
 
                   return true;
-                }
+                },
               })}
             />
             {errors.name && (
@@ -106,13 +106,13 @@ const SignupForm: React.SFC<SignupFormProps> = ({
               name="email"
               ref={register({
                 required: 'This field is required',
-                validate: value => {
+                validate: (value) => {
                   if (!value.match(emailRegex)) {
                     return 'Your email address is not of the correct format';
                   }
 
                   return true;
-                }
+                },
               })}
             />
             {errors.email && (
@@ -140,7 +140,7 @@ const SignupForm: React.SFC<SignupFormProps> = ({
                     return 'Your password should have more than 8 characters';
                   }
                   return true;
-                }
+                },
               })}
             />
             {errors.password && (
@@ -170,7 +170,7 @@ const SignupForm: React.SFC<SignupFormProps> = ({
                     return 'Your password confirmation does not match your password';
                   }
                   return true;
-                }
+                },
               })}
             />
             {errors.passwordConfirmation && (

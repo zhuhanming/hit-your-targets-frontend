@@ -12,8 +12,8 @@ const defaultOptions = {
   autoplay: true,
   animationData,
   rendererSettings: {
-    preserveAspectRatio: 'xMidYMid slice'
-  }
+    preserveAspectRatio: 'xMidYMid slice',
+  },
 };
 
 interface LoadingProps {

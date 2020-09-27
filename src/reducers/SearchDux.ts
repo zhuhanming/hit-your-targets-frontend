@@ -3,12 +3,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export enum SearchType {
   TITLE = 'TITLE',
-  TAG = 'TAG'
+  TAG = 'TAG',
 }
 
 export enum SearchLogic {
   ALL = 'ALL',
-  ANY = 'ANY'
+  ANY = 'ANY',
 }
 
 export interface CurrentSearch {
@@ -22,7 +22,7 @@ const initialState: CurrentSearch = {
   searchType: null,
   titleString: '',
   tags: [],
-  searchLogic: SearchLogic.ALL
+  searchLogic: SearchLogic.ALL,
 };
 
 // Contains current SearchType, title being searched, tags being searched, and the logic for tag searching
@@ -52,8 +52,8 @@ const search = createSlice({
     },
     setSearchLogic: (state, action: PayloadAction<SearchLogic>): void => {
       state.searchLogic = action.payload;
-    }
-  }
+    },
+  },
 });
 
 export const {
@@ -62,7 +62,7 @@ export const {
   setSearch,
   setTitleString,
   setTags,
-  setSearchLogic
+  setSearchLogic,
 } = search.actions;
 
 export default search.reducer;

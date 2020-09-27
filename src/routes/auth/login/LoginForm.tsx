@@ -10,14 +10,14 @@ import '../Auth.scss';
 
 type LoginFormProps = {
   email: string | null;
-  handleError: Function;
-  handleChangeForm: Function;
+  handleError: (e: Error) => void;
+  handleChangeForm: (value: string) => void;
 };
 
 const LoginForm: React.SFC<LoginFormProps> = ({
   email,
   handleError,
-  handleChangeForm
+  handleChangeForm,
 }) => {
   const { login } = useAuth();
   const { theme } = useTheme();
@@ -30,7 +30,7 @@ const LoginForm: React.SFC<LoginFormProps> = ({
 
   const { register, handleSubmit: validateInputs, getValues, errors } = useForm(
     {
-      defaultValues: getDefaultValues()
+      defaultValues: getDefaultValues(),
     }
   );
 
@@ -38,7 +38,7 @@ const LoginForm: React.SFC<LoginFormProps> = ({
     setIsLoading(true);
     // eslint-disable-next-line no-param-reassign
     data = { ...data, email: data.email.toLowerCase() };
-    await login(data).catch(e => {
+    await login(data).catch((e) => {
       handleError(e);
       setIsLoading(false);
     });
@@ -67,13 +67,13 @@ const LoginForm: React.SFC<LoginFormProps> = ({
               name="email"
               ref={register({
                 required: 'This field is required',
-                validate: value => {
+                validate: (value) => {
                   if (!value.match(emailRegex)) {
                     return 'Your email address is not of the correct format';
                   }
 
                   return true;
-                }
+                },
               })}
             />
             {errors.email && (

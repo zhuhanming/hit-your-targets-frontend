@@ -14,7 +14,7 @@ interface PageContainerProps {
 const PageContainer: React.SFC<PageContainerProps> = ({
   children,
   titleText,
-  className = ''
+  className = '',
 }) => {
   // children should be wrapped up in column
   return (

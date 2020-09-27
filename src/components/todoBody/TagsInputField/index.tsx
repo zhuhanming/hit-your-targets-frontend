@@ -2,7 +2,7 @@ import React from 'react';
 import { toast } from 'react-toastify';
 import TagsInput from 'react-tagsinput';
 // import 'react-tagsinput/react-tagsinput.css';
-import * as Sentry from '@sentry/browser';
+import * as Sentry from '@sentry/react';
 
 import { useTodo } from 'contexts/todoContext';
 import { useTheme } from 'contexts/themeContext';
@@ -50,13 +50,13 @@ const TagsInputField: React.SFC<TagsInputFieldProps> = ({ todo }) => {
       onChange={handleChange}
       tagProps={{
         className: 'tag is-primary react-tagsinput-tag',
-        classNameRemove: 'react-tagsinput-remove'
+        classNameRemove: 'react-tagsinput-remove',
       }}
       inputProps={{
         className: `react-tagsinput-input ${theme} ${
           length === 5 ? 'hide' : ''
         }`,
-        placeholder: 'Add a tag'
+        placeholder: 'Add a tag',
       }}
     />
   );

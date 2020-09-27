@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import moment from 'moment';
-import * as Sentry from '@sentry/browser';
+import * as Sentry from '@sentry/react';
 
 import { useTodo } from 'contexts/todoContext';
 import { useView } from 'contexts/viewContext';
@@ -24,12 +24,12 @@ const TodoCreationField: React.SFC<TodoCreationField> = ({
     Sentry.captureMessage(
       'Missing cancelCallback function in TodoCreationField!'
     );
-  }
+  },
 }) => {
   const { viewSelected, updateView } = useView();
   const { createTodo } = useTodo();
   const { register, handleSubmit } = useForm({
-    reValidateMode: 'onSubmit'
+    reValidateMode: 'onSubmit',
   });
   const { theme } = useTheme();
   const onSubmit = async (data, e): Promise<void> => {
@@ -49,15 +49,10 @@ const TodoCreationField: React.SFC<TodoCreationField> = ({
         startTime: moment().format(),
         endTime:
           viewSelected === View.NEXT_SEVEN_DAYS
-            ? moment()
-                .add(7, 'days')
-                .endOf('day')
-                .format()
-            : moment()
-                .endOf('day')
-                .format(),
+            ? moment().add(7, 'days').endOf('day').format()
+            : moment().endOf('day').format(),
         completed: false,
-        tags: []
+        tags: [],
       };
       try {
         e.target.reset();

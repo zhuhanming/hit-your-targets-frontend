@@ -19,7 +19,7 @@ const ConfirmationModalBody: React.SFC<ConfirmationModalBodyProps> = ({
   handleConfirm,
   handleCancel,
   confirmButtonClassName = '',
-  cancelButtonClassName = ''
+  cancelButtonClassName = '',
 }) => {
   return (
     <div className="confirmation-modal-body">

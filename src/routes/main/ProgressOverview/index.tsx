@@ -19,7 +19,7 @@ interface ProgressOverviewProps {
 const ProgressOverview: React.SFC<ProgressOverviewProps> = ({
   todos,
   isLoading,
-  isError
+  isError,
 }) => {
   if (isLoading)
     return (
@@ -44,7 +44,7 @@ const ProgressOverview: React.SFC<ProgressOverviewProps> = ({
       </div>
     );
   if (todos.length > 3) {
-    const completedTodos = todos.filter(todo => !todo.completed);
+    const completedTodos = todos.filter((todo) => !todo.completed);
     if (completedTodos.length >= 3) {
       todos = completedTodos.slice(0, 3);
     } else {

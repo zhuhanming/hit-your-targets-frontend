@@ -7,7 +7,8 @@ import { Provider } from 'react-redux';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Modal from 'react-modal';
-import * as Sentry from '@sentry/browser';
+import * as Sentry from '@sentry/react';
+import { Integrations } from '@sentry/tracing';
 
 import App from 'app';
 import AppProviders from 'contexts';
@@ -17,7 +18,9 @@ import * as serviceWorker from './serviceWorker';
 import './index.scss';
 
 Sentry.init({
-  dsn: 'https://1b70d05e3e604dc2b6b0765b3a258621@sentry.io/1971017'
+  dsn: 'https://1b70d05e3e604dc2b6b0765b3a258621@sentry.io/1971017',
+  integrations: [new Integrations.BrowserTracing()],
+  tracesSampleRate: 1.0,
 });
 
 toast.configure({
@@ -26,7 +29,7 @@ toast.configure({
   hideProgressBar: false,
   closeOnClick: true,
   pauseOnHover: true,
-  draggable: true
+  draggable: true,
 });
 
 Modal.setAppElement('#root');

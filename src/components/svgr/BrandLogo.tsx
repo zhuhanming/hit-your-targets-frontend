@@ -1,7 +1,9 @@
 import React from 'react';
 
 // HYT Logo
-const BrandLogo = (props): React.ReactElement => (
+const BrandLogo = (
+  props: JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>
+): React.ReactElement => (
   <svg
     id="_1"
     data-name="1"

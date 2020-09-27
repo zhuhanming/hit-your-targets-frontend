@@ -10,7 +10,7 @@ const AuthContext = React.createContext<AuthContextInterface | undefined>(
   undefined
 );
 
-const AuthProvider: React.SFC = props => {
+const AuthProvider: React.SFC = (props) => {
   const [firstAttemptFinished, setFirstAttemptFinished] = React.useState(false);
   const {
     data = null,
@@ -18,9 +18,9 @@ const AuthProvider: React.SFC = props => {
     isRejected,
     isPending,
     isSettled,
-    reload
+    reload,
   } = useAsync({
-    promiseFn: AuthService.getUser
+    promiseFn: AuthService.getUser,
   });
 
   // Uses useLayoutEffect as auth status directly affects the view
@@ -52,14 +52,14 @@ const AuthProvider: React.SFC = props => {
   }): Promise<void> =>
     AuthService.signup(code)
       .then(reload)
-      .catch(e => {
+      .catch((e) => {
         return Promise.reject(new Error(e.message));
       });
 
   const login = (code: { email: string; password: string }): Promise<void> =>
     AuthService.login(code)
       .then(reload)
-      .catch(e => {
+      .catch((e) => {
         return Promise.reject(new Error(e.message));
       });
 

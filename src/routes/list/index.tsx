@@ -35,7 +35,7 @@ const List: React.SFC = () => {
     {
       isLoading: true,
       isError: false,
-      taskInFocus: null
+      taskInFocus: null,
     }
   );
 
@@ -48,12 +48,12 @@ const List: React.SFC = () => {
       try {
         loadTodos();
         setState({
-          isLoading: false
+          isLoading: false,
         });
       } catch (error) {
         setState({
           isLoading: false,
-          isError: true
+          isError: true,
         });
       }
     }

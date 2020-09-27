@@ -15,11 +15,12 @@ interface SubTodoListProps {
 const SubTodoList: React.SFC<SubTodoListProps> = ({
   todo,
   setFocus,
-  isMobile
+  isMobile,
 }) => {
   const { id, startTime, endTime, subtodos, title } = todo;
   const { length } = subtodos;
-  const numberCompleted = subtodos.filter(subtodo => subtodo.completed).length;
+  const numberCompleted = subtodos.filter((subtodo) => subtodo.completed)
+    .length;
 
   // Check if todo is one subtodo away from completion
   // If the last subtodo is completed, the todo should complete as well

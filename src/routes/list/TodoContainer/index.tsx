@@ -21,11 +21,11 @@ const TodoContainer: React.SFC<TodoContainerProps> = ({
   setFocus,
   todos,
   isMobile = false,
-  isKanban = false
+  isKanban = false,
 }) => {
   const { searchType } = useSearch();
   if (id === null) return <></>;
-  const todo = todos.find(ele => ele.id === id);
+  const todo = todos.find((ele) => ele.id === id);
   if (typeof todo === 'undefined' && searchType) return <></>;
   if (typeof todo === 'undefined')
     return (

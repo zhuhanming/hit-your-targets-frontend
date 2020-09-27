@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import * as Sentry from '@sentry/browser';
+import * as Sentry from '@sentry/react';
 
 import ViewContextInterface, { View } from 'interfaces/ViewContext';
 import RootStateInterface from 'interfaces/RootState';
@@ -12,7 +12,7 @@ const defaultContextData = {
     Sentry.captureMessage(
       `updateView was not initalised properly - newView: ${newView}`
     );
-  }
+  },
 };
 
 const ViewContext = React.createContext<ViewContextInterface>(
@@ -20,7 +20,7 @@ const ViewContext = React.createContext<ViewContextInterface>(
 );
 
 // Manages the view of the app - interacts with redux store
-const ViewProvider: React.SFC = props => {
+const ViewProvider: React.SFC = (props) => {
   const dispatch = useDispatch();
   const selectMisc = (state: RootStateInterface): CurrentMisc => state.misc;
   const { view } = useSelector(selectMisc);
