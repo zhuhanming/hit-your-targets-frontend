@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import _ from 'lodash';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import autosize from 'autosize';
 import * as Sentry from '@sentry/react';
@@ -42,7 +42,7 @@ const TodoBody: React.FunctionComponent<TodoBodyProps> = ({
     description: string;
   };
   const initialState: FormData = { title, description };
-  const { getValues, setValue, control } = useForm<FormData>({
+  const { getValues, setValue, register } = useForm<FormData>({
     mode: 'onBlur',
   });
 
@@ -94,30 +94,28 @@ const TodoBody: React.FunctionComponent<TodoBodyProps> = ({
       )}
       <form className="todo-body" key={`form-${id}`}>
         <TodoBodyHeader todo={todo} setFocus={setFocus} isMobile={isMobile} />
-        <Controller
-          as="textarea"
-          control={control}
-          rules={{ required: true }}
+        <textarea
+          className="todo-body__title is-size-4"
           name="title"
+          ref={register({ required: true })}
           onBlur={handleTodoBlur}
+          autoComplete="off"
           defaultValue={title}
           rows={1}
-          className="todo-body__title is-size-4"
-          autoComplete="off"
         />
         <DateTimePicker todo={todo} />
         <div className="todo-body__tag">
           <p className="todo-body__tag__label">Tags</p>
           <TagsInputField todo={todo} />
         </div>
-        <Controller
-          as="textarea"
-          control={control}
+        <textarea
+          className={`todo-body__description ${theme}`}
           name="description"
           onBlur={handleTodoBlur}
+          autoComplete="off"
           defaultValue={description}
+          ref={register}
           rows={1}
-          className={`todo-body__description ${theme}`}
           placeholder="Description"
         />
       </form>

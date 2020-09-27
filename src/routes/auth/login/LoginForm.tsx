@@ -69,7 +69,7 @@ const LoginForm: React.FunctionComponent<LoginFormProps> = ({
                 required: 'This field is required',
                 validate: (value) => {
                   if (!value.match(emailRegex)) {
-                    return 'Your email address is not of the correct format';
+                    return 'Your email address is not of the correct format!';
                   }
 
                   return true;
