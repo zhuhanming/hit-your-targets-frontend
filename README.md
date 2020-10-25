@@ -1,4 +1,4 @@
-<p align="center"><img width=20% src="https://github.com/zhuhanming/cvwo/blob/master/assets/logo.png" /></p>
+<p align="center"><img width=20% src="https://github.com/zhuhanming/hit-your-targets/blob/master/assets/logo.png" /></p>
 <h1 align="center">Hit Your Targets</h1>
 <h3 align="center">A todo list for the meticulous</h2>
 
